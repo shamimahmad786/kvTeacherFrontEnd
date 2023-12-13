@@ -1,0 +1,103 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="shadow bg-white mt-4 rounded-3 p-4 cardSet20">
+                <form id="msform" [formGroup]="disclaimerForm" (ngSubmit)="onSubmit($event)">
+                    <h1 class="text25 mb-0">UNDERTAKING</h1> 
+                     
+                     <span class="line"> </span>
+                    
+                    <!-- <div class="d-flex d-flex-row mb-2 mt-4">
+                        <div class="form-check-label">
+                          1. My name is in selected panel of LDCE.I am willing to be considered only for LDCE posting.  <select class="customSelect" formControlName="ldceSelectBox">
+                            <option value="Yes">Yes</option>
+                            <option value="No">No </option>
+                          
+                          </select> 
+                        </div>
+                     
+                    </div>   -->
+                    <hr/>
+                    <div class="d-flex justify-content-between">
+                        <div class="form-check-label">
+                          1. (a). I have not filed any case in any court or Tribunal in the Country in respect of  transfer from one place to another and I am not a party to any case related to  transfer.
+                        </div>
+                        <div>
+                            <input type="radio" class="customRadio" formControlName="policyRaioButtonOne" value="1"  (click)="declarationShow(1)"/>
+                        </div>
+                    </div> 
+                    <div class="w-100 text-center fw-bold">OR</div>               
+                    <div class="d-flex justify-content-between mt-3">
+                        <div class="form-check-label">
+                          1. (b). I  have filed/I am a party to a case related to transfer.
+                        </div>
+                        <div>
+                            <input type="radio" class="customRadio"  formControlName="policyRaioButtonOne" value="0" (click)="declarationShow(0)"/>
+                        </div>
+                    </div>
+               
+                    <div class="mt-3" *ngIf="declarationStrShow">
+                    
+                      <table>
+                        <tr class="disclamerMessage">
+                          <td>{{responseData?.declarationStr}}</td>                    
+                        </tr>                     
+                      </table>
+                    </div>
+                    <div class="mt-3 bg-light px-2 pt-2  border" *ngIf="declaration && !declarationStrShow">
+                        <p class="form-check-label paraSet"> I 
+                            <select class="customSelect mx-1" formControlName="customSelectOne">
+                            <option value="have">have</option>
+                            <option value="had">had </option>
+                          
+                          </select> 
+                          filed and I
+                         
+                          <select class="customSelect mx-1" formControlName="customSelectTwo">
+                            <option value="am">am</option>
+                            <option value="was">was</option>
+                          </select> 
+                        a party to  case number
+                        <input type="text" class="customSelect"  formControlName="testFieldOne"> 
+                        which is 
+                           <select class="customSelect dffdf mx-1" formControlName="customSelectThree">
+                            <option value="disposed of">disposed of</option>
+                            <option value="pending">pending</option>
+                          </select> 
+                          before
+                          <select class="customSelect mx-1" formControlName="customSelectFour">
+                            <option value="court">court</option>
+                            <option value="tribunal">tribunal</option>
+                          </select> 
+                          (specify the  name of the court/tribunal )
+                          <input type="text" class="customSelect" formControlName="testFieldTwo"> 
+                        </p>
+                    </div>
+                    <hr/>  
+                    <div class=" mb-3">
+                      <table>
+                      
+                          <tr>
+                            <td><input class="form-check-input" type="checkbox" formControlName="policyCheckBox" value="" id="flexCheckDefault"></td>
+                            <td class="fw-bold">I have carefully through the transfer policy and read and understood the content there of (Click here to read/download).</td>
+                          </tr>
+                         
+                        </table>
+                  </div>
+                    <div class="text-center" *ngIf='buttonShow'>
+                <!-- <button type="submit" id="submit1" class="btn btn-success login-btn mt-2"  [disabled]="((!disclaimerForm.get('policyCheckBox').valid  || 
+                disclaimerForm.get('policyCheckBox').value == false) || !disclaimerForm.get('ldceSelectBox').valid || !disclaimerForm.get('policyRaioButtonOne').valid || ((!disclaimerForm.get('customSelectOne').valid || 
+                !disclaimerForm.get('customSelectTwo').valid || !disclaimerForm.get('testFieldOne').valid || !disclaimerForm.get('customSelectThree').valid || !disclaimerForm.get('customSelectFour').valid || !disclaimerForm.get('testFieldTwo').valid) &&  declaration)) " >Save & Next</button>
+                     -->
+                <button type="submit" id="submit1" class="btn btn-success login-btn mt-2"  [disabled]="((!disclaimerForm.get('policyCheckBox').valid  || 
+                disclaimerForm.get('policyCheckBox').value == false) || !disclaimerForm.get('policyRaioButtonOne').valid || ((!disclaimerForm.get('customSelectOne').valid || 
+                !disclaimerForm.get('customSelectTwo').valid || !disclaimerForm.get('testFieldOne').valid || !disclaimerForm.get('customSelectThree').valid || !disclaimerForm.get('customSelectFour').valid || !disclaimerForm.get('testFieldTwo').valid) &&  declaration)) " >Save & Next</button>
+              
+              
+              </div>
+                </form>
+                <div></div>
+            </div>
+        </div>
+    </div>
+</div>

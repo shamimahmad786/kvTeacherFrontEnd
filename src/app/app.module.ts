@@ -53,6 +53,12 @@ import { TeacherBasicProfileComponent } from './teacherDetailed/teacher-basic-pr
 import { TeacherWorkExperienceComponent } from './teacherDetailed/teacher-work-experience/teacher-work-experience.component';
 import { TeacherPreviewConfirmComponent } from './teacherDetailed/teacher-preview-confirm/teacher-preview-confirm.component';
 import { ProgresionBarComponent } from './teacherDetailed/progresion-bar/progresion-bar.component';
+import { ProfileVerificationComponent } from './kvs/kvs-teacher-transfer/profile-verification/profile-verification.component';
+import { TransferMiscellaneousComponent } from './kvs/kvs-teacher-transfer/transfer-miscellaneous/transfer-miscellaneous.component';
+import { TransferProgresionBarComponent } from './kvs/kvs-teacher-transfer/transfer-progresion-bar/transfer-progresion-bar.component';
+import { TransferStationChoiceComponent } from './kvs/kvs-teacher-transfer/transfer-station-choice/transfer-station-choice.component';
+import { TransferDcCountComponent } from './kvs/kvs-teacher-transfer/transfer-dc-count/transfer-dc-count.component';
+import { TransferTcCountComponent } from './kvs/kvs-teacher-transfer/transfer-tc-count/transfer-tc-count.component';
 // import { MatModuleModule } from './mat/mat-module/mat-module.module';
 // export function HttpLoaderFactory(http: HttpClient) {
 //   return new MultiTranslateHttpLoader(http, [
@@ -103,6 +109,12 @@ import { ProgresionBarComponent } from './teacherDetailed/progresion-bar/progres
     TeacherWorkExperienceComponent,
     TeacherPreviewConfirmComponent,
     ProgresionBarComponent,
+    ProfileVerificationComponent,
+    TransferMiscellaneousComponent,
+    TransferProgresionBarComponent,
+    TransferStationChoiceComponent,
+    TransferDcCountComponent,
+    TransferTcCountComponent,
 
   ],
   imports: [

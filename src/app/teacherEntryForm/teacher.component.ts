@@ -88,12 +88,19 @@ export class TeacherComponent implements OnInit {
 
   }
 
-  authlogout(){   
+  authlogout(){
     if(sessionStorage.getItem("loginType")=="jwt"){
-          this.router.navigate(['/mainPage']);
-    }else if(sessionStorage.getItem("loginType")=="auth"){
-      window.location.href=this.logoutLink;
-    }
-    sessionStorage.clear();
-    }
+     // alert("in if");
+      sessionStorage.clear();
+      // this.logoutLink=environment.LANDING_PAGE_URL
+     // window.location.href= "https://demopgi.udiseplus.gov.in/school";
+   //   window.location.href= "https://kvsonlinetransfer.kvs.gov.in/school";
+       this.router.navigate(['/login']);
+}else if(sessionStorage.getItem("loginType")=="auth"){
+ // alert("in else");
+  sessionStorage.clear();
+  window.location.href=this.logoutLink;
+}
+
+  }
 }

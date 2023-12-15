@@ -1,5 +1,5 @@
 <!-- preview of teacher details and consent check -->
-<div *ngIf="schoolVerifyStatus && savedPreview == 0 && !spouseStationFlag && !flagsBasedMessages">
+<div >
     <fieldset>
         <div class="" style="min-width: 100%; ">
 
@@ -471,21 +471,21 @@
 
 
 <!-- School not verified message -->
-<div class="d-flex justify-content-center align-items-center h-100 w-50 mx-auto" *ngIf="!schoolVerifyStatus && !spouseStationFlag && !flagsBasedMessages">
+<!-- <div class="d-flex justify-content-center align-items-center h-100 w-50 mx-auto" *ngIf="!schoolVerifyStatus && !spouseStationFlag && !flagsBasedMessages">
     <div class="cardsett shadow rounded justify-content-center align-items-center">
     <div class="setImg">
-        <span class="fw-bold">"Your Data is still not verified by School. Please get it verified from the school to exercise your station
+        <span class="fw-bold">"Your Data issasasasasasa still not verified by School. Please get it verified from the school to exercise your station
         prefrences." </span><br/> <span class="textBlack"> After filling the Preferred Station, data will not be changed/modified.</span>
     </div>
 </div>
-</div>
+</div> -->
 
 
 
 
 
 <!-- Station choices and further work -->
-<div *ngIf="(fromStatus == 'SA' || fromStatus == 'SEE' || fromStatus == 'TTD'  || fromStatus == 'TTS') && isZiet != '1' && schoolVerifyStatus && !spouseStationFlag && consentCheckBoxValue && !flagsBasedMessages && (savedPreview==1)"
+<div 
     class="container-fluid">
     <div class="row">
         <div class="col-md-12">

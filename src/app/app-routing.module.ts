@@ -16,6 +16,11 @@ import { DisclaimerComponent } from './disclaimer/disclaimer.component';
 import { TeacherBasicProfileComponent } from './teacherDetailed/teacher-basic-profile/teacher-basic-profile.component';
 import { TeacherWorkExperienceComponent } from './teacherDetailed/teacher-work-experience/teacher-work-experience.component';
 import { TeacherPreviewConfirmComponent } from './teacherDetailed/teacher-preview-confirm/teacher-preview-confirm.component';
+import { ProfileVerificationComponent } from './kvs/kvs-teacher-transfer/profile-verification/profile-verification.component';
+import { TransferMiscellaneousComponent } from './kvs/kvs-teacher-transfer/transfer-miscellaneous/transfer-miscellaneous.component';
+import { TransferStationChoiceComponent } from './kvs/kvs-teacher-transfer/transfer-station-choice/transfer-station-choice.component';
+import { TransferDcCountComponent } from './kvs/kvs-teacher-transfer/transfer-dc-count/transfer-dc-count.component';
+import { TransferTcCountComponent } from './kvs/kvs-teacher-transfer/transfer-tc-count/transfer-tc-count.component';
 
 const routes: Routes = [
   // {path:'', component: TDashboardComponent},
@@ -26,8 +31,13 @@ const routes: Routes = [
   {path: 'teacher', component:TeacherComponent,canActivate: [AuthGuard], children:[
       {path: 'mainPage', component:MainPageComponent},
       {path:'profile',component:TeacherProfileComponent}, 
-      {path:'teacherBasicProfile',component:TeacherBasicProfileComponent},   
-      {path:'teacherWorkExperience', component:TeacherWorkExperienceComponent},  
+      {path:'teacherBasicProfile',component:TeacherBasicProfileComponent},  
+      {path:'profileVerifiation', component:ProfileVerificationComponent},  
+      {path:'transferMiscellaneous', component:TransferMiscellaneousComponent}, 
+      {path:'transferDcCount', component:TransferDcCountComponent},
+      {path:'transferTcCount', component:TransferTcCountComponent},
+      {path:'transferStationChoice', component:TransferStationChoiceComponent},
+      {path:'teacherWorkExperience', component:TeacherWorkExperienceComponent}, 
       {path:'teacherPreviewConfirm', component:TeacherPreviewConfirmComponent}, 
       {path:'kvsteacherprofile', component:KvsTeacherProfileComponent},
       {path:'kvsteachertransfer', component:KvsTeacherTransferComponent},
@@ -35,7 +45,7 @@ const routes: Routes = [
       {path:'changePassword', component:ChangePasswordComponent}
       // {path:'appFlow',component:ApplicationFlowComponent}
     ]},  
-    
+
 ];
 
 @NgModule({

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import * as $ from 'jquery';
 import { OutsideServicesService } from 'src/app/service/outside-services.service';
+import Swal from 'sweetalert2';
 @Component({
   selector: 'app-side-nav',
   templateUrl: './side-nav.component.html',
@@ -15,7 +16,6 @@ export class SideNavComponent implements OnInit {
   workExperience: any = false;
   PreviewConfirm: any = false;
   constructor(private outSideService: OutsideServicesService) { }
-
   public ngOnInit(): void {
    this.basicProfile=true;
    this.workExperience=true;
@@ -25,9 +25,7 @@ export class SideNavComponent implements OnInit {
       this.lastName = JSON.parse(sessionStorage.getItem("authTeacherDetails"))?.lastname;
       this.teacherId = JSON.parse(sessionStorage.getItem("authTeacherDetails"))?.user_name;
     }
-    
     this.getProfileImage();
-
     function readURL(input) {
       if (input.files && input.files[0]) {
         var reader = new FileReader();
@@ -44,6 +42,21 @@ export class SideNavComponent implements OnInit {
     });
   }
 
+  getTeacherConfirmation(){
+    var data = {"teacherId": this.teacherId}
+    this.outSideService.getTeacherConfirmationV2(data).subscribe((res)=>{
+      debugger
+      if(res){
+      }   
+  },
+  error => {
+    Swal.fire({
+      'icon':'error',
+      'text':error.error
+    }  
+    )
+  })
+  }
   fileToUpload: File | null = null;
   documentUpload(index) {
     const formData = new FormData();
@@ -60,7 +73,6 @@ export class SideNavComponent implements OnInit {
     }
   }
 
-
   handleFileInput(files: FileList, index) {    
     var data = files.item(0).name
     var splitted = data.split('.', 2)
@@ -73,20 +85,15 @@ export class SideNavComponent implements OnInit {
   }
 
   getProfileImage() {
-
     this.outSideService.getProfileImage(JSON.parse(sessionStorage.getItem('authTeacherDetails')).user_name).subscribe((res) => {
           if(res.status == '1' || res.status == '1'){
             this.imageData = "data:image/jpg;base64," + res.data;
           }else if(res.status == '0' || res.status == '0'){
             this.imageData = 'assets/assets/img/download.jpg';
           }
-      
     },
       error => {
         this.imageData = 'assets/assets/img/download.jpg';
       })
   }
-
-
-
 }

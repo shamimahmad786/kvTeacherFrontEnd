@@ -4,17 +4,33 @@ import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@ang
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { OutsideServicesService } from 'src/app/service/outside-services.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { DateAdapter } from '@angular/material/core';
+import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
 import * as moment from 'moment';
 import { environment } from 'src/environments/environment';
 import Swal from 'sweetalert2';
 import { FormDataService } from 'src/app/teacherEntryForm/service/internalService/form-data.service';
 import { DataService } from 'src/app/service/data.service';
 import { TeacherAppPdfService } from 'src/app/makePDF/teacher-app-pdf.service';
+import { MomentDateAdapter } from '@angular/material-moment-adapter';
+export const MY_FORMATS = {
+  parse: {
+    dateInput: 'DD-MM-YYYY',
+  },
+  display: {
+    dateInput: 'DD-MM-YYYY',
+    monthYearLabel: 'YYYY',
+    dateA11yLabel: 'LL',
+    monthYearA11yLabel: 'YYYY',
+  },
+};
 @Component({
   selector: 'app-teacher-work-experience',
   templateUrl: './teacher-work-experience.component.html',
-  styleUrls: ['./teacher-work-experience.component.css']
+  styleUrls: ['./teacher-work-experience.component.css'],
+  providers: [
+    { provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE] },
+    { provide: MAT_DATE_FORMATS, useValue: MY_FORMATS },
+  ],
 })
 export class TeacherWorkExperienceComponent implements OnInit {
   teacherForm: FormGroup;

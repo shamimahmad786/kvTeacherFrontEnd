@@ -48,11 +48,11 @@
                       </div>
                       <div class="dashboard-header--details">
                           <p class="dashboard-header--hello">Welcome</p>
-                          <p class="dashboard-header--name">ddsds</p>
+                          <p class="dashboard-header--name">{{loginUserNameForChild}}</p>
 
                       </div>
                       <div class="dashboard-header--logo text-center">
-                          <a >
+                          <a (click)="authlogout()">
                               <img src="assets/images/log-out.svg">
                               <div>Logout</div>
                           </a>

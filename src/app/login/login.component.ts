@@ -59,9 +59,9 @@ export class LoginComponent implements OnInit {
       }else if(this.businessUnitTypeId=="4"){
         this.router.navigate(['/teacher/stationDashboard']);
       }else if(this.businessUnitTypeId=="5"){
-        this.router.navigate(['/teacher/profile']);
+        this.router.navigate(['/teacher/teacherBasicProfile']);
       }else{
-        this.router.navigate(['/teacher/profile']);
+        this.router.navigate(['/teacher/teacherBasicProfile']);
       }
 
     }

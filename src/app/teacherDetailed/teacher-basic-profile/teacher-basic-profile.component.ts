@@ -418,83 +418,84 @@ export class TeacherBasicProfileComponent implements OnInit {
     })
   }
   submit(){
-    if(this.basicProfileForm.value.disabilityYN!=0)
-    {
-      if (this.basicProfileForm.invalid) {
-        Swal.fire(
-          'something went worng!',
-          'error'
-        )
-        return false;
-         }
-       }
-        var data={
-          "teacherName":this.basicProfileForm.value.fullName,
-          "teacherGender":this.basicProfileForm.value.gender,
-          "teacherDob":this.basicProfileForm.value.dob,
-          "teacherEmployeeCode":this.basicProfileForm.value.empCode,
-          "teacherMobile":this.basicProfileForm.value.mobile,
-          "teacherEmail":this.basicProfileForm.value.email,
-          "teacherPermanentAddress":this.basicProfileForm.value.prmntAddress,
-          "teacherParmanentState":this.basicProfileForm.value.prmntState,
-          "teacherPermanentDistrict":this.basicProfileForm.value.prmntDistrict,
-          "teacherPermanentPin":this.basicProfileForm.value.prmntPinCode,
-          "teacherCorrespondenceAddress":this.basicProfileForm.value.crspndncAddress,
-          "teacherCorrespondenceState":this.basicProfileForm.value.crspndncState,
-          "teacherCorrespondenceDistrict":this.basicProfileForm.value.crspndncDistrict,
-          "teacherCorrespondencePin":this.basicProfileForm.value.crspndncPinCode,
-          "teacherDisabilityYn":this.basicProfileForm.value.disabilityYN,
-          "teacherDisabilityType":this.basicProfileForm.value.disabilityType,
-          "lastPromotionPositionType":this.basicProfileForm.value.presentPostName,
-          "lastPromotionPositionDate":this.basicProfileForm.value.lastPromotionPositionDate,
-          "workExperienceAppointedForSubject":this.basicProfileForm.value.presentSubjectName,
-          "currentUdiseSchCode":this.kvCode,
-          "teacherId":this.emplyeeData['teacherId'],
-          "schoolId":"",
-          "dropBoxFlag":"",
-          "teachingNonteaching":this.basicProfileForm.value.staffType,
-          "natureOfAppointment":"",
-          "specialRecruitmentYn":this.basicProfileForm.value.specialRecruitmentYn,
-          "kvCode":this.kvCode
-        }
-        console.log(data)
+    this.router.navigate(['/teacher/teacherWorkExperience']);
+    // if(this.basicProfileForm.value.disabilityYN!=0)
+    // {
+    //   if (this.basicProfileForm.invalid) {
+    //     Swal.fire(
+    //       'something went worng!',
+    //       'error'
+    //     )
+    //     return false;
+    //      }
+    //    }
+    //     var data={
+    //       "teacherName":this.basicProfileForm.value.fullName,
+    //       "teacherGender":this.basicProfileForm.value.gender,
+    //       "teacherDob":this.basicProfileForm.value.dob,
+    //       "teacherEmployeeCode":this.basicProfileForm.value.empCode,
+    //       "teacherMobile":this.basicProfileForm.value.mobile,
+    //       "teacherEmail":this.basicProfileForm.value.email,
+    //       "teacherPermanentAddress":this.basicProfileForm.value.prmntAddress,
+    //       "teacherParmanentState":this.basicProfileForm.value.prmntState,
+    //       "teacherPermanentDistrict":this.basicProfileForm.value.prmntDistrict,
+    //       "teacherPermanentPin":this.basicProfileForm.value.prmntPinCode,
+    //       "teacherCorrespondenceAddress":this.basicProfileForm.value.crspndncAddress,
+    //       "teacherCorrespondenceState":this.basicProfileForm.value.crspndncState,
+    //       "teacherCorrespondenceDistrict":this.basicProfileForm.value.crspndncDistrict,
+    //       "teacherCorrespondencePin":this.basicProfileForm.value.crspndncPinCode,
+    //       "teacherDisabilityYn":this.basicProfileForm.value.disabilityYN,
+    //       "teacherDisabilityType":this.basicProfileForm.value.disabilityType,
+    //       "lastPromotionPositionType":this.basicProfileForm.value.presentPostName,
+    //       "lastPromotionPositionDate":this.basicProfileForm.value.lastPromotionPositionDate,
+    //       "workExperienceAppointedForSubject":this.basicProfileForm.value.presentSubjectName,
+    //       "currentUdiseSchCode":this.kvCode,
+    //       "teacherId":this.emplyeeData['teacherId'],
+    //       "schoolId":"",
+    //       "dropBoxFlag":"",
+    //       "teachingNonteaching":this.basicProfileForm.value.staffType,
+    //       "natureOfAppointment":"",
+    //       "specialRecruitmentYn":this.basicProfileForm.value.specialRecruitmentYn,
+    //       "kvCode":this.kvCode
+    //     }
+    //     console.log(data)
 
-        Swal.fire({
-          'icon':'warning',
-          'text': "Do you want to proceed ?",
-          'allowEscapeKey': false,
-          'allowOutsideClick': false,
-          'showCancelButton': true,
-          'confirmButtonColor': "#DD6B55",
-          'confirmButtonText': "Yes",
-          'cancelButtonText': "No",
-          'showLoaderOnConfirm': true,
-        }
-        ).then((isConfirm) => {
-          if (isConfirm.value === true) {
-              this.outSideService.saveSingleTeacher(data).subscribe((res)=>{
-                debugger
-                console.log(res)
-                if(res){
-                  sessionStorage.setItem('kvTeacherId',res['response']['teacherId']);
-                  sessionStorage.setItem('profileTeacherName',this.profileTeacherName);
-                  Swal.fire(
-                    'Basic profile save successfully!',
-                    '',
-                    'success'
-                  ) 
-                }
-                this.router.navigate(['/teacher/teacherWorkExperience']);
-          },
-          error => {
-            Swal.fire({
-              'icon':'error',
-              'text':error.error
-            }
-            )
-          })
-        }
-        return false;
-        });
+    //     Swal.fire({
+    //       'icon':'warning',
+    //       'text': "Do you want to proceed ?",
+    //       'allowEscapeKey': false,
+    //       'allowOutsideClick': false,
+    //       'showCancelButton': true,
+    //       'confirmButtonColor': "#DD6B55",
+    //       'confirmButtonText': "Yes",
+    //       'cancelButtonText': "No",
+    //       'showLoaderOnConfirm': true,
+    //     }
+    //     ).then((isConfirm) => {
+    //       if (isConfirm.value === true) {
+    //           this.outSideService.saveSingleTeacher(data).subscribe((res)=>{
+    //             debugger
+    //             console.log(res)
+    //             if(res){
+    //               sessionStorage.setItem('kvTeacherId',res['response']['teacherId']);
+    //               sessionStorage.setItem('profileTeacherName',this.profileTeacherName);
+    //               Swal.fire(
+    //                 'Basic profile save successfully!',
+    //                 '',
+    //                 'success'
+    //               ) 
+    //             }
+    //             this.router.navigate(['/teacher/teacherWorkExperience']);
+    //       },
+    //       error => {
+    //         Swal.fire({
+    //           'icon':'error',
+    //           'text':error.error
+    //         }
+    //         )
+    //       })
+    //     }
+    //     return false;
+    //     });
 }
 }

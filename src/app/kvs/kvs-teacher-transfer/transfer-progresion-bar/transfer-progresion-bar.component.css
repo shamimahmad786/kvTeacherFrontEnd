@@ -1,4 +1,4 @@
-.add-teacher{
+.add-user{
     color: #fff;
     border-radius: 4px;
     font-size: 14px;
@@ -6,19 +6,9 @@
     height: 35px !important;
     line-height: normal;
     border: none;
-    padding: 0 35px;
+    padding: 0 15px;
   }
-  .save-user{
-    color: #fff;
-    border-radius: 4px;
-    font-size: 14px;
-    background: #632765;
-    height: 35px !important;
-    line-height: normal;
-    border: none;
-    padding: 0 24px;
-  }
-  .add-teacher:disabled {
+  .add-user:disabled {
     color: #fff;
     top: 7px;
     padding: 0 15px 0 33px;
@@ -361,7 +351,7 @@ ul.ulLeft li {
 #progressbar li {
   list-style-type: none;
   font-size: 15px;
-  width: 32.66%;
+  width: 16.66%;
   float: left;
   position: relative;
   font-weight: 400;

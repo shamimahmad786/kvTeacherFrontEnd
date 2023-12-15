@@ -466,6 +466,7 @@ export class KvsTeacherTransferComponent implements OnInit {
   }
 
   getPreviewAndChcekPermissions(teacherId: any) {
+    debugger
     let data = {
       teacher_id: teacherId
     }
@@ -616,7 +617,7 @@ console.log(res?.response?.rowValue[0]?.unfrez_flag);
       this.getTeacherDetailsForPreview();
       this.getSchoolDetailsByKvCode();
     }
-    this.getPreviewAndChcekPermissions(this.tempTeacherId)
+   // this.getPreviewAndChcekPermissions(this.tempTeacherId)
 
     // setTimeout(function () {
     //   onNextClick(1);

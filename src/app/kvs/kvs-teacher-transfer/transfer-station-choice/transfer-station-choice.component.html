@@ -1,0 +1,240 @@
+<div class="dashboard-main-content" style="min-height: 600px;">
+    <app-transfer-progresion-bar></app-transfer-progresion-bar>
+<div class="dashboard-main-content-info  p-4 mt-3">   
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="row">
+                <div class="col-4">
+                    <h2 class="mb-0">Preferred Station For Transfer/Displacement</h2>
+                </div>
+                <div class="col-8">
+                    <h2 class="steps text-end pro-name"  style="text-align:right;padding:1%;color:green;font-size:18px">  Status:    <span style="font-weight: 700;"> {{statUsMessage}}</span> </h2>
+                </div>
+            </div>
+            <div  class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    {{formStatusLocale}}
+        <div class="shadow-sm bg-white rounded" *ngIf="formStatusLocale!=''">
+            <div class="p-3">
+                <div class="card px-0 pb-0 ">
+                    <div class="mt-3" *ngIf="formStatusLocale == 'TRI'">
+                        <h2>
+                            Form Status : <span style="color: green;">Transfer initiated</span>
+                        </h2>
+                    </div>
+                    <div class="mt-3" *ngIf="formStatusLocale == 'TRA'">
+                        <h2>
+                            Form Status : <span style="color: green;">Transfer verified</span>
+                        </h2>
+                    </div>
+                    <div class="mt-3" *ngIf="formStatusLocale == 'TRE'">
+                        <h2>
+                            Form Status : <span style="color: yellowgreen;">Transfer edited at school</span>
+                        </h2>
+                    </div>
+                    <div class="mt-3" *ngIf="formStatusLocale == 'TRS'">
+                        <h2>
+                            Form Status : <span style="color: orange;">Transfer submitted for verification. </span>
+                        </h2>
+                    </div>
+                    <div class="mt-3" *ngIf="formStatusLocale == 'TRR'">
+                        <h2>
+                            Form Status : <span style="color: red;">Transfer exempted from HQ.</span>
+                        </h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+     
+    <div class="shadow-sm bg-white rounded">
+    <div class="">
+    <form id="msform" class="msform" [formGroup]="transferForm" (ngSubmit)="onSubmit($event)">
+
+    <div formGroupName="stationChoice" class="form-card">
+        <div class="card" style="height:95%; border-radius: 1%;padding: 1%;">
+        <div class="row">
+            <div class="col-sm-3">
+                <h3 class="youWant"> Do you want to apply for transfer?</h3> </div>
+                <div class="col-sm-1">
+                <div class="form-check form-check-inline " *ngIf="!onlyDcFill">
+                    <input class="form-check-input" value="1" name="applyTransferYn"
+                        id="applyTransferYn" formControlName="applyTransferYn"
+                       type="radio"
+                        (click)="manageChoice(1)" />
+                    <label class="form-check-label fw-bold">Yes</label>
+                </div>
+               </div>
+                <div class="col-sm-1">
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" value="0" name="applyTransferYn"
+                        id="applyTransferYn" formControlName="applyTransferYn"
+                        type="radio"
+                        (click)="manageChoice(0)" >
+                    <label class="form-check-label fw-bold">No</label>
+                </div>
+                </div>
+                <div class="form-check form-check-inline" *ngIf="onlyDcFill">
+                    <span
+                    class="required-asterisk">You are not eligible for the request transfer due to insufficient active stay as per transfer policy.</span>
+                </div>
+            <hr>
+        </div>
+        <div class="row ">
+            <div class="col-md-6">
+                <h4 class="titleSet">Preferred Station (I) <span
+                    class="required-asterisk">*</span></h4>
+                <div class="input-group mb-3">
+                    <input type="text" class="input-group-text input"
+                        id="choiceKv1StationCode" formControlName="choiceKv1StationCode"
+                        name="choiceKv1StationCode" disabled
+                        style="width:70px; height:33px;">
+                    <input type="text" class="form-control form-control-sm input"
+                        id="choiceKv1StationName" formControlName="choiceKv1StationName"
+                        name="choiceKv1StationName"
+                        placeholder="Station Name (Preference One)"
+                        aria-label="Recipient's username" aria-describedby="button-addon2"
+                        disabled disabled>
+                    <button
+                        class="btn btn-sm btn-outline-secondary btn-bdr-color input-group-text"
+                        type="button" id="button-addon2"><i class='bx bx-reset'
+                            title="Reset" (click)="restStationSelection(1)"></i></button>
+                    <button
+                        class="btn btn-sm btn-outline-secondary btn-bdr-color input-group-text"
+                        type="button" id="button-addon2"><i
+                            class="fa fa-search SearchIconSet "
+                            (click)="selectSchool('1')"></i></button>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <h4 class="titleSet">Preferred Station (II) <span
+                        class="required-asterisk">*</span></h4>
+                    
+                        <div class="input-group mb-3">
+                            <input type="text" class="input-group-text input"
+                                id="choiceKv2StationCode" formControlName="choiceKv2StationCode"
+                                name="choiceKv2StationCode" disabled
+                                style="width:70px; height:33px;">
+                            <input type="text" class="form-control form-control-sm"
+                                id="choiceKv2StationName" formControlName="choiceKv2StationName"
+                                name="choiceKv2StationName"
+                                placeholder="Station Name (Preference Two)"
+                                aria-label="Recipient's username" aria-describedby="button-addon2"
+                                disabled>
+
+                            <button
+                                class="btn btn-sm btn-outline-secondary btn-bdr-color input-group-text"
+                                type="button" id="button-addon2"><i class='bx bx-reset'
+                                    title="Reset" (click)="restStationSelection(2)"></i></button>
+                               <button class="btn btn-sm btn-outline-secondary btn-bdr-color input-group-text"type="button" id="button-addon2"><i
+                                    class="fa fa-search SearchIconSet"
+                                    (click)="selectSchool('2')"></i></button>
+             </div>        
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <h4 class="titleSet">Preferred Station (III) <span
+                    class="required-asterisk">*</span></h4>
+                    <div class="input-group mb-3">
+                        <input type="text" class="input-group-text input"
+                            id="choiceKv3StationCode" formControlName="choiceKv3StationCode"
+                            name="choiceKv3StationCode" disabled
+                            style="width:70px; height:33px;">
+                        <input type="text" class="form-control form-control-sm"
+                            id="choiceKv3StationName" formControlName="choiceKv3StationName"
+                            name="choiceKv3StationName"
+                            placeholder="Station Name (Preference Three)"
+                            aria-label="Recipient's username" aria-describedby="button-addon2"
+                            disabled>
+
+                        <button
+                            class="btn btn-sm btn-outline-secondary btn-bdr-color input-group-text"
+                            type="button" id="button-addon2"><i class='bx bx-reset'
+                                title="Reset" (click)="restStationSelection(3)"></i></button>
+                        <button
+                            class="btn btn-sm btn-outline-secondary btn-bdr-color input-group-text"
+                            type="button" id="button-addon2"><i
+                                class="fa fa-search SearchIconSet"
+                                (click)="selectSchool('3')"></i></button>
+                    </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <h4 class="titleSet">Preferred Station (IV) <span
+                    class="required-asterisk">*</span></h4>
+                <div class="input-group mb-3">
+                    <input type="text" class="input-group-text input"
+                        id="choiceKv4StationCode" formControlName="choiceKv4StationCode"
+                        name="choiceKv4StationCode" disabled
+                        style="width:70px; height:33px;">
+                    <input type="text" class="form-control form-control-sm"
+                        id="choiceKv4StationName" formControlName="choiceKv4StationName"
+                        name="choiceKv4StationName"
+                        placeholder="Station Name (Preference Four)"
+                        aria-label="Recipient's username" aria-describedby="button-addon2"
+                        disabled>
+
+                    <button
+                        class="btn btn-sm btn-outline-secondary btn-bdr-color input-group-text"
+                        type="button" id="button-addon2"><i class='bx bx-reset'
+                            title="Reset" (click)="restStationSelection(4)"></i></button>
+                    <button
+                        class="btn btn-sm btn-outline-secondary btn-bdr-color input-group-text"
+                        type="button" id="button-addon2"><i
+                            class="fa fa-search SearchIconSet"
+                            (click)="selectSchool('4')"></i></button>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <h4 class="titleSet">Preferred Station (V) <span
+                    class="required-asterisk">*</span></h4>
+                <div class="input-group mb-3">
+                    <input type="text" class="input-group-text input"
+                        id="choiceKv5StationCode" formControlName="choiceKv5StationCode"
+                        name="choiceKv5StationCode" disabled
+                        style="width:70px; height:33px;">
+                    <input type="text" class="form-control form-control-sm"
+                        id="choiceKv5StationName" formControlName="choiceKv5StationName"
+                        name="choiceKv5StationName"
+                        placeholder="Station Name (Preference Five)"
+                        aria-label="Recipient's username" aria-describedby="button-addon2"
+                        disabled>
+
+                    <button
+                        class="btn btn-sm btn-outline-secondary btn-bdr-color input-group-text"
+                        type="button" id="button-addon2"><i class='bx bx-reset'
+                            title="Reset" (click)="restStationSelection(5)"></i></button>
+                    <button
+                        class="btn btn-sm btn-outline-secondary btn-bdr-color input-group-text"
+                        type="button" id="button-addon2"><i
+                            class="fa fa-search SearchIconSet"
+                            (click)="selectSchool('5')"></i></button>
+                </div>
+            </div>
+        </div>
+        <h3 class="mb-0"> <b>Note :</b> All are Mandatory <span class="required-asterisk">*</span></h3>
+    </div>
+</div>
+    <input
+        [disabled]="((!transferForm.get('stationChoice.choiceKv1StationName').valid && !transferForm.get('stationChoice.choiceKv2StationName').valid && !transferForm.get('stationChoice.choiceKv3StationName').valid && !transferForm.get('stationChoice.choiceKv4StationName').valid && !transferForm.get('stationChoice.choiceKv5StationName').valid)) || !transDisable"
+        type="button" name="next" class="next action-button1 me-3" value="Next"
+        />
+    <input
+    [disabled]="((!transferForm.get('stationChoice.choiceKv1StationName').valid || !transferForm.get('stationChoice.choiceKv2StationName').valid || !transferForm.get('stationChoice.choiceKv3StationName').valid || !transferForm.get('stationChoice.choiceKv4StationName').valid || !transferForm.get('stationChoice.choiceKv5StationName').valid)) || transDisable"
+        type="submit" id="submit1"  value="Save & Next" class="next action-button" />
+</form>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>

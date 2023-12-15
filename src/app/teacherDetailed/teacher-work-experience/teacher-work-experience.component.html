@@ -22,9 +22,9 @@
                         <th style="width: 182px; "> Position Held</th>
                         <th style="width: 209px;">Appointed for Subject</th>
                         <th>Transfer Ground</th>
-                        <th style="width: 140px; ">
+                        <!-- <th style="width: 140px; ">
                             <input type="button"  class="btn btn-sm btn-green-logout me-2" value="Add" (click)="addQuantity(undefined)">
-                        </th>
+                        </th> -->
                     </tr>
                 </thead>
                 <tbody>
@@ -34,14 +34,14 @@
                                 <input type="text" class="input-group-text input" name="udiseSchCode" formControlName="udiseSchCode" disabled style="width:70px; height:33px;">
                                 <input type="text" class="form-control form-control-sm " name="udiseSchoolName" formControlName="udiseSchoolName" disabled>
 
-                                <div *ngIf="i==0">
+                                <!-- <div *ngIf="i==0">
                                     <button class="btn btn-sm btn-outline-secondary btn-sm" type="button" id="button-addon2"  (click)="selectExperianceSchool(i)"> <i
                                     class="fa fa-search"></i></button>
-                                </div>
-                                <div *ngIf="i!=0">
+                                </div> -->
+                                <!-- <div *ngIf="i!=0">
                                     <button class="btn btn-sm btn-outline-secondary btn-sm" type="button" id="button-addon2" (click)="selectExperianceSchool(i)"> <i
                                         class="fa fa-search"></i></button>
-                                </div>
+                                </div> -->
                             </div>
                             <span class="help-block text-danger" *ngIf="quantity.controls.udiseSchoolName.errors?.required">
                                 Enter KV/RO/ZIET/HQ !</span>
@@ -99,9 +99,9 @@
                             </mat-form-field>
                         </td>
                         <td class="IconBx">
-                            <i (click)="removeQuantity(i)" class="bx bx-minus-circle bxStyle1 mr-2" style="color: #f9384b;"></i>
+                            <!-- <i (click)="removeQuantity(i)" class="bx bx-minus-circle bxStyle1 mr-2" style="color: #f9384b;"></i>
                             <input  *ngIf="quantity.value.buttonType=='save'" (click)="onSaveExperience(i)" type="submit" name="Save"  class="me-2  save-user" value="Save" />
-                            <input *ngIf="quantity.value.buttonType=='update'" (click)="onSaveExperience(i)" type="submit" name="Update"  class="me-2 add-user" value="Update" />
+                            <input *ngIf="quantity.value.buttonType=='update'" (click)="onSaveExperience(i)" type="submit" name="Update"  class="me-2 add-user" value="Update" /> -->
                         </td>
                     </tr>
                 </tbody>
@@ -112,7 +112,7 @@
         <div class="button-back mt-2">
         <input type="button" name="previous" class=" me-2 back-button" (click)="previousPage()"  value="Back" /><i class="fa fa-chevron-circle-left" aria-hidden="true"></i></div>  
         <div class="button-save mt-2">
-       <input  type="button"  class="me-2 add-user" (click)="onNextClick()" value="Next" /> <i class="fa fa-floppy-o" aria-hidden="true"></i> </div>
+       <input  type="button"  class="me-2 add-teacher" (click)="onNextClick()" value="Next" /> <i class="fa fa-floppy-o" aria-hidden="true"></i> </div>
        </div>
  </div>
  </div> 

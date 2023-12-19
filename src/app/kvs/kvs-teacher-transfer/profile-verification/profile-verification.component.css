@@ -310,7 +310,12 @@
   }
   
 
-  
+  .blink_text {
+    animation-name: blinker;
+    animation-duration: 1s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+}
   .fit-image {
     width: 50%;
     margin: 0px auto;

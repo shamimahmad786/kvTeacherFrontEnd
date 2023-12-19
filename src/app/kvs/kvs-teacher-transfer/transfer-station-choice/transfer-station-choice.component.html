@@ -221,13 +221,12 @@
         <h3 class="mb-0"> <b>Note :</b> All are Mandatory <span class="required-asterisk">*</span></h3>
     </div>
 </div>
-    <input
-        [disabled]="((!transferForm.get('stationChoice.choiceKv1StationName').valid && !transferForm.get('stationChoice.choiceKv2StationName').valid && !transferForm.get('stationChoice.choiceKv3StationName').valid && !transferForm.get('stationChoice.choiceKv4StationName').valid && !transferForm.get('stationChoice.choiceKv5StationName').valid)) || !transDisable"
-        type="button" name="next" class="next action-button1 me-3" value="Next"
-        />
-    <input
-    [disabled]="((!transferForm.get('stationChoice.choiceKv1StationName').valid || !transferForm.get('stationChoice.choiceKv2StationName').valid || !transferForm.get('stationChoice.choiceKv3StationName').valid || !transferForm.get('stationChoice.choiceKv4StationName').valid || !transferForm.get('stationChoice.choiceKv5StationName').valid)) || transDisable"
-        type="submit" id="submit1"  value="Save & Next" class="next action-button" />
+<div class="mt-2 d-flex align-items-center justify-content-between " >
+    <div class="button-back mt-2">
+    <input type="button" name="previous" class=" me-2 back-button"   value="Back" /><i class="fa fa-chevron-circle-left" aria-hidden="true"></i></div>  
+    <div class="button-save mt-2">
+   <input  type="button"  class="me-2 add-teacher"  value="Next" /> <i class="fa fa-floppy-o" aria-hidden="true"></i> </div>
+   </div>
 </form>
 </div>
 </div>
@@ -237,4 +236,61 @@
 </div>
 </div>
 </div>
+
+
+<ng-template #selectSchoolModalInterStation let-modal style="min-width: 100%;">
+    <div class="modal-header">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="clearfix">
+                    <div class="float-left">
+                        <h2 class="mb-0 text-green">Select Station</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="" style="min-width: 100%; max-height: 750px;">
+        <div class="container-fluid">
+            <div class="row p-4">
+                <div class="col-md-6 ">
+                    <!-- <h3>Region</h3> -->
+                    <select class="form-select form-select-sm" aria-label="Default select example"
+                        (change)="getStationByRegionIdWithCond($event)">
+                        <option selected disabled> Select Region</option>
+                        <option *ngFor="let data of regionList; let i=index;" value="{{data.regionCode}}">
+                            {{data.regionName}}
+                        </option>
+
+                    </select>
+                </div>
+                <div class="col-md-6">
+                    <!-- <h3>Station</h3> -->
+                    <select class="form-select form-select-sm" aria-label="Default select example"
+                        [(ngModel)]="selectedUdiseCode" (change)="getKvSchoolByStationIdPreference($event)">
+                        <option selected disabled> Select Station</option>
+                        <option *ngFor="let data of stationList; let i=index;"
+                            value="{{data.station_code}}-{{data.station_name}}">
+                            {{data.station_name}}
+                        </option>
+
+                    </select>
+                </div>
+            </div>
+
+            <hr>
+            <div class="ulLeft" style="margin-bottom: 20px; margin-top: 10px;">
+                <a class=" btn-cancel p-2 me-2" (click)="modal.dismiss('Cross click')">Cancel</a>
+                <!-- <button class="btn btn-sm btn-green-logout p-2 me-1"
+            (click)="onVerify('false') ; modal.dismiss('Cross click')">Edit</button> -->
+                <button class="btn btn-success btn-sm" style="margin-left: 3px;"
+                    (click)="selectTransferFormSchoolByUdise() ; modal.dismiss('Cross click')"> Ok</button>
+            </div>
+        </div>
+    </div>
+
+
+</ng-template>
 </div>

@@ -10,7 +10,7 @@ export class TransferTcCountComponent implements OnInit {
   responseData: any;
   transferCountForm: FormGroup;
   enableTransferFormYn: boolean = true;
-  isZiet: any;
+  isZiet: any;  
   constructor() { }
 
   ngOnInit(): void {

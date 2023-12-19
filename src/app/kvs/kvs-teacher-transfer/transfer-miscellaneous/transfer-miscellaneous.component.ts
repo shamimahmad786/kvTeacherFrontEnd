@@ -1,23 +1,16 @@
 import { Component, OnInit } from '@angular/core';
-
 import { ActivatedRoute, Router } from '@angular/router';
 import { DatePipe } from '@angular/common';
-
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-
 import { DateAdapter } from '@angular/material/core';
-
 import { environment } from 'src/environments/environment';
 import { RxwebValidators } from '@rxweb/reactive-form-validators';
 import Swal from 'sweetalert2';
-
 import { OutsideServicesService } from 'src/app/service/outside-services.service';
 import { TeacherAppPdfService } from 'src/app/makePDF/teacher-app-pdf.service';
 import { FormDataService } from 'src/app/teacherEntryForm/service/internalService/form-data.service';
 import { DataService } from 'src/app/service/data.service';
-
-
 @Component({
   selector: 'app-transfer-miscellaneous',
   templateUrl: './transfer-miscellaneous.component.html',
@@ -27,7 +20,7 @@ export class TransferMiscellaneousComponent implements OnInit {
   gkFilebenefit: boolean = false;
   miscellaneousForm: FormGroup;
   gkFilemMedical: boolean = false;
-  personalStatusMdgDradioButton: any;
+ 
   applicationId: any;
   loginUserNameForChild: any;
   kvicons: string;
@@ -159,7 +152,7 @@ export class TransferMiscellaneousComponent implements OnInit {
       'childDifferentDisabilityName': new FormControl('', [Validators.required, Validators.maxLength(50), Validators.pattern("^[A-Za-z0-9 ]*$")]),
       'childDifferentDisabilityPrcnt': new FormControl('', [Validators.required, Validators.min(0), Validators.max(100), Validators.maxLength(3), RxwebValidators.numeric({ allowDecimal: true, isFormat: true })]),
     })
-  
+    this.getTransferProfile();
   }
 
   declarationtransferRelated1(event) {
@@ -170,8 +163,6 @@ export class TransferMiscellaneousComponent implements OnInit {
     }
   }
 
-
-
   declarationtransferRelated2(event) {
     if (event.target.value == '1') {
       this.gkFilemMedical = true;
@@ -181,23 +172,10 @@ export class TransferMiscellaneousComponent implements OnInit {
   }
 
   getTransferProfile() {
-    debugger;
-
-    this.miscellaneousForm.patchValue({
-        spouseKvsYnD: '0',
-        personalStatusMdgD: '0',
-        careGiverFaimlyYnD: '0',
-        careGiverYnD: '0',
-        personalStatusDfpD: '0',
-        personalStatusSpD: '0',
-        childDifferentAbleYnD: '0',
-        disciplinaryYn: '0',
-        memberJCM: '0',
-        surveHardYn: '0',
-    })
-
     const data = { "teacherId": this.tempTeacherId }
     this.outSideService.getTransferData(data).subscribe((res) => {
+      debugger
+      console.log(res.response)
       if (res.response != null || res.response == '') {
         this.patientAilmentData = res.response.patientAilment
         this.medicalCertificateIssueDateData = this.date.transform(res.response.medicalCertificateIssueDate, 'yyyy-MM-dd');
@@ -208,7 +186,6 @@ export class TransferMiscellaneousComponent implements OnInit {
         this.relationWithEmplMdgData = res.response.relationWithEmplMdg
         this.deathCertificateIssueDateData = this.date.transform(res.response.deathCertificateIssueDate, 'yyyy-MM-dd');
         this.miscellaneousForm.patchValue({
-      
             id: res.response.id,
             teacherId: res.response.teacherId,
             applyTransferYn: res.response.applyTransferYn,
@@ -245,7 +222,6 @@ export class TransferMiscellaneousComponent implements OnInit {
             spousePost: res.response.spousePost,
             spouseStation: res.response.spouseStation,
             patientName: res.response.patientName,
-            //patientAilment:res.response.patientAilment,
             patientHospital: res.response.patientHospital,
             patientMedicalOfficerName: res.response.patientMedicalOfficerName,
             patientMedicalOfficerDesignation: res.response.patientMedicalOfficerDesignation,
@@ -271,37 +247,10 @@ export class TransferMiscellaneousComponent implements OnInit {
       if (this.miscellaneousForm.value.spouseKvsYnD == 1) {
         this.spouseKvsYnDradioButton = 1;
         this.gkFilebenefit = true
-        this.miscellaneousForm.patchValue({
-          spouseKvsYnD: 1
-        })
+   
 
       }
-      if (this.miscellaneousForm.value.spouseKvsYnD == '' || this.miscellaneousForm.value.spouseKvsYnD == null) {
-        this.spouseKvsYnDradioButton = 0;
-        this.gkFilebenefit = false
-        this.miscellaneousForm.patchValue({
-          spouseKvsYnD: 0
-        })
-
-      }
-      if (this.miscellaneousForm.value.spouseKvsYnD == 0) {
-        this.spouseKvsYnDradioButton = 0;
-        this.miscellaneousForm.patchValue({
-          spouseKvsYnD: 0
-        })
-        this.gkFilebenefit = false
-      }
-      if (this.miscellaneousForm.value.personalStatusMdgD == 1) {
-        this.personalStatusMdgDradioButton = 1;
-        this.gkFilemMedical = true
-      } if (this.miscellaneousForm.value.personalStatusMdgD == 0) {
-        this.personalStatusMdgDradioButton = 0;
-        this.gkFilemMedical = false
-      } if (this.miscellaneousForm.value.personalStatusMdgD == '' || this.miscellaneousForm.value.personalStatusMdgD == null) {
-        this.personalStatusMdgDradioButton = 0;
-        this.gkFilemMedical = false
-      }
-
+  
 
       if (this.miscellaneousForm.value.careGiverFaimlyYnD == 1) {
         this.careGiverFaimlyYnDradioButton = 1;
@@ -381,9 +330,7 @@ export class TransferMiscellaneousComponent implements OnInit {
       if (this.miscellaneousForm.value.memberJCM == '' || this.miscellaneousForm.value.memberJCM == null) {
         this.inlineRadio13radioButton = 0;
         this.positionHeld = false
-        this.miscellaneousForm.patchValue({
-            memberJCM: '0',
-        })
+      
       }
 
       if (this.miscellaneousForm.value.memberJCM == 0) {
@@ -401,9 +348,9 @@ export class TransferMiscellaneousComponent implements OnInit {
         this.surveHardYnradioButton = 0;
       }
 
-      this.miscellaneousForm.patchValue({
-          spouseStationName: this.responseData.spouseStationName,
-      })
+      // this.miscellaneousForm.patchValue({
+      //     spouseStationName: this.responseData.spouseStationName,
+      // })
   
     })
 
@@ -685,6 +632,7 @@ export class TransferMiscellaneousComponent implements OnInit {
     this.router.navigate(['/teacher/workExperience']);
   }
   submit(){
-    this.router.navigate(['/teacher/previewConfirm']);
+    debugger
+    this.router.navigate(['/teacher/transferStationChoice']);
   }
 }

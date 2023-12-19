@@ -24,6 +24,7 @@ export class TransferStationChoiceComponent implements OnInit {
   tempTeacherId: any;
   onlyDcFill: boolean = false;
   showTcField: boolean = false;
+  regionList: any;
   disabled = true;
   constructor(private outSideService: OutsideServicesService,private modalService: NgbModal) { }
 
@@ -45,16 +46,6 @@ export class TransferStationChoiceComponent implements OnInit {
         'choiceKv3StationName': new FormControl('', Validators.required),
         'choiceKv4StationName': new FormControl('', Validators.required),
         'choiceKv5StationName': new FormControl('', Validators.required)
-        // 'displacement1StationCode': new FormControl,
-        // 'displacement2StationCode': new FormControl,
-        // 'displacement3StationCode': new FormControl,
-        // 'displacement4StationCode': new FormControl,
-        // 'displacement5StationCode': new FormControl,
-        // 'displacement1StationName': new FormControl('', Validators.required),
-        // 'displacement2StationName': new FormControl,
-        // 'displacement3StationName': new FormControl,
-        // 'displacement4StationName': new FormControl,
-        // 'displacement5StationName': new FormControl
       }),
     })
     this.applicationId = environment.applicationId;
@@ -64,6 +55,7 @@ export class TransferStationChoiceComponent implements OnInit {
       this.kvCode = JSON.parse(sessionStorage.getItem("authTeacherDetails"))?.applicationDetails[i].business_unit_type_code;
     }
     this.tempTeacherId = sessionStorage.getItem('kvTeacherId');
+    this.getKvRegion();
   }
   selectSchool(val) {
 
@@ -72,6 +64,13 @@ export class TransferStationChoiceComponent implements OnInit {
 
     // this.getKvRegion();
     this.getTransferRegionsByEmployee()
+  }
+  getKvRegion() {
+     
+    this.outSideService.fetchKvRegion(1).subscribe((res) => {
+      this.regionList = res.response.rowValue;
+
+    })
   }
   getTransferRegionsByEmployee(){
     debugger

@@ -35,6 +35,7 @@ export class ProfileVerificationComponent implements OnInit {
   schoolDetails:any;
   verifyTchTeacherTraining: any;
   profileTeacherName: any;
+  blinkClass: boolean = true;
   constructor(private pdfServive: TeacherAppPdfService,private router: Router, private date: DatePipe, private dataService: DataService,
     private modalService: NgbModal, private outSideService: OutsideServicesService,
     private route: ActivatedRoute, private fb: FormBuilder, private formData: FormDataService, private _adapter: DateAdapter<any>) { }
@@ -119,7 +120,16 @@ export class ProfileVerificationComponent implements OnInit {
     )
   })
   }
+  consentCheckBoxChange(event: any) {
+  //  this.consentCheckBoxValue = event?.target?.checked;
+  }
+  mouseEnter(){
+  //  this.blinkClass= false;
+  }
 
+  mouseLeave(){
+  //  this.blinkClass = true;
+  }
   previousPage(){
     this.router.navigate(['/teacher/teacherWorkExperience']);
   }

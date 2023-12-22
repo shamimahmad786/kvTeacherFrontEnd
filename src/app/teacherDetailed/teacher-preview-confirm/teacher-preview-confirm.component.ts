@@ -77,6 +77,7 @@ export class TeacherPreviewConfirmComponent implements OnInit {
     }, error => {
     })
     this.outSideService.fetchConfirmedTchDetails(this.tempTeacherId).subscribe((res) => {
+      debugger
     this.verifyTchTeacherProfileData = res.response.teacherProfile;
     console.log("------------------techer detail----------------")
     console.log(this.verifyTchTeacherProfileData)

@@ -10,7 +10,6 @@ export const environment = {
    udiseApi:'https://demo.udiseplus.gov.in/api-v1/public/getSchoolMaster/',
    auth_service:'http://' + "10.25.26.251:8090/meuser"+'/api/userCradential',
    BASE_URL_DATA_TEACHER_TRANSFER:'http://10.25.26.251:8014/api/transprofile/',
-  
    BASE_URL_DATA_TEACHER: 'http://10.25.26.251:8014/api/teacher/',
    BASE_URL_DATA_MASTER: 'http://10.25.26.251:8014/api/master/',
    BASE_URL_DATA_QUESTION: 'http://10.25.26.251:8014/api/question/',
@@ -20,6 +19,8 @@ export const environment = {
    BASE_URL_DATA_QUALIFICATION: 'http://10.25.26.251:8014/api/qualification/',
    BASE_URL_DATA_AWARDS: 'http://10.25.26.251:8014/api/awards/',
    BASE_URL_DATA_TRANSFER: 'http://10.25.26.251:8014/api/transfer/',
+   BASE_URL_DATA_TEACHER_TRANSFER_V2: 'http://10.25.26.251:8014/api/teacher/transfer/',
+   BASE_URL_DATA_TRANSFER_PROCESS: 'http://10.25.26.251:8014/api/transferprocess/',
    BASE_URL_REPORT:'http://10.25.26.251:8014/api/kvsreport/',
    LOGOUT_URL: 'http://10.25.26.251:8385/meauth/logout?returnTo=http://10.25.26.10:6200/',
    LOGIN_URL_INDIVIDUAL: 'http://10.25.26.251:8385/meauth/oauth/authorize?response_type=code&user_oauth_approval=true&client_id=teachermodule&redirect_uri=http://10.25.26.10:6200/teacher/profile&scopes=read',

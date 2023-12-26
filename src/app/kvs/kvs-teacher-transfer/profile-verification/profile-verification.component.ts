@@ -54,7 +54,6 @@ export class ProfileVerificationComponent implements OnInit {
     this.tempTeacherId = sessionStorage.getItem('kvTeacherId');
     this.profileTeacherName=sessionStorage.getItem('profileTeacherName');
     this.onVerifyClick();
-    this.getTeacherConfirmationV2();
   }
   teacherPdf() {
     // this.onVerifyClick();
@@ -84,33 +83,7 @@ export class ProfileVerificationComponent implements OnInit {
       this.verifyTchTeacherWorkExp = res.response.experience
     })
   }
-  getTeacherConfirmationV2(){
-    var data={
-      "teacherId":this.tempTeacherId}
-    this.outSideService.getTeacherConfirmationV2(data).subscribe((res)=>{
-      if(res){
-        console.log("---------------teacher check  detilll------");
-        console.log(res);
-        this.teacherPreviewConfirmForm.patchValue({
-          teacherName:  res.response['teacherName'],
-          teacherGender:  res.response['teacherGender'],
-          teacherDob:  res.response['teacherDob'],
-          teacherEmplCode:  res.response['teacherEmployeeCode'],
-          teacherDisability:  res.response['teacherDisabilityYn'],
-          ExperienceStartDatePresentKv:  res.response['workExperienceWorkStartDatePresentKv'],
-          workExperienceAppointedForSubject:  res.response['workExperienceAppointedForSubject'],
-          lastPromotionPositionType:  res.response['lastPromotionPositionType'],
-      });
-      }
-  },
-  error => {
-    Swal.fire({
-      'icon':'error',
-      'text':error.error
-    }
-    )
-  })
-  }
+
   consentCheckBoxChange(event: any) {
   //  this.consentCheckBoxValue = event?.target?.checked;
   }

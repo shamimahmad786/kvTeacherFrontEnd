@@ -200,7 +200,8 @@ export class TeacherBasicProfileComponent implements OnInit {
           specialRecruitmentYn: this.emplyeeData['specialRecruitmentYn'],
       });
       sessionStorage.setItem('kvTeacherId',this.emplyeeData['teacherId'])
-      this.profileTeacherName= this.emplyeeData['teacherName']
+      this.profileTeacherName= this.emplyeeData['teacherName'];
+      sessionStorage.setItem('profileTeacherName',this.profileTeacherName);
       this.getDistrictByStateId(this.emplyeeData['teacherParmanentState'],'P');
       this.getDistrictByStateId(this.emplyeeData['teacherCorrespondenceState'],'C');
 

@@ -88,11 +88,11 @@ export class ProfileVerificationComponent implements OnInit {
   //  this.consentCheckBoxValue = event?.target?.checked;
   }
  
-  previousPage(){
-    this.router.navigate(['/teacher/teacherWorkExperience']);
-  }
+  // previousPage(){
+  //   this.router.navigate(['/teacher/teacherWorkExperience']);
+  // }
   submit(){
-    debugger
+   // this.router.navigate(['/teacher/transferMiscellaneous'], { queryParams: { 'form': 2 } })
     if (this.teacherPreviewConfirmForm.invalid) {
       Swal.fire({
         'icon':'error',
@@ -126,6 +126,7 @@ export class ProfileVerificationComponent implements OnInit {
                         '',
                        'success'
                       ) 
+                      this.router.navigate(['/teacher/transferMiscellaneous']);  
                     }
                   }
                 })

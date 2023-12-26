@@ -47,24 +47,7 @@ export class TransferProgresionBarComponent implements OnInit {
       this.transferCountPage=false;
       this.previewAndUndertakingPage=false;
     }
-    // if(url[0].path=='transferDcCount')
-    // {
-    //   this.profileVerifiation=true;
-    //   this.miscellaneousPge=true;
-    //   this.stationChoicepage=true;
-    //   this.displacementCountPage=true;
-    //   this.transferCountPage=false;
-    //   this.previewAndUndertakingPage=false;
-    // }
-    // if(url[0].path=='transferTcCount')
-    // {
-    //   this.profileVerifiation=true;
-    //   this.miscellaneousPge=true;
-    //   this.stationChoicepage=true;
-    //   this.displacementCountPage=true;
-    //   this.transferCountPage=true;
-    //   this.previewAndUndertakingPage=false;
-    // }
+    
     if(url[0].path=='preview-undertaking')
     {
       this.profileVerifiation=true;

@@ -9,43 +9,28 @@
           <li class="breadcrumb-item"><a href="#">Transfer Management</a></li>
         </ol>
       </nav>
-
       <div class="dashboard-main-content-info p-5 ">
-
         <ul class="list-group list-info">
             <li class="list-group-item" >Profile Verification          
-                <span class="text-success me-2"  *ngIf="profileVerification==true">   Complete <i class="bi bi-check2-square ms-1"></i></span>  
-                <span class="text-danger me-2"  *ngIf="profileVerification==false">   InComplete <i class="bi bi-x-square ms-1"></i></span>  
+                <span class="text-success me-2"  *ngIf="FormStatus1==true">   Complete <i class="bi bi-check2-square ms-1"></i></span>  
+                <span class="text-danger me-2"  *ngIf="FormStatus1!=true">   InComplete <i class="bi bi-x-square ms-1"></i></span>  
             </li>
-           
             <li class="list-group-item" >Miscellaneous            
-                <span class="text-success me-2"  *ngIf="Miscellaneous==true">   Complete <i class="bi bi-check2-square ms-1"></i></span>  
-                <span class="text-danger me-2"  *ngIf="Miscellaneous==false">   InComplete <i class="bi bi-x-square ms-1"></i></span>  
+                <span class="text-success me-2"  *ngIf="FormStatus2==true">   Complete <i class="bi bi-check2-square ms-1"></i></span>  
+                <span class="text-danger me-2"  *ngIf="FormStatus2!=true">   InComplete <i class="bi bi-x-square ms-1"></i></span>  
             </li>
-
             <li class="list-group-item" >Station Choice            
-                <span class="text-success me-2"  *ngIf="stationChoice==true">   Complete <i class="bi bi-check2-square ms-1"></i></span>  
-                <span class="text-danger me-2"  *ngIf="stationChoice==false">   InComplete <i class="bi bi-x-square ms-1"></i></span>  
+                <span class="text-success me-2"  *ngIf="FormStatus3==true">   Complete <i class="bi bi-check2-square ms-1"></i></span>  
+                <span class="text-danger me-2"  *ngIf="FormStatus3!=true">   InComplete <i class="bi bi-x-square ms-1"></i></span>  
             </li>
-
-            <li class="list-group-item" >Displacement Count            
-                <span class="text-success me-2"  *ngIf="displacementCount==true">   Complete <i class="bi bi-check2-square ms-1"></i></span>  
-                <span class="text-danger me-2"  *ngIf="displacementCount==false">   InComplete <i class="bi bi-x-square ms-1"></i></span>  
-            </li>
-
-            <li class="list-group-item" >Transfer Count            
-                <span class="text-success me-2"  *ngIf="transferCount==true">   Complete <i class="bi bi-check2-square ms-1"></i></span>  
-                <span class="text-danger me-2"  *ngIf="transferCount==false">   InComplete <i class="bi bi-x-square ms-1"></i></span>  
-            </li>
-
             <li class="list-group-item" >Preview And Undertaking           
-                <span class="text-success me-2"  *ngIf="previewAndUndertaking==true">   Complete <i class="bi bi-check2-square ms-1"></i></span>  
-                <span class="text-danger me-2"  *ngIf="previewAndUndertaking==false">   InComplete <i class="bi bi-x-square ms-1"></i></span>  
+                <span class="text-success me-2"  *ngIf="FormStatus4==true">   Complete <i class="bi bi-check2-square ms-1"></i></span>  
+                <span class="text-danger me-2"  *ngIf="FormStatus4!=true">   InComplete <i class="bi bi-x-square ms-1"></i></span>  
             </li>
           </ul>
      
           <div class="mt-4 button-save  " style="text-align: center; " >
-             <input   type="submit" name="Next"  class="me-2 add-teacher" value="Click here to complete transfer process" /> 
+             <input   type="submit" name="Next"  class="me-2 add-teacher" (click)="processTransfer()"value="Click here to complete transfer process" /> 
            </div>                     
       </div><!--close main-content-info-->
   </div><!--close dashboard-main-content-->

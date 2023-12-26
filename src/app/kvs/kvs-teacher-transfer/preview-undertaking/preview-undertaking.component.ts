@@ -365,14 +365,37 @@ export class PreviewUndertakingComponent implements OnInit {
     "stationCodeChoice4":this.responseTcDcData.choiceKv4StationCode,
     "stationCodeChoice5":this.responseTcDcData.choiceKv5StationCode
   }
-      this.outSideService.saveTransferConfirmation(data).subscribe((res) => {
-        if (res) {
-          Swal.fire(
-            'Your transfer has been submitted  successfully.',
-            '',
-            'success'
-          );
-        }
-    })
+    Swal.fire({
+      'icon':'warning',
+      'text': "Do you want to proceed ?",
+      'allowEscapeKey': false,
+      'allowOutsideClick': false,
+      'showCancelButton': true,
+      'confirmButtonColor': "#DD6B55",
+      'confirmButtonText': "Yes",
+      'cancelButtonText': "No",
+      'showLoaderOnConfirm': true,
     }
+    ).then((isConfirm) => {
+      if (isConfirm.value === true) {
+        this.outSideService.saveTransferConfirmation(data).subscribe((res)=>{
+          if (res) {
+            Swal.fire(
+              'Your transfer has been submitted  successfully.',
+              '',
+              'success'
+            );
+          }
+      },
+      error => {
+        Swal.fire({
+          'icon':'error',
+          'text':error.error
+        }
+        )
+      })
+    }
+    return false;
+    });
+}
 }

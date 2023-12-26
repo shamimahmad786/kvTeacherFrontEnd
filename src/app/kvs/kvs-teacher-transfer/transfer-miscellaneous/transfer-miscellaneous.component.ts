@@ -20,7 +20,6 @@ export class TransferMiscellaneousComponent implements OnInit {
   gkFilebenefit: boolean = false;
   miscellaneousForm: FormGroup;
   gkFilemMedical: boolean = false;
- 
   applicationId: any;
   loginUserNameForChild: any;
   kvicons: string;
@@ -44,14 +43,10 @@ export class TransferMiscellaneousComponent implements OnInit {
   careGiver: boolean = false;
   childDifferentAbleYnDradioButton: any;
   abledChild: boolean = false;
-  personalStatusDfpDradioButton: any;
   dfpGround: boolean = false;
-  personalStatusSpDradioButton: any;
   spGround: boolean = false;
-  disciplinaryYnradioButton: any;
   inlineRadio13radioButton: any;
   positionHeld: boolean = false;
-  surveHardYnradioButton: any;
   buttonVisible: boolean = false;
   flagUpdatedList: any;
   verifyTchTeacherProfileData: any;
@@ -103,30 +98,13 @@ export class TransferMiscellaneousComponent implements OnInit {
       'absenceDaysOne': new FormControl('', Validators.required),
       'disciplinaryYn': new FormControl(''),
       'teacherId': new FormControl('', Validators.required),
-      'applyTransferYn': new FormControl('', Validators.required),
-      'choiceKv1StationName': new FormControl('', Validators.required),
-      'choiceKv2StationName': new FormControl('', Validators.required),
-      'choiceKv3StationName': new FormControl('', Validators.required),
-      'choiceKv4StationName': new FormControl('', Validators.required),
-      'choiceKv5StationName': new FormControl('', Validators.required),
-      'displacement1StationCode': new FormControl('', Validators.required),
-      'displacement1StationName': new FormControl('', Validators.required),
-      'displacement2StationName': new FormControl('', Validators.required),
-      'displacement2StationCode': new FormControl('', Validators.required),
-      'displacement3StationName': new FormControl('', Validators.required),
-      'displacement3StationCode': new FormControl('', Validators.required),
-      'displacement4StationCode': new FormControl('', Validators.required),
-      'displacement4StationName': new FormControl('', Validators.required),
-      'displacement5StationCode': new FormControl('', Validators.required),
-      'displacement5StationName': new FormControl('', Validators.required),
       'spouseKvsYnD': new FormControl(),
+      'inityear': new FormControl(),
       'personalStatusMdgD': new FormControl(),
       'personalStatusSpD': new FormControl(),
       'personalStatusDfpD': new FormControl(),
       'memberJCM': new FormControl(),
       'surveHardYn': new FormControl(),
-      'careGiverYnD': new FormControl(),
-      'childDifferentAbleYnD': new FormControl(),
       'relationWithEmplMdg': new FormControl('', Validators.required),
       'spouseEmpCode': new FormControl(''),
       'spousePost': new FormControl(''),
@@ -148,9 +126,6 @@ export class TransferMiscellaneousComponent implements OnInit {
       'careGiverRelation': new FormControl('', Validators.required),
       'careGiverDisabilityName': new FormControl('', [Validators.required, Validators.maxLength(50), Validators.pattern("^[A-Za-z0-9 ]*$")]),
       'careGiverDisabilityPrcnt': new FormControl('', [Validators.required, Validators.maxLength(3), Validators.min(0), Validators.max(100), RxwebValidators.numeric({ allowDecimal: true, isFormat: true })]),
-      'childDifferentName': new FormControl('', [Validators.required, Validators.maxLength(50), Validators.pattern("^[A-Za-z ]*$")]),
-      'childDifferentDisabilityName': new FormControl('', [Validators.required, Validators.maxLength(50), Validators.pattern("^[A-Za-z0-9 ]*$")]),
-      'childDifferentDisabilityPrcnt': new FormControl('', [Validators.required, Validators.min(0), Validators.max(100), Validators.maxLength(3), RxwebValidators.numeric({ allowDecimal: true, isFormat: true })]),
     })
     this.getTransferProfile();
   }
@@ -172,10 +147,12 @@ export class TransferMiscellaneousComponent implements OnInit {
   }
 
   getTransferProfile() {
-    const data = { "teacherId": this.tempTeacherId }
+    const data = {
+       "teacherId": this.tempTeacherId,
+       "inityear":"2024" 
+      };
     this.outSideService.getTransferData(data).subscribe((res) => {
-      debugger
-      console.log(res.response)
+      console.log(res.response.spouseKvsYnD)
       if (res.response != null || res.response == '') {
         this.patientAilmentData = res.response.patientAilment
         this.medicalCertificateIssueDateData = this.date.transform(res.response.medicalCertificateIssueDate, 'yyyy-MM-dd');
@@ -189,7 +166,7 @@ export class TransferMiscellaneousComponent implements OnInit {
             id: res.response.id,
             teacherId: res.response.teacherId,
             applyTransferYn: res.response.applyTransferYn,
-            disciplinaryYn: res.response.disciplinaryYn,
+            disciplinaryYn: String(res.response.disciplinaryYn),
             absenceDaysOne: res.response.absenceDaysOne,
             positionOfNjcmRjcm: res.response.positionOfNjcmRjcm,
             nameOfFamilyMember: res.response.nameOfFamilyMember,
@@ -209,15 +186,13 @@ export class TransferMiscellaneousComponent implements OnInit {
             displacement5StationCode: res.response.displacement5StationCode,
             displacement5StationName: res.response.displacement5StationName,
             singleParentGround: res.response.singleParentGround,
-            spouseKvsYnD: res.response.spouseKvsYnD,
-            childDifferentAbleYnD: res.response.childDifferentAbleYnD,
-            careGiverFaimlyYnD: res.response.careGiverFaimlyYnD,
-            careGiverYnD: res.response.careGiverYnD,
-            personalStatusMdgD: res.response.personalStatusMdgD,
-            personalStatusDfpD: res.response.personalStatusDfpD,
-            personalStatusSpD: res.response.personalStatusSpD,
-            memberJCM: res.response.memberJCM,
-            surveHardYn: res.response.surveHardYn,
+            spouseKvsYnD: String(res.response.spouseKvsYnD),
+            careGiverFaimlyYnD:  String(res.response.careGiverFaimlyYnD),
+            personalStatusMdgD: String(res.response.personalStatusMdgD),
+            personalStatusDfpD:  String(res.response.personalStatusDfpD),
+            personalStatusSpD: String(res.response.personalStatusSpD),
+            memberJCM: String(res.response.memberJCM),
+            surveHardYn: String(res.response.surveHardYn),
             spouseEmpCode: res.response.spouseEmpCode,
             spousePost: res.response.spousePost,
             spouseStation: res.response.spouseStation,
@@ -233,127 +208,78 @@ export class TransferMiscellaneousComponent implements OnInit {
             childDifferentDisabilityPrcnt: res.response.childDifferentDisabilityPrcnt,
         })
       }
-      // ----------------------------- emp transfer radio button start  here ------------------------------------
-      this.empTransferradioButton = this.miscellaneousForm.value.applyTransferYn
-      if (this.empTransferradioButton == 3) {
-        this.showStationChoice18C = true
-      }
-      if (this.empTransferradioButton == 0) {
-        this.showStationChoice18C = false
-      }
-      // ---------------------------- end here--------------------------------------------------------------------
-
+    debugger
       // ---------------------------  declairation from radio button start  here ---------------------------------
       if (this.miscellaneousForm.value.spouseKvsYnD == 1) {
-        this.spouseKvsYnDradioButton = 1;
-        this.gkFilebenefit = true
-   
-
+        this.gkFilebenefit = true;
       }
-  
-
-      if (this.miscellaneousForm.value.careGiverFaimlyYnD == 1) {
-        this.careGiverFaimlyYnDradioButton = 1;
-        this.careGiver = true
-      } if (this.miscellaneousForm.value.careGiverFaimlyYnD == 0) {
-        this.careGiverFaimlyYnDradioButton = 0;
-        this.careGiver = false
-      } if (this.miscellaneousForm.value.careGiverFaimlyYnD == '' || this.miscellaneousForm.value.careGiverFaimlyYnD == null) {
-        this.careGiverFaimlyYnDradioButton = 0;
-        this.careGiver = false
+      if(this.miscellaneousForm.value.spouseKvsYnD == 0 ||  this.miscellaneousForm.value.spouseKvsYnD == '' || this.miscellaneousForm.value.spouseKvsYnD == 'null')
+      {
+        this.gkFilebenefit = false;
+        this.miscellaneousForm.patchValue({
+          spouseKvsYnD: '0'
+          })
       }
 
-      if (this.miscellaneousForm.value.careGiverYnD == 1) {
-        this.childDifferentAbleYnDradioButton = 1;
-        this.abledChild = true
-      } if (this.miscellaneousForm.value.careGiverYnD == 0) {
-        this.childDifferentAbleYnDradioButton = 0;
-        this.abledChild = false
-      } if (this.miscellaneousForm.value.careGiverYnD == '' || this.miscellaneousForm.value.careGiverYnD == null) {
-        this.childDifferentAbleYnDradioButton = 0;
-        this.abledChild = false
-      }
-
-      if (this.miscellaneousForm.value.personalStatusDfpD == 1) {
-        this.personalStatusDfpDradioButton = 1;
-        this.dfpGround = true
-      } if (this.miscellaneousForm.value.personalStatusDfpD == 0) {
-        this.personalStatusDfpDradioButton = 0;
-        this.dfpGround = false
-      } if (this.miscellaneousForm.value.personalStatusDfpD == '' || this.miscellaneousForm.value.personalStatusDfpD == null) {
-        this.personalStatusDfpDradioButton = 0;
-        this.dfpGround = false
+      if (this.miscellaneousForm.value.personalStatusMdgD == 1) {
+        this.gkFilemMedical = true
+      } 
+      if (this.miscellaneousForm.value.personalStatusMdgD ==0 || this.miscellaneousForm.value.personalStatusMdgD == '' || this.miscellaneousForm.value.personalStatusMdgD == 'null') {
+        this.gkFilemMedical = false;
+        this.miscellaneousForm.patchValue({
+          personalStatusMdgD: '0'
+          })
       }
 
       if (this.miscellaneousForm.value.personalStatusSpD == 1) {
-        this.personalStatusSpDradioButton = 1;
         this.spGround = true
-      } if (this.miscellaneousForm.value.personalStatusSpD == '' || this.miscellaneousForm.value.personalStatusSpD == null) {
-        this.personalStatusSpDradioButton = 0;
-        this.spGround = false
+      } if ( this.miscellaneousForm.value.personalStatusSpD == 0 || this.miscellaneousForm.value.personalStatusSpD == '' || this.miscellaneousForm.value.personalStatusSpD == 'null') {
+        this.spGround = false;
+        this.miscellaneousForm.patchValue({
+          personalStatusSpD: '0'
+          })
       }
-      if (this.miscellaneousForm.value.personalStatusSpD == 0) {
-        this.personalStatusSpDradioButton = 0;
-        this.spGround = false
+   
+      if (this.miscellaneousForm.value.careGiverFaimlyYnD == 1) {
+        this.careGiver = true
+      }if (this.miscellaneousForm.value.careGiverFaimlyYnD == 0 || this.miscellaneousForm.value.careGiverFaimlyYnD == '' || this.miscellaneousForm.value.careGiverFaimlyYnD == 'null') {
+        this.careGiver = false;
+        this.miscellaneousForm.patchValue({
+          careGiverFaimlyYnD: '0'
+          })
       }
 
-      if (this.miscellaneousForm.value.childDifferentAbleYnD == 1) {
-        this.childDifferentAbleYnDradioButton = 1;
-        this.abledChild = true
+      if (this.miscellaneousForm.value.personalStatusDfpD == 1) {
+        this.dfpGround = true
+      }if ( this.miscellaneousForm.value.personalStatusDfpD == 0 || this.miscellaneousForm.value.personalStatusDfpD == '' || this.miscellaneousForm.value.personalStatusDfpD == 'null') { 
+        this.dfpGround = false;
+        this.miscellaneousForm.patchValue({
+          personalStatusDfpD: '0'
+          })
       }
-      if (this.miscellaneousForm.value.childDifferentAbleYnD == '' || this.miscellaneousForm.value.childDifferentAbleYnD == null) {
-        this.childDifferentAbleYnDradioButton = 0;
-        this.abledChild = false
-      }
-      if (this.miscellaneousForm.value.childDifferentAbleYnD == 0) {
-        this.childDifferentAbleYnDradioButton = 0;
-        this.abledChild = false
-      }
-      debugger
-      if (this.miscellaneousForm.value.disciplinaryYn == 1) {
-      
-        this.disciplinaryYnradioButton = 1;
-      }
-      if (this.miscellaneousForm.value.disciplinaryYn == '' || this.miscellaneousForm.value.disciplinaryYn == null) {
-        this.disciplinaryYnradioButton = 0;
-      }
-     
 
-      if (this.miscellaneousForm.value.memberJCM == 1) {
-        this.inlineRadio13radioButton = 1;
+      if (this.miscellaneousForm.value.memberJCM == 1 || this.miscellaneousForm.value.memberJCM == 2) {
         this.positionHeld = true
-
-      } if (this.miscellaneousForm.value.memberJCM == 2) {
-        this.inlineRadio13radioButton = 2;
-        this.positionHeld = true
-      }
-      if (this.miscellaneousForm.value.memberJCM == '' || this.miscellaneousForm.value.memberJCM == null) {
-        this.inlineRadio13radioButton = 0;
+      } 
+      if (this.miscellaneousForm.value.memberJCM == 0 || this.miscellaneousForm.value.memberJCM == '' || this.miscellaneousForm.value.memberJCM == 'null') {
         this.positionHeld = false
+        this.miscellaneousForm.patchValue({
+          memberJCM: '0'
+          })
+      }
       
-      }
+    if (this.miscellaneousForm.value.disciplinaryYn == 0 || this.miscellaneousForm.value.disciplinaryYn == '' || this.miscellaneousForm.value.disciplinaryYn == 'null') {
+    this.miscellaneousForm.patchValue({
+      disciplinaryYn: '0'
+      })
+     }
 
-      if (this.miscellaneousForm.value.memberJCM == 0) {
-        this.inlineRadio13radioButton = 0;
-        this.positionHeld = false
-      }
-
-      if (this.miscellaneousForm.value.surveHardYn == 1) {
-        this.surveHardYnradioButton = 1;
-      }
-      if (this.miscellaneousForm.value.surveHardYn == '' || this.miscellaneousForm.value.surveHardYn == null) {
-        this.surveHardYnradioButton = 0;
-      }
-      if (this.miscellaneousForm.value.surveHardYn == 0) {
-        this.surveHardYnradioButton = 0;
-      }
-
-      // this.miscellaneousForm.patchValue({
-      //     spouseStationName: this.responseData.spouseStationName,
-      // })
-  
+     if (this.miscellaneousForm.value.surveHardYn == 0 || this.miscellaneousForm.value.surveHardYn == '' || this.miscellaneousForm.value.surveHardYn == 'null') {
+      this.miscellaneousForm.patchValue({
+        surveHardYn: '0'
+        })
+       }
     })
-
   }
   declarationtransferRelated6(event) {
     if (event.target.value == '1') {
@@ -371,14 +297,10 @@ export class TransferMiscellaneousComponent implements OnInit {
   }
   declarationtransferRelated4(event) {
     if (event.target.value == '1') {
-      this.miscellaneousForm.patchValue({
-          careGiverYnD: '1'
-      })
+      
       this.careGiver = true;
     } else if (event.target.value == '0') {
-      this.miscellaneousForm.patchValue({
-          careGiverYnD: '0'
-      })
+     
       this.careGiver = false;
     }
   }
@@ -526,9 +448,10 @@ export class TransferMiscellaneousComponent implements OnInit {
     }
   }
   documentUploadRelatedForm(index) {
+    debugger
     const formData = new FormData();
     if (this.fileToRelatedFormUpload != null) {
-      formData.append('teacherId', this.responseData.teacherId);
+      formData.append('teacherId', this.tempTeacherId);
       formData.append('file', this.fileToRelatedFormUpload);
       if (index == 0) {
         this.fileUpgkFilemMedical = true;
@@ -555,7 +478,7 @@ export class TransferMiscellaneousComponent implements OnInit {
       }
 
       this.outSideService.uploadDocument(formData).subscribe((res) => {
-        this.outSideService.fetchUploadedDoc(this.responseData.teacherId).subscribe((res) => {
+        this.outSideService.fetchUploadedDoc(this.tempTeacherId).subscribe((res) => {
           this.documentUploadArray = res;
           // alert(JSON.stringify(this.documentUploadArray));
           for (let i = 0; i < res.length; i++) {
@@ -632,7 +555,18 @@ export class TransferMiscellaneousComponent implements OnInit {
     this.router.navigate(['/teacher/workExperience']);
   }
   submit(){
-    debugger
-    this.router.navigate(['/teacher/transferStationChoice']);
+    this.miscellaneousForm.patchValue({
+      inityear: '2024'
+      })
+    this.outSideService.saveTransProfile(this.miscellaneousForm.value).subscribe((res) => {
+      if (res.status == 1) {
+        Swal.fire(
+          'Your Data has been saved Successfully!',
+          '',
+          'success'
+        )
+      }
+    })
+
   }
 }

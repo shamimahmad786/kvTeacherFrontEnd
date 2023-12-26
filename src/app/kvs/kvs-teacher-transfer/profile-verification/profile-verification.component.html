@@ -1,124 +1,131 @@
 <div class="dashboard-main-content" style="min-height: 600px;">
     <app-transfer-progresion-bar></app-transfer-progresion-bar>
-<div class="dashboard-main-content-info  p-4 mt-3">   
-    <div class="row">
-        <div class="col-lg-12">
-            <div class="row">
-                <div class="col-4">
-                    <h2 class="mb-0">Preview & Confirm:</h2>
-                </div>
-                <div class="col-6">
-                    <h2 class="steps text-end pro-name">{{ profileTeacherName | uppercase}}  </h2>
-                </div>
-              
+      <div class="dashboard-main-content-info p-4 mt-4 ">
+        <div class="row">
+            <div class="col-lg-12">
+        <div class="row">
+            <div class="col-6">
+                <h2 class="mb-0">Preview & Confirm:</h2>
             </div>
-    <form [formGroup]="teacherPreviewConfirmForm" (ngSubmit)="submit()">
-        <div class="row" id="pdfTable" #pdfTable>
-            <div class="table-responsive shadow p-3">
-                     <table class=" table-striped w-100">
-                                    <h2 class="px-2 mt-2 text-green">Profile Details</h2>
-                                    <tr>
-                                        <th>KV/RO/ZIET/HQ Name</th>
-                                        <td>{{schoolDetails?.kvName}} ({{schoolDetails?.kvCode}})</td>
-                                        <th>Employee Code</th>
-                                        <td>{{verifyTchTeacherProfileData?.teacherEmployeeCode}}</td>
-                                        <th>Staff Type</th>
-                                        <td>{{verifyTchTeacherProfileData?.teachingNonteaching | staffType}}
-                                        </td>
-                                    </tr>
-                                    <tr>                              
-                                        <th>Name</th>
-                                        <td>{{verifyTchTeacherProfileData?.teacherName | titlecase}}
-                                        </td>
-                                        <th>Gender</th>
-                                        <td>{{verifyTchTeacherProfileData?.teacherGender | genderPipe}}
-                                        </td>
-                                        <th>Date of Birth</th>
-                                        <td>{{verifyTchTeacherProfileData?.teacherDob }}</td>
-                                    </tr>
-                                    <tr>
-                                        <th>Email</th>
-                                        <td>{{verifyTchTeacherProfileData?.teacherEmail}}</td>
-                                        <th>Mobile Number</th>
-                                        <td>{{verifyTchTeacherProfileData?.teacherMobile}}</td>
-                                        <th>Disability</th>
-                                        <td>{{verifyTchTeacherProfileData?.teacherDisabilityYn == '1' ? 'Yes':'No'}}
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <th>Present Station Name</th>
-                                        <td>{{schoolDetails?.stationName}} ({{schoolDetails?.stationCode}})</td>
-                                        <th>Present post name</th>
-                                        <td>{{verifyTchTeacherProfileData?.lastPromotionPositionType}}
-                                        </td>
-                                        <th>Subject Name</th>
-                                        <td>{{verifyTchTeacherProfileData?.workExperienceAppointedForSubject}}
-                                        </td>
-                                    </tr>
-                    </table>
-                                <table class="table-striped w-100">
-                                    <h2 class="px-2 mt-2 text-green">Experience</h2>
-                                    <tr style="background-color: #cccccc;">
-                                        <th>School Name</th>
-                                        <th>From</th>
-                                        <th>To</th>
-                                        <th>Position Held</th>
-                                        <th>Appointed for Subject</th>
-                                        <th>Transfer Ground</th>
-                                    </tr>
-                                    <tr *ngFor="let data of verifyTchTeacherWorkExp">
-                                        <td>{{data?.udiseSchoolName}}</td>
-                                        <td>{{data?.workStartDate}}</td>
-                                        <td>{{data?.workEndDate}}</td>              
-                                        <td>{{data?.positionType}}</td>
-                                        <td>{{data?.appointedForSubject}}</td>
-                                        <td>{{data?.groundForTransfer == 'null' ? '':data?.groundForTransfer}}</td>
-                                    </tr>
-                                </table>                           
-                               
-                                <hr>
-                                <div class="form-card">
-                                    <div class="row">
-                                        <div class="col-7">
-                                            <h2 class="mb-0 font8958"> Undertaking: </h2>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-
-                                        <div class="col-md-12" style="text-align: left;">
-
-                                            <div class="mt-3 bg-yellow ">
-                                                <span class="fw-bold text-danger">
-                                                    "Kindly check your data for any discrepancy. If there are any discrepancies then School may correct the data upon the
-                                                    Employee's request, using the unfreezing option provided. After confirmation to proceed further,the data can't be changed
-                                                    or modified by anyone.
-                                                </span>
-                                            </div>
-                        
-                                            <div class="my-3">
-                                                <input class="form-check-input" type="checkbox" id="consentCheck"
-                                                    (change)="consentCheckBoxChange($event)" >&nbsp;&nbsp;
-                                                <label class="form-check-label fw-bold chekboxPosition" for="consentCheck">
-                                                    I hereby undertake that the entries made by me in the Application Form are complete and
-                                                    true to
-                                                    the best of my knowledge and available information. Now I would like to exercise my STATION
-                                                    CHOICE.
-                                                </label>
-                                            </div>
-                        
-                                            <div class="fw-bold text-danger" (mouseenter) ="mouseEnter()"  (mouseleave) ="mouseLeave()" [ngClass]="blinkClass ? 'blink_text' : ''">*Verification should be done on or before 20th of july 2023. Only after verification, you will be able to fill preferred choices.
-                                            </div>
-                        
-                                        </div>
-                                    </div>
-                                </div>
-           </div>
+            <div class="col-6">
+                <h2 class="steps text-end pro-name">{{ profileTeacherName | uppercase}}  </h2>
+            </div>
+          
         </div>
-        <div class="mt-4 button-save float-end " >
-            <i class="fa fa-floppy-o" aria-hidden="true"></i>  <input type="submit" name="Next"  class="me-2 add-teacher" value="Confirm" /> 
-           </div>
+        <table class=" table-striped w-100">
+            <thead>
+                <tr style="background-color:#7492cb;">
+                    <th colspan="6" class="text-center text-white">Profile Details</th>
+                </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <th>KV/RO/ZIET/HQ Name</th>
+                <td>{{schoolDetails?.kvName}} ({{schoolDetails?.kvCode}})</td>
+                <th>Employee Code</th>
+                <td>{{verifyTchTeacherProfileData?.teacherEmployeeCode}}</td>
+                <th>Staff Type</th>
+                <td>{{verifyTchTeacherProfileData?.teachingNonteaching | staffType}}
+                </td>
+            </tr>
+            <tr>                              
+                <th>Name</th>
+                <td>{{verifyTchTeacherProfileData?.teacherName | titlecase}}
+                </td>
+                <th>Gender</th>
+                <td>{{verifyTchTeacherProfileData?.teacherGender | genderPipe}}
+                </td>
+                <th>Date of Birth</th>
+                <td>{{verifyTchTeacherProfileData?.teacherDob }}</td>
+            </tr>
+            <tr>
+                <th>Email</th>
+                <td>{{verifyTchTeacherProfileData?.teacherEmail}}</td>
+                <th>Mobile Number</th>
+                <td>{{verifyTchTeacherProfileData?.teacherMobile}}</td>
+                <th>Disability</th>
+                <td>{{verifyTchTeacherProfileData?.teacherDisabilityYn == '1' ? 'Yes':'No'}}
+                </td>
+            </tr>
+            <tr>
+                <th>Present Station Name</th>
+                <td>{{schoolDetails?.stationName}} ({{schoolDetails?.stationCode}})</td>
+                <th>Present post name</th>
+                <td>{{verifyTchTeacherProfileData?.lastPromotionPositionType}}
+                </td>
+                <th>Subject Name</th>
+                <td>{{verifyTchTeacherProfileData?.workExperienceAppointedForSubject}}
+                </td>
+            </tr>
+            </tbody>
+</table>            
+<table class="table-striped w-100">
+    <thead>
+        <tr style="background-color:#7492cb;">
+            <th colspan="7" class="text-center text-white">Experience</th>
+        </tr>
+     <tr style="background-color:#E5EEFF;">
+        <th>School Name</th>
+        <th>From</th>
+        <th>To</th>
+        <th>Position Held</th>
+        <th>Appointed for Subject</th>
+        <th>Transfer Ground</th>                 
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let data of verifyTchTeacherWorkExp">
+        <td>{{data?.udiseSchoolName}}</td>
+        <td>{{data?.workStartDate}}</td>
+        <td>{{data?.workEndDate}}</td>              
+        <td>{{data?.positionType}}</td>
+        <td>{{data?.appointedForSubject}}</td>
+        <td>{{data?.groundForTransfer == 'null' ? '':data?.groundForTransfer}}</td>
+    </tr>
+    </tbody>
+</table> 
+<hr>
+<form [formGroup]="teacherPreviewConfirmForm" (ngSubmit)="submit()" >     
+<div class="form-card">
+    <div class="row">
+        <div class="col-7">
+            <h2 class="mb-0 font8958"> Undertaking: </h2>
+        </div>
+    </div>
+    <div class="row">
+
+        <div class="col-md-12" style="text-align: left;">
+
+            <div class="mt-3 bg-yellow ">
+                <span class="fw-bold text-danger">
+                    "Kindly check your data for any discrepancy. If there are any discrepancies then School may correct the data upon the
+                    Employee's request, using the unfreezing option provided. After confirmation to proceed further,the data can't be changed
+                    or modified by anyone.
+                </span>
+            </div>
+
+            <div class="my-3">
+                <input class="form-check-input" type="checkbox" id="consentCheck"
+                    (change)="consentCheckBoxChange($event)" formControlName="consentCheckBox"  >&nbsp;&nbsp;
+                <label class="form-check-label fw-bold chekboxPosition" for="consentCheck">
+                    I hereby undertake that the entries made by me in the Application Form are complete and
+                    true to
+                    the best of my knowledge and available information. Now I would like to exercise my STATION
+                    CHOICE.
+                </label>
+            </div>
+
+            <div class="fw-bold text-danger"  [ngClass]="blinkClass ? 'blink_text' : ''">*Verification should be done on or before 20th of july 2023. Only after verification, you will be able to fill preferred choices.
+            </div>
+
+        </div>
+    </div>
+</div>
+<div class="mt-4 button-save float-end " >
+    <i class="fa fa-floppy-o" aria-hidden="true"></i>  <input [disabled]="!teacherPreviewConfirmForm.get('consentCheckBox').valid " type="submit" name="Next"  class="me-2 add-teacher" value="Confirm" /> 
+   </div>
 </form>
-</div>
-</div>
-</div>
-</div>
+   </div><!--close main-content-info-->
+  </div><!--close dashboard-main-content-->
+  </div>
+  </div>

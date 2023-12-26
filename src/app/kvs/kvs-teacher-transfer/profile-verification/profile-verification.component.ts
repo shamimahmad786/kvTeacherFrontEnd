@@ -42,16 +42,7 @@ export class ProfileVerificationComponent implements OnInit {
 
   ngOnInit(): void {
     this.teacherPreviewConfirmForm = this.fb.group({
-      "teacherName": new FormControl('', Validators.required),
-      "teacherGender": new FormControl('', Validators.required),
-      "teacherDob": new FormControl('', Validators.required),
-      "teacherEmplCode": new FormControl('', Validators.required),
-      "teacherDisability": new FormControl('', Validators.required),
-      "ExperienceStartDatePresentKv": new FormControl('', Validators.required),
-      "workExperienceAppointedForSubject": new FormControl('', Validators.required),
-      "lastPromotionPositionType": new FormControl('', Validators.required),
-      "undertaking1": new FormControl('', Validators.required),
-      "undertaking2": new FormControl('', Validators.required),
+      "consentCheckBox": new FormControl('', Validators.required),
     });
 
     this.applicationId = environment.applicationId;
@@ -63,7 +54,6 @@ export class ProfileVerificationComponent implements OnInit {
     this.tempTeacherId = sessionStorage.getItem('kvTeacherId');
     this.profileTeacherName=sessionStorage.getItem('profileTeacherName');
     this.onVerifyClick();
-    this.getTeacherConfirmationV2();
   }
   teacherPdf() {
     // this.onVerifyClick();
@@ -93,43 +83,11 @@ export class ProfileVerificationComponent implements OnInit {
       this.verifyTchTeacherWorkExp = res.response.experience
     })
   }
-  getTeacherConfirmationV2(){
-    var data={
-      "teacherId":this.tempTeacherId}
-    this.outSideService.getTeacherConfirmationV2(data).subscribe((res)=>{
-      if(res){
-        console.log("---------------teacher check  detilll------");
-        console.log(res);
-        this.teacherPreviewConfirmForm.patchValue({
-          teacherName:  res.response['teacherName'],
-          teacherGender:  res.response['teacherGender'],
-          teacherDob:  res.response['teacherDob'],
-          teacherEmplCode:  res.response['teacherEmployeeCode'],
-          teacherDisability:  res.response['teacherDisabilityYn'],
-          ExperienceStartDatePresentKv:  res.response['workExperienceWorkStartDatePresentKv'],
-          workExperienceAppointedForSubject:  res.response['workExperienceAppointedForSubject'],
-          lastPromotionPositionType:  res.response['lastPromotionPositionType'],
-      });
-      }
-  },
-  error => {
-    Swal.fire({
-      'icon':'error',
-      'text':error.error
-    }
-    )
-  })
-  }
+
   consentCheckBoxChange(event: any) {
   //  this.consentCheckBoxValue = event?.target?.checked;
   }
-  mouseEnter(){
-  //  this.blinkClass= false;
-  }
-
-  mouseLeave(){
-  //  this.blinkClass = true;
-  }
+ 
   previousPage(){
     this.router.navigate(['/teacher/teacherWorkExperience']);
   }
@@ -142,65 +100,37 @@ export class ProfileVerificationComponent implements OnInit {
       })
       return false;
        }
-  if(this.teacherPreviewConfirmForm.value.teacherName==false || this.teacherPreviewConfirmForm.value.teacherGender==false || this.teacherPreviewConfirmForm.value.teacherDob==false || this.teacherPreviewConfirmForm.value.teacherEmplCode==false
-       || (this.teacherPreviewConfirmForm.value.teacherDisability==false  && this.teacherPreviewConfirmForm.value.teacherDisability!='0')|| this.teacherPreviewConfirmForm.value.ExperienceStartDatePresentKv==false
-       || this.teacherPreviewConfirmForm.value.workExperienceAppointedForSubject==false || this.teacherPreviewConfirmForm.value.lastPromotionPositionType==false
-       || this.teacherPreviewConfirmForm.value.undertaking1==false || this.teacherPreviewConfirmForm.value.undertaking2==false ){
-        Swal.fire({
-          'icon':'error',
-          'text':'Please check all fields'
-        })
-        return false;
-       }
        else{
-       
-        var data = {
-            "teacherName": this.verifyTchTeacherProfileData['teacherName'],
-            "teacherGender": this.verifyTchTeacherProfileData['teacherGender'],
-            "teacherDob":this.verifyTchTeacherProfileData['teacherDob'],
-            "teacherEmployeeCode":this.verifyTchTeacherProfileData['teacherEmployeeCode'],
-            "teacherDisabilityYn": this.verifyTchTeacherProfileData['teacherDisabilityYn'],
-            "workExperienceWorkStartDatePresentKv": this.verifyTchTeacherProfileData['workExperienceWorkStartDatePresentKv'],
-            "workExperienceAppointedForSubject": this.verifyTchTeacherProfileData['workExperienceAppointedForSubject'],
-            "lastPromotionPositionType": this.verifyTchTeacherProfileData['lastPromotionPositionType'],
-            "teacherId": this.verifyTchTeacherProfileData['teacherId'],
-        }
-       console.log(data)
-       Swal.fire({
-        'icon':'warning',
-        'text': "Do you want to proceed ?",
-        'allowEscapeKey': false,
-        'allowOutsideClick': false,
-        'showCancelButton': true,
-        'confirmButtonColor': "#DD6B55",
-        'confirmButtonText': "Yes",
-        'cancelButtonText': "No",
-        'showLoaderOnConfirm': true,
-      }
-      ).then((isConfirm) => {
-        if (isConfirm.value === true) {
-            this.outSideService.saveTeacherConfirmationV2(data).subscribe((res)=>{
-              debugger
-              console.log(res)
-              if(res){
-                Swal.fire(
-                  'Confirmation save successfully!',
-                  '',
-                  'success'
-                ) 
-              } 
-              this.getTeacherConfirmationV2(); 
-        },
-        error => {
-          Swal.fire({
-            'icon':'error',
-            'text':error.error
+            Swal.fire({
+              title: 'Are you sure your data is correct!',
+              text: 'Once you confirmed here, then you will not be able to modify your data.',
+              icon: 'info',
+              showCancelButton: true,
+              confirmButtonText: 'Cancel',
+              cancelButtonText: 'Confirm',
+              confirmButtonColor: '#ea6c75',
+              cancelButtonColor: '#2064cc',
+            }).then((result: any) => {
+              if (result?.dismiss == "cancel") {
+                let data = {
+                  transEmpIsDeclaration: 1,
+                  teacherId: this.tempTeacherId,
+                  inityear:"2024"
+                }
+
+                this.outSideService.saveEmployeeTransferDeclarationV2(data).subscribe((res: any) => {
+                  if (res?.status) {
+                    if (res?.response?.status == 1) {
+                      Swal.fire(
+                        'Transfer undertaking submitted sucessfuly!',
+                        '',
+                       'success'
+                      ) 
+                    }
+                  }
+                })
+              }
+            })
           }
-          )
-        })
-      }
-      return false;
-      });
-       }
   }
 }

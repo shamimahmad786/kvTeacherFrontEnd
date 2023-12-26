@@ -1,5 +1,4 @@
-import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
 import { FormDataService } from 'src/app/teacherEntryForm/service/internalService/form-data.service';
 import { DataService } from 'src/app/service/data.service'
@@ -17,13 +16,6 @@ import {
   MAT_DATE_LOCALE
 } from '@angular/material/core';
 import { MomentDateAdapter } from '@angular/material-moment-adapter';
-declare const onNextClick: any;
-declare const onPreviousClick: any;
-declare const onNextButtonClick: any;
-declare var progressBarTest: any;
-
-declare const loadScroller: any;
-
 interface SubjectData {
   subNameCode: string;
   subjectCode: string;
@@ -42,7 +34,11 @@ export const MY_FORMATS = {
 @Component({
   selector: 'app-teacher-basic-profile',
   templateUrl: './teacher-basic-profile.component.html',
-  styleUrls: ['./teacher-basic-profile.component.css']
+  styleUrls: ['./teacher-basic-profile.component.css'],
+  providers: [
+    { provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE] },
+    { provide: MAT_DATE_FORMATS, useValue: MY_FORMATS },
+  ],
 })
 export class TeacherBasicProfileComponent implements OnInit {
   maxDate: any;
@@ -59,6 +55,19 @@ export class TeacherBasicProfileComponent implements OnInit {
   stationName: any;
   subjectListNameCode: any[] = [];
   teacherTypeDataNameCode: any = [];
+  documentUploadArray: any[] = [];
+  regionList: any[] = [];
+  stationList: any[] = [];
+  formStatusLocale:any;
+  marriedStatusYN: boolean = false;
+  fileUppositionHeld: boolean = true;
+  spouseNone: boolean = false;
+  fileUpgkFilebenefit: boolean = true;
+  fileUpload: boolean = true;
+  selectedSpouseStation:any;
+  enableUploadButton4: boolean = false;
+  deleteDocUpdate4: boolean = true;
+  spouseKVSStation: boolean = false;
   teacherTypeData: any;
   subjectList: any;
   spouseTypeData: any;
@@ -80,7 +89,8 @@ export class TeacherBasicProfileComponent implements OnInit {
   teacherDisabilityType: any;
   businessUnitTypeCode: any;
   userName: any;
- 
+  @ViewChild('Physically_Handicap_Certificate')Physically_Handicap_Certificate: ElementRef;
+  @ViewChild('selectSpouseStationModal', { static: true }) selectSpouseStationModal: TemplateRef<any>;
   constructor(private pdfServive: TeacherAppPdfService,private router: Router, private date: DatePipe, private dataService: DataService,
   private modalService: NgbModal, private outSideService: OutsideServicesService,
   private route: ActivatedRoute, private fb: FormBuilder, private formData: FormDataService, private _adapter: DateAdapter<any>) {
@@ -122,8 +132,10 @@ export class TeacherBasicProfileComponent implements OnInit {
       'specialRecruitmentYn': new FormControl('', Validators.required),
       'lastPromotionPositionDate': new FormControl('', Validators.required),
       'kvCode': new FormControl(''),
+      'spouseStationCode': new FormControl(''),
       'disabilityYN': new FormControl('', Validators.required),
       'disabilityType': new FormControl('', Validators.required),
+      'maritalStatusF': new FormControl('', Validators.required),
       'crspndncAddress': new FormControl('', Validators.required),
       'crspndncState': new FormControl('', Validators.required),
       'crspndncDistrict': new FormControl('', Validators.required),
@@ -131,19 +143,21 @@ export class TeacherBasicProfileComponent implements OnInit {
       'prmntAddress': new FormControl('', Validators.required),
       'prmntState': new FormControl('', Validators.required),
       'prmntDistrict': new FormControl('', Validators.required),
+      'spouseName': new FormControl('', Validators.required),
+      'spouseEmpCode': new FormControl('', Validators.required),
+      'spousePost': new FormControl('', Validators.required),
+      'spouseStatusF': new FormControl('', Validators.required),
+      'spouseStationName': new FormControl('', Validators.required),
       'prmntPinCode': new FormControl('', [Validators.minLength(6), Validators.maxLength(6), Validators.pattern("^[1-9]{1}[0-9]{2}\\s{0,1}[0-9]{3}$")]),
     });
-  
     for (let i = 0; i < JSON.parse(sessionStorage.getItem("authTeacherDetails"))?.applicationDetails.length; i++) {
       this.userName = JSON.parse(sessionStorage.getItem("authTeacherDetails"))?.applicationDetails[i].user_name;
-   
-      
     }
-     this.getEmployeeData()
-
+    this.getEmployeeData()
     this.getAllMaster();
     this.getSchoolDetailsByKvCode();
     this.getStateMaster();
+    this.getDocumentByTeacherId();
   }
 
   getEmployeeData(){
@@ -176,12 +190,39 @@ export class TeacherBasicProfileComponent implements OnInit {
           lastPromotionPositionDate: this.emplyeeData['lastPromotionPositionDate'],
           presentSubjectName: this.emplyeeData['workExperienceAppointedForSubject'],
           staffType: this.emplyeeData['teachingNonteaching'],
+          spouseStatusF:this.emplyeeData['spouseStatus'],
+          spouseEmpCode:this.emplyeeData['spouseEmpCode'],
+          spouseName:this.emplyeeData['spouseName'],
+          spousePost:this.emplyeeData['spousePost'],
+          spouseStationName:this.emplyeeData['spouseStationName'],
+          spouseStationCode:this.emplyeeData['spouseStationCode'],
+          maritalStatusF:this.emplyeeData['maritalStatus'],
           specialRecruitmentYn: this.emplyeeData['specialRecruitmentYn'],
       });
       sessionStorage.setItem('kvTeacherId',this.emplyeeData['teacherId'])
-      this.profileTeacherName= this.emplyeeData['teacherName']
+      this.profileTeacherName= this.emplyeeData['teacherName'];
+      sessionStorage.setItem('profileTeacherName',this.profileTeacherName);
       this.getDistrictByStateId(this.emplyeeData['teacherParmanentState'],'P');
       this.getDistrictByStateId(this.emplyeeData['teacherCorrespondenceState'],'C');
+
+
+      if (this.emplyeeData['maritalStatus'] == '1' || this.emplyeeData['maritalStatus'] == 1) {
+        this.marriedStatusYN = true;
+      }
+      else{
+        this.marriedStatusYN = false;
+      }
+
+      if (this.emplyeeData['spouseStatus'] == '1') {
+        this.spouseNone = true;
+        this.spouseKVSStation = true;
+      } else if (this.emplyeeData['spouseStatus'] == '2' || this.emplyeeData['spouseStatus'] == '3') {
+        this.spouseNone = true;
+        this.spouseKVSStation = false;
+      } else if (this.emplyeeData['spouseStatus'] == '5') {
+        this.spouseNone = false;
+        this.spouseKVSStation = false;
+      }
       var data = {
         "applicationId": this.applicationId,
         "teacherTypeId": this.emplyeeData['lastPromotionPositionType']
@@ -207,7 +248,6 @@ export class TeacherBasicProfileComponent implements OnInit {
 
   getStateMaster() {
     this.outSideService.fetchStateMaster("a").subscribe((res) => {
-      debugger
       this.stateMasterList = res.response.rowValue;
     })
   }
@@ -241,7 +281,6 @@ export class TeacherBasicProfileComponent implements OnInit {
     }
   }
   getDistrictByStateId(stateId, data) {
-    debugger
     this.outSideService.fetchDistrictByStateId(stateId).subscribe((res) => {
       if (data == 'C') {
         this.districListByStateIdC = [];
@@ -254,14 +293,12 @@ export class TeacherBasicProfileComponent implements OnInit {
     })
   }
   onKeyUp(event){
-    debugger
     this.profileTeacherName=event.target.value;
   }
   pDistrictChange(value) {
     //this.responseData.teacherPermanentDistrict = value;
   }
   clickOnDisability(val) {
-    debugger
     if (val == 'yes') {
       this.isVisible = true;
     } else if (val == 'no') {
@@ -400,6 +437,184 @@ export class TeacherBasicProfileComponent implements OnInit {
     }
     this.getSubjectByTchType(data);
   }
+  onSpouseClick(event) {
+    if (event.target.value == '1') {
+      this.spouseNone = true;
+      this.spouseKVSStation = true;
+      this.basicProfileForm.patchValue({
+   
+          spouseStationName: '',
+          spousePost: '',
+          spouseStationCode: '',
+          spouseName: '',
+          spouseEmpCode: ''
+        
+      })
+    } else if (event.target.value == '2') {
+      this.spouseNone = true;
+      this.spouseKVSStation = false;
+      this.basicProfileForm.patchValue({
+   
+          spouseStationName: '',
+          spousePost: '',
+          spouseStationCode: '',
+          spouseName: '',
+          spouseEmpCode: ''
+        
+      })
+    } else if (event.target.value == '3') {
+      this.spouseNone = true;
+      this.spouseKVSStation = false;
+      this.basicProfileForm.patchValue({
+    
+          spouseStationName: '',
+          spousePost: '',
+          spouseStationCode: '',
+          spouseName: '',
+          spouseEmpCode: ''
+        
+      })
+    } else if (event.target.value == '5') {
+      this.spouseNone = false;
+      this.spouseKVSStation = false;
+      this.basicProfileForm.patchValue({
+    
+          spouseStationName: '',
+          spousePost: '',
+          spouseStationCode: '',
+          spouseName: '',
+          spouseEmpCode: ''
+        
+      })
+    }
+  }
+
+  maritalStatusCheck(event) {
+
+    if (event.target.value == '1') {
+      this.marriedStatusYN = true;
+      this.basicProfileForm.patchValue({
+          spouseStationName: '',
+          spousePost: '',
+          spouseStationCode: '',
+          spouseName: '',
+          spouseEmpCode: '',
+          spouseStatusF: '5'
+        
+      })
+
+    } else if (event.target.value == '7') {
+      this.marriedStatusYN = false;
+      this.spouseKVSStation = false;
+      this.spouseNone = false;
+      this.basicProfileForm.patchValue({
+          spouseStationName: '',
+          spousePost: '',
+          spouseStationCode: '',
+          spouseName: '',
+          spouseEmpCode: '',
+          spouseStatusF: '5' 
+      })
+
+    } else if (event.target.value == '4') {
+    
+      this.marriedStatusYN = false;
+      this.spouseKVSStation = false;
+      this.spouseNone = false;
+      this.basicProfileForm.patchValue({
+          spouseStationName: '',
+          spousePost: '',
+          spouseStationCode: '',
+          spouseName: '',
+          spouseEmpCode: '',
+          spouseStatusF: '5'
+        
+      })
+
+      if (this.basicProfileForm.value.gender == '2') {
+        this.basicProfileForm.patchValue({
+            spouseStationName: '',
+            spousePost: '',
+            spouseStationCode: '',
+            spouseName: '',
+            spouseEmpCode: '',
+            spouseStatusF: '4'
+          
+        })
+      }
+
+    }
+  }
+  selectSpouseStation() {
+    this.modalService.open(this.selectSpouseStationModal, { size: 'xl', backdrop: 'static', keyboard: false })
+    this.getKvRegion();
+  }
+  getKvRegion() {
+    this.regionList=[];
+    this.outSideService.fetchKvRegion(1).subscribe((res) => {
+      console.log("region list")
+      this.regionList = res.response.rowValue;
+      console.log(this.regionList)
+    })
+  }
+  getStationByRegionId(event) {
+    this.stationList=[];
+    const data = { "regionCode": event.target.value };
+    this.outSideService.fetchStationByRegionId(data).subscribe((res) => {
+      this.stationList = res.rowValue
+    })
+    
+  }
+  selectSpouseStationFn() {
+    debugger
+    var str = this.selectedSpouseStation
+    var splitted = str.split("-", 2);
+    this.basicProfileForm.patchValue({
+        spouseStationName: splitted[1],
+        spouseStationCode: splitted[0]
+    })
+  }
+  getSpouseDetails(event) {
+
+    this.basicProfileForm.patchValue({
+        spouseStationName: '',
+        spousePost: '',
+        spouseStationCode: '',
+        spouseName: ''
+    })
+    
+    this.outSideService.fetchSpouseByEmpCode(event.target.value).subscribe((res) => {
+      if (res.status == '0') {
+        // Swal.fire(
+        //   'Record not found with the given employee code !',
+        //   'Please enter correct employee code',
+        //   'error'
+        // )
+        // this.teacherForm.patchValue({
+        //   personalInfoForm: {
+        //     spouseStationName: '',
+        //     spousePost: '',
+        //     spouseStationCode: '',
+        //     spouseName: '',
+        //     spouseEmpCode: ''
+        //   }
+        // })
+      }
+      this.basicProfileForm.patchValue({
+          spouseStationName: res.response?.stationName,
+          spousePost: res.response?.lastPromotionPositionType,
+          spouseStationCode: res.response?.stationCode
+      })
+
+      if (res.status == '1') {
+        this.outSideService.fetchTeacherByTeacherId(res.response?.teacherId).subscribe((res) => {
+          this.basicProfileForm.patchValue({
+              spouseName: res.response?.teacherName
+          })
+        })
+      }
+    })
+  }
   getSubjectByTchType(data) {
     this.outSideService.fetchKvSubjectListByTchType(data).subscribe((res) => {
       this.subjectList = res.response.rowValue;
@@ -417,6 +632,109 @@ export class TeacherBasicProfileComponent implements OnInit {
       }
     })
   }
+  fileToUpload: File | null = null;
+  handleFileInput(files: FileList, index) {
+    this.fileUpload = true;
+    var data = files.item(0).name
+    var splitted = data.split('.', 2)
+    if (splitted[1] == 'pdf' || splitted[1] == 'PDF' || splitted[1] == 'Pdf') {
+      if (files.item(0).size <= 512000) {
+        this.fileToUpload = files.item(0);
+         if (index == '4') {
+          this.enableUploadButton4 = true;
+        }
+      } else {
+        this.fileToUpload = null;
+        Swal.fire(
+          'File size allowed upto 500KB only !',
+          '',
+          'error'
+        )
+        if (index == '4') {
+          this.enableUploadButton4 = true;
+        }
+      }
+
+    } else {
+      this.fileToUpload = null;
+      Swal.fire(
+        'Only PDF file can be uploaded',
+        '',
+        'error'
+      )
+      if (index == '4') {
+        this.enableUploadButton4 = true;
+      }
+    }
+  }
+  documentUpload(index) {
+    this.fileUpload = true;
+    const formData = new FormData();
+
+    if (this.fileToUpload != null) {
+      formData.append('teacherId', this.emplyeeData['teacherId']);
+      formData.append('file', this.fileToUpload);
+      if (index == 4) {
+        formData.append('filename', "Physically_Handicap_Certificate");
+      }
+      this.outSideService.uploadDocument(formData).subscribe((res) => {
+        debugger
+        this.fileUpload = false;
+        Swal.fire(
+          'Document Upload Sucessfully',
+          '',
+          'success'
+        )
+        this.documentUploadArray[index] = { "docName": res.response.docName, "url": res.response.url };
+
+       if (index == 4) {
+          this.deleteDocUpdate4 = false
+        }
+        this.getDocumentByTeacherId()
+      })
+    } else {
+      Swal.fire(
+        'Select PDF to be uploaded !',
+        '',
+        'error'
+      )
+    }
+  }
+  getDocumentByTeacherId() {
+    this.outSideService.fetchUploadedDoc(this.tempTeacherId).subscribe((res) => {
+      this.documentUploadArray = res;
+
+      for (let i = 0; i < res.length; i++) {
+        if (res[i].docName == 'Physically_Handicap_Certificate.pdf') {
+          this.fileUpload = false;
+        }   
+      }
+    })
+  }
+  deleteDocumentUploaded(documentName) {
+    for (let i = 0; i < this.documentUploadArray.length; i++) {
+      if (this.documentUploadArray[i].docName == documentName) {
+        this.documentUploadArray[i] = {}
+      }
+    }
+    if(documentName == 'Physically_Handicap_Certificate.pdf'){
+      this.fileUpload = true;
+      this.Physically_Handicap_Certificate.nativeElement.value = "";
+    }
+    var data = {
+      "teacherId": this.responseData.teacherId,
+      "docName": documentName
+    }
+
+    this.outSideService.deleteUploadedDoc(data).subscribe((res) => {
+      Swal.fire(
+        'Deleted !',
+        '',
+        'success'
+      )
+    })
+  }
+
   submit(){
     this.router.navigate(['/teacher/teacherWorkExperience']);
     // if(this.basicProfileForm.value.disabilityYN!=0)

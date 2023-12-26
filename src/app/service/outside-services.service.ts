@@ -733,11 +733,19 @@ export class OutsideServicesService {
   }
 
   uploadDocument(data) {
-    return this._http.post<any>(environment.BASE_URL_DATA_TRANSFER + "uploadDocument", data);
+    var token = JSON.parse(sessionStorage.getItem('authTeacherDetails'))?.token
+  var headers = new HttpHeaders({
+    'Authorization':token, 
+  }); 
+    return this._http.post<any>(environment.BASE_URL_DATA_TRANSFER + "uploadDocument",  data,{headers});
   }
 
   fetchUploadedDoc(data) {
-    return this._http.post<any>(environment.BASE_URL_DATA_TRANSFER + "getDocumentByTeacherId", data)
+    var token = JSON.parse(sessionStorage.getItem('authTeacherDetails'))?.token
+    var headers = new HttpHeaders({
+      'Authorization':token, 
+    }); 
+    return this._http.post<any>(environment.BASE_URL_DATA_TRANSFER + "getDocumentByTeacherId", data,{headers})
   }
 
   deleteUploadedDoc(data) {
@@ -818,9 +826,27 @@ export class OutsideServicesService {
 
     });
 
-    return this._http.post<any>(environment.BASE_URL_DATA_TEACHER_TRANSFER + "getTransProfile", data, { headers });
+    return this._http.post<any>(environment.BASE_URL_DATA_TEACHER_TRANSFER + "getTransProfileV2", data, { headers });
   }
 
+  getTcDcPointByTeacherIdAndInityear(data) {
+    var token = JSON.parse(sessionStorage.getItem('authTeacherDetails'))?.token
+    var headers = new HttpHeaders({
+      'Authorization': token,
+      'Content-Type': 'text/plain; charset=utf-8',
+
+    });
+    return this._http.post<any>(environment.BASE_URL_DATA_TEACHER_TRANSFER_V2 + "getTcDcPointByTeacherIdAndInityear", data, { headers });
+  }
+  getFormStatusV2(data) {
+    var token = JSON.parse(sessionStorage.getItem('authTeacherDetails'))?.token
+    var headers = new HttpHeaders({
+      'Authorization': token,
+      'Content-Type': 'text/plain; charset=utf-8',
+
+    });
+    return this._http.post<any>(environment.BASE_URL_DATA_TEACHER + "getFormStatusV2", data, { headers });
+  }
   saveTransProfile(data) {
     var token = JSON.parse(sessionStorage.getItem('authTeacherDetails'))?.token
     var headers = new HttpHeaders({
@@ -840,6 +866,16 @@ export class OutsideServicesService {
     });
 
     return this._http.post<any>(environment.BASE_URL_DATA_TEACHER + "transfer/saveTransferDCTCPoints", data, { headers });
+  }
+
+  saveTransferConfirmation(data) {
+    var token = JSON.parse(sessionStorage.getItem('authTeacherDetails'))?.token
+    var headers = new HttpHeaders({
+      'Authorization': token,
+      'Content-Type': 'text/plain; charset=utf-8',
+
+    });
+    return this._http.post<any>(environment.BASE_URL_DATA_TRANSFER_PROCESS + "saveTransferConfirmation", data, { headers });
   }
   saveTransferDeclaration(data) {
     var token = JSON.parse(sessionStorage.getItem('authTeacherDetails'))?.token
@@ -883,6 +919,20 @@ export class OutsideServicesService {
 
     return this._http.post<any>(environment.BASE_URL_DATA_TEACHER_TRANSFER + "saveEmployeeTransferDeclaration", data, { headers });
   }
+
+  saveEmployeeTransferDeclarationV2(data: any) {
+    var token = JSON.parse(sessionStorage.getItem('authTeacherDetails'))?.token
+    var headers = new HttpHeaders({
+      'Authorization': token,
+      'Content-Type': 'text/plain; charset=utf-8',
+
+    });
+
+    return this._http.post<any>(environment.BASE_URL_DATA_TEACHER_TRANSFER + "saveEmployeeTransferDeclarationV2", data, { headers });
+  }
+
+
+
 
 }
 

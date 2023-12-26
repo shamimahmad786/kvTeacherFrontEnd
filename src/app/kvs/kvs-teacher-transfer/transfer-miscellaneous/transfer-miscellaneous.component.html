@@ -48,10 +48,8 @@
                       
                         <div class="col-md-3">
                             <h4 class="titleSet">Spouse name</h4>
-                            <input type="text" class="form-control mb-3" style="text-transform:uppercase" id="spouseName" name="spouseName" value=" {{responseData.spouseName}}">
+                            <input type="text" class="form-control mb-3" style="text-transform:uppercase" id="spouseName" name="spouseName" value="">
                         </div>
-
-                   
                         <div class="col-md-3">
                             <h4 class="titleSet">Name of Station</h4>
                             <input type="text" class="form-control  mb-3" style="text-transform:uppercase" id="spouseStationName" formControlName="spouseStationName" name="spouseStationName" disabled>
@@ -96,22 +94,16 @@
                         <h4 class="titleSet">
                             <span class="text-green">2.</span> Whether the employee is seeking benefit of medical ground (MDG Ground) <a href="assets/assets/declaration/MdgDeclaration.pdf" download class="text-danger">(Mandatory Instruction)</a>
                         </h4>
-                    </div>   {{miscellaneousForm.get('personalStatusMdgD').value}}
+                    </div> 
                     <div class="col-md-2 mb-2 py-3">
                         <div class="form-check form-check-inline">
 
-                            <input class="form-check-input" value="1" name="personalStatusMdgD" type="radio" formControlName="personalStatusMdgD" >
-
-
-                         
+                            <input class="form-check-input" value="1" name="personalStatusMdgD" (click)="declarationtransferRelated2($event)" type="radio" formControlName="personalStatusMdgD" >                 
                             <label class="form-check-label" for="inlineRadio13">Yes
                             </label>
                         </div>
-                        <div class="form-check form-check-inline">
-
-
-                            <input class="form-check-input" value="0" name="personalStatusMdgD" type="radio" formControlName="personalStatusMdgD" >
-                        
+                        <div class="form-check form-check-inline">  
+                            <input class="form-check-input" value="0" name="personalStatusMdgD" (click)="declarationtransferRelated2($event)" type="radio" formControlName="personalStatusMdgD" >                       
                             <label class="form-check-label" for="inlineRadio24">No</label>
                         </div>
                     </div>
@@ -165,8 +157,6 @@
                         <div class="col-md-12 mb-3">
                             <h4 class="titleSet">Name and designation of the Medical Officer who has issued the medical certificate:<span class="required-asterisk">*</span>
                             </h4>
-
-
                         </div>
                         <div class="col-md-3">
                             <label class="titleSet">Name  <span
@@ -184,7 +174,6 @@
                                     class="required-asterisk">*</span></label>
                             <input type="date" [max]="maxDate" class="form-control" name="medicalCertificateIssueDate" formControlName="medicalCertificateIssueDate" [(ngModel)]="medicalCertificateIssueDateData" style="text-transform: none">
                         </div>
-
                     </div>
 
                     <div class="row">
@@ -194,9 +183,7 @@
                                 <input type="file" class="form-control form-control-sm" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04" aria-label="Upload" id="file" data-max-size="500" accept=".pdf" (change)="handledeclarationRelatedFormFileInput($event.target.files, '0')" #Medical_Certificate>
                                 <button [disabled]="enableUploadButtonRelatedForm0" class="btn btn-secondary btn-sm" type="button" id="inputGroupFileAddon04" (click)="documentUploadRelatedForm(0)">Upload</button>
                             </div>
-
                             <span class="help-block text-danger" *ngIf="fileUpgkFilemMedical">Please upload the file</span>
-
                         </div>
 
                         <div *ngIf="documentUploadArray[0]?.docName == 'Medical_Certificate.pdf'" class="col-md-4">
@@ -204,7 +191,6 @@
                             <div>                              
                                 <a target="_blank" class="btn  btn-sm btn-green" href="{{documentUploadArray[0]?.url}}"> <i class='bx bx-file'>{{documentUploadArray[0]?.docName}}</i>
                                 </a>
-
                                 <i *ngIf="allowEdit" (click)="deleteDocumentUploaded('Medical_Certificate.pdf')" class='bx bx-minus-circle'></i>
                             </div>
                         </div>
@@ -230,12 +216,12 @@
                     </div>
                     <div class="col-md-2 mb-2 py-3">
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" id="inlineRadio13" value="1" (click)="declarationtransferRelated6($event)" id="personalStatusSpD" formControlName="personalStatusSpD" name="personalStatusSpD" [checked]="personalStatusSpDradioButton == '1'">
+                            <input class="form-check-input" type="radio" id="inlineRadio13" value="1" (click)="declarationtransferRelated6($event)" id="personalStatusSpD" formControlName="personalStatusSpD" name="personalStatusSpD" >
                             <label class="form-check-label" for="inlineRadio13">Yes
                             </label>
                         </div>
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" id="inlineRadio24" value="0" (click)="declarationtransferRelated6($event)" id="personalStatusSpD" formControlName="personalStatusSpD" name="personalStatusSpD" [checked]="personalStatusSpDradioButton == '0'">
+                            <input class="form-check-input" type="radio" id="inlineRadio24" value="0" (click)="declarationtransferRelated6($event)" id="personalStatusSpD" formControlName="personalStatusSpD" name="personalStatusSpD" >
                             <label class="form-check-label" for="inlineRadio24">No</label>
                         </div>
                     </div>
@@ -246,7 +232,7 @@
                             <label class="titleSet">Reason for being Single Parent<span class="required-asterisk">*</span>
                     </label>
 
-                            <select class="form-select" aria-label="Default select example" name="singleParentGround" formControlName="singleParentGround" [(ngModel)]="singleParentGroundData">
+                        <select class="form-select" aria-label="Default select example" name="singleParentGround" formControlName="singleParentGround" [(ngModel)]="singleParentGroundData">
                         <!-- <option selected>Select</option> -->
                         <option selected disabled>Select</option>
                         <option value="ADOPTION">ADOPTION</option>
@@ -269,9 +255,7 @@
                                 <input type="file" class="form-control form-control-sm" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04" aria-label="Upload" id="file" data-max-size="500" accept=".pdf" (change)="handledeclarationRelatedFormFileInput($event.target.files, '6')" #Single_Parent_Declaration>
                                 <button [disabled]="enableUploadButtonRelatedForm6" class="btn btn-secondary btn-sm" type="button" id="inputGroupFileAddon04" (click)="documentUploadRelatedForm(6)">Upload</button>
                             </div>
-
                             <span class="help-block text-danger" *ngIf="fileUpspGround">Please upload the file</span>
-
                         </div>
                         <div *ngIf="documentUploadArray[6]?.docName == 'Single_Parent_Declaration.pdf'" class="col-md-4">
                             <h4 class="titleSet">Uploaded Document</h4>
@@ -279,10 +263,8 @@
 
                                 <!-- <a href="{{documentUploadArray[6]?.url}}"><i
                                         class='bx bx-show'></i></a> -->
-
                                 <a target="_blank" class="btn  btn-sm btn-green" href="{{documentUploadArray[6]?.url}}"> <i class='bx bx-file'>{{documentUploadArray[6]?.docName}}</i>
                                 </a>
-
                                 <i *ngIf="allowEdit" (click)="deleteDocumentUploaded('Single_Parent_Declaration.pdf')" class='bx bx-minus-circle'></i>
                             </div>
                         </div>
@@ -307,12 +289,12 @@
                     </div>
                     <div class="col-md-2 mb-2 py-3">
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" id="inlineRadio13" value="1" (click)="declarationtransferRelated7($event)" id="personalStatusDfpD" formControlName="personalStatusDfpD" name="personalStatusDfpD" [checked]="personalStatusDfpDradioButton == '1'">
+                            <input class="form-check-input" type="radio" id="inlineRadio13" value="1" (click)="declarationtransferRelated7($event)" id="personalStatusDfpD" formControlName="personalStatusDfpD" name="personalStatusDfpD" >
                             <label class="form-check-label" for="inlineRadio13">Yes
                             </label>
                         </div>
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" id="inlineRadio24" value="0" (click)="declarationtransferRelated7($event)" id="personalStatusDfpD" formControlName="personalStatusDfpD" name="personalStatusDfpD" [checked]="personalStatusDfpDradioButton == '0'">
+                            <input class="form-check-input" type="radio" id="inlineRadio24" value="0" (click)="declarationtransferRelated7($event)" id="personalStatusDfpD" formControlName="personalStatusDfpD" name="personalStatusDfpD" >
                             <label class="form-check-label" for="inlineRadio24">No</label>
                         </div>
                     </div>
@@ -355,10 +337,8 @@
                         <div *ngIf="documentUploadArray[7]?.docName == 'DFP_Declaration.pdf'" class="col-md-4">
                             <h4 class="titleSet">Uploaded Document</h4>
                             <div>
-
                                 <a target="_blank" class="btn  btn-sm btn-green" href="{{documentUploadArray[7]?.url}}"> <i class='bx bx-file'>{{documentUploadArray[7]?.docName}}</i>
                                 </a>
-
                                 <i *ngIf="allowEdit" (click)="deleteDocumentUploaded('DFP_Declaration.pdf')" class='bx bx-minus-circle'></i>
                             </div>
                         </div>
@@ -373,12 +353,12 @@
                     </div>
                     <div class="col-md-2 mb-2 py-3">
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" id="inlineRadio13" value="1" (click)="declarationtransferRelated4($event)" id="careGiverFaimlyYnD" formControlName="careGiverFaimlyYnD" name="careGiverFaimlyYnD" [checked]="careGiverFaimlyYnDradioButton == '1'">
+                            <input class="form-check-input" type="radio" id="inlineRadio13" value="1" (click)="declarationtransferRelated4($event)" id="careGiverFaimlyYnD" formControlName="careGiverFaimlyYnD" name="careGiverFaimlyYnD" >
                             <label class="form-check-label" for="inlineRadio13">Yes
                             </label>
                         </div>
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" id="inlineRadio24" value="0" (click)="declarationtransferRelated4($event)" id="careGiverFaimlyYnD" formControlName="careGiverFaimlyYnD" name="careGiverFaimlyYnD" [checked]="careGiverFaimlyYnDradioButton == '0'">
+                            <input class="form-check-input" type="radio" id="inlineRadio24" value="0" (click)="declarationtransferRelated4($event)" id="careGiverFaimlyYnD" formControlName="careGiverFaimlyYnD" name="careGiverFaimlyYnD" >
                             <label class="form-check-label" for="inlineRadio24">NO</label>
                         </div>
                     </div>
@@ -395,7 +375,6 @@
                         <div class="col-md-3 mb-2">
                             <label class="titleSet"> Relation with care giver<span class="required-asterisk">*</span>
                             </label>
-
                             <select class="form-select" aria-label="Default select example" name="careGiverRelation" formControlName="careGiverRelation" [(ngModel)]="careGiverRelationData">
                                 <!-- <option selected>Select</option> -->
                                 <option selected disabled>Select</option>
@@ -404,7 +383,6 @@
                                 <option value="SPOUSE">SPOUSE</option>  
                             </select>
                         </div>
-
                         <div class="col-md-6">
                             <h4 class="titleSet">Name the type of disability as per the RPwD Act.<span class="required-asterisk">*</span>
                             </h4>
@@ -460,17 +438,17 @@
                     </div>
                     <div class="col-md-2 mb-2 py-3">
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" id="inlineRadio13" value="1" id="memberJCM" (click)="checkRjcmNjcm('show')" formControlName="memberJCM" [checked]="inlineRadio13radioButton == '1'" name="memberJCM">
+                            <input class="form-check-input" type="radio" id="inlineRadio13" value="1" id="memberJCM" (click)="checkRjcmNjcm('show')" formControlName="memberJCM"  name="memberJCM">
                             <label class="form-check-label" for="inlineRadio13">RJCM
                             </label>
                         </div>
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" id="inlineRadio13" value="2" id="memberJCM" formControlName="memberJCM" (click)="checkRjcmNjcm('show')" [checked]="inlineRadio13radioButton == '2'" name="memberJCM">
+                            <input class="form-check-input" type="radio" id="inlineRadio13" value="2" id="memberJCM" formControlName="memberJCM" (click)="checkRjcmNjcm('show')"  name="memberJCM">
                             <label class="form-check-label" for="inlineRadio13">NJCM
                             </label>
                         </div>
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" id="inlineRadio24" value="0" id="memberJCM" formControlName="memberJCM" (click)="checkRjcmNjcm('notShow')" [checked]="inlineRadio13radioButton == '0'" name="memberJCM">
+                            <input class="form-check-input" type="radio" id="inlineRadio24" value="0" id="memberJCM" formControlName="memberJCM" (click)="checkRjcmNjcm('notShow')" name="memberJCM">
                             <label class="form-check-label" for="inlineRadio24">None</label>
                         </div>
                     </div>
@@ -534,12 +512,12 @@
                   
                     <div class="col-md-2 mb-2 py-3">
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" id="disciplinaryYn" value="1" id="disciplinaryYn" formControlName="disciplinaryYn" name="disciplinaryYn" [checked]="disciplinaryYnradioButton == '1'">
+                            <input class="form-check-input" type="radio" id="disciplinaryYn" value="1" id="disciplinaryYn" formControlName="disciplinaryYn" name="disciplinaryYn" >
                             <label class="form-check-label" for="disciplinaryYn">Yes
                             </label>
                         </div>
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" id="disciplinaryYn" value="0" id="disciplinaryYn" formControlName="disciplinaryYn" name="disciplinaryYn" [checked]="disciplinaryYnradioButton == '0'">
+                            <input class="form-check-input" type="radio" id="disciplinaryYn" value="0" id="disciplinaryYn" formControlName="disciplinaryYn" name="disciplinaryYn" >
                             <label class="form-check-label" for="disciplinaryYn">No
                             </label>
                         </div>
@@ -555,12 +533,12 @@
 
                     <div class="col-md-2 mb-2 py-3">
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" id="surveHardYn" value="1" id="surveHardYn" formControlName="surveHardYn" name="surveHardYn" [checked]="surveHardYnradioButton == '1'">
+                            <input class="form-check-input" type="radio" id="surveHardYn" value="1" id="surveHardYn" formControlName="surveHardYn" name="surveHardYn" >
                             <label class="form-check-label" for="surveHardYn">Yes
                             </label>
                         </div>
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" id="surveHardYn" value="0" id="surveHardYn" formControlName="surveHardYn" name="surveHardYn" [checked]="surveHardYnradioButton == '0'">
+                            <input class="form-check-input" type="radio" id="surveHardYn" value="0" id="surveHardYn" formControlName="surveHardYn" name="surveHardYn" >
                             <label class="form-check-label" for="surveHardYn">No
                             </label>
                         </div>
@@ -585,9 +563,6 @@
                 </div>
             </div>
         </div>
-
-
-
         <div class="mt-2 d-flex align-items-center justify-content-between " >
         <div class="button-back mt-2"><input type="button" name="previous" class="action-save me-2 back-button" (click)="previousPage()"  value="Back" /><i class="fa fa-chevron-circle-left" aria-hidden="true"></i></div>  
         <div class="button-save mt-2">
@@ -604,10 +579,7 @@
         !miscellaneousForm.get('careGiverRelation').valid || 
         !miscellaneousForm.get('careGiverDisabilityName').valid || 
         !miscellaneousForm.get('careGiverDisabilityPrcnt').valid) && careGiver) || ((!miscellaneousForm.get('positionOfNjcmRjcm').valid 
-       ) && positionHeld) || !miscellaneousForm.get('absenceDaysOne').valid ||
-        ((!miscellaneousForm.get('childDifferentName').valid || 
-        !miscellaneousForm.get('childDifferentDisabilityName').valid || 
-        !miscellaneousForm.get('childDifferentDisabilityPrcnt').valid) && abledChild) || buttonVisible!=true  || (gkFilebenefit ? fileUpgkFilebenefit : false) || (gkFilemMedical ? fileUpgkFilemMedical : false) || (spGround ? fileUpspGround : false) || (dfpGround ? fileUpdfpGround : false) || (careGiver ? fileUpcareGiver : false) || (positionHeld ? fileUppositionHeld : false)" type="submit" id="submit4" value="Save & Next" class="me-2 add-user" /> <i class="fa fa-floppy-o" aria-hidden="true"></i> </div>
+       ) && positionHeld) || !miscellaneousForm.get('absenceDaysOne').valid || buttonVisible!=true  || (gkFilebenefit ? fileUpgkFilebenefit : false) || (gkFilemMedical ? fileUpgkFilemMedical : false) || (spGround ? fileUpspGround : false) || (dfpGround ? fileUpdfpGround : false) || (careGiver ? fileUpcareGiver : false) || (positionHeld ? fileUppositionHeld : false)" type="submit" id="submit4" value="Save & Next" class="me-2 add-user" /> <i class="fa fa-floppy-o" aria-hidden="true"></i> </div>
  </div>
 </form>
 </div>

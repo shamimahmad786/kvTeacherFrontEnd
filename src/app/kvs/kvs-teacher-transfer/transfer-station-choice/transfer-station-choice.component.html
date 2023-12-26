@@ -7,72 +7,42 @@
                 <div class="col-4">
                     <h2 class="mb-0">Preferred Station For Transfer/Displacement</h2>
                 </div>
-                <div class="col-8">
-                    <h2 class="steps text-end pro-name"  style="text-align:right;padding:1%;color:green;font-size:18px">  Status:    <span style="font-weight: 700;"> {{statUsMessage}}</span> </h2>
-                </div>
+             
             </div>
             <div  class="container-fluid">
             <div class="row">
-                <div class="col-md-12">
-                    {{formStatusLocale}}
-        <div class="shadow-sm bg-white rounded" *ngIf="formStatusLocale!=''">
-            <div class="p-3">
-                <div class="card px-0 pb-0 ">
-                    <div class="mt-3" *ngIf="formStatusLocale == 'TRI'">
-                        <h2>
-                            Form Status : <span style="color: green;">Transfer initiated</span>
-                        </h2>
-                    </div>
-                    <div class="mt-3" *ngIf="formStatusLocale == 'TRA'">
-                        <h2>
-                            Form Status : <span style="color: green;">Transfer verified</span>
-                        </h2>
-                    </div>
-                    <div class="mt-3" *ngIf="formStatusLocale == 'TRE'">
-                        <h2>
-                            Form Status : <span style="color: yellowgreen;">Transfer edited at school</span>
-                        </h2>
-                    </div>
-                    <div class="mt-3" *ngIf="formStatusLocale == 'TRS'">
-                        <h2>
-                            Form Status : <span style="color: orange;">Transfer submitted for verification. </span>
-                        </h2>
-                    </div>
-                    <div class="mt-3" *ngIf="formStatusLocale == 'TRR'">
-                        <h2>
-                            Form Status : <span style="color: red;">Transfer exempted from HQ.</span>
-                        </h2>
-                    </div>
-                </div>
-            </div>
-        </div>
-     
-    <div class="shadow-sm bg-white rounded">
-    <div class="">
-    <form id="msform" class="msform" [formGroup]="transferForm" (ngSubmit)="onSubmit($event)">
+            <div class="col-md-12">
+           <div class="shadow-sm bg-white rounded">
 
-    <div formGroupName="stationChoice" class="form-card">
+    <form id="msform" class="msform" [formGroup]="stationChoiceForm" (ngSubmit)="onSubmit()">
         <div class="card" style="height:95%; border-radius: 1%;padding: 1%;">
         <div class="row">
             <div class="col-sm-3">
                 <h3 class="youWant"> Do you want to apply for transfer?</h3> </div>
-                <div class="col-sm-1">
-                <div class="form-check form-check-inline " *ngIf="!onlyDcFill">
+                <div class="col-sm-1"> 
+                    <div class="form-check form-check-inline ms-4" *ngIf="!onlyDcFill">
+                        <input class="form-check-input" value="1" name="applyTransferYn"
+                            id="applyTransferYn" formControlName="applyTransferYn"
+                            [checked]="empTransferradioButton == '1'" type="radio"
+                            (click)="manageChoice(1)" />
+                        <label class="form-check-label fw-bold">Yes</label>
+                    </div>
+               </div>
+               <div class="col-sm-1"> 
+                <div class="form-check form-check-inline ms-4" *ngIf="onlyDcFill">
                     <input class="form-check-input" value="1" name="applyTransferYn"
                         id="applyTransferYn" formControlName="applyTransferYn"
-                       type="radio"
-                        (click)="manageChoice(1)" />
+                        [checked]="empTransferradioButton == '1'" type="radio"
+                        (click)="manageChoice(1)"  disabled/>
                     <label class="form-check-label fw-bold">Yes</label>
                 </div>
-               </div>
+           </div>
                 <div class="col-sm-1">
-                <div class="form-check form-check-inline">
                     <input class="form-check-input" value="0" name="applyTransferYn"
-                        id="applyTransferYn" formControlName="applyTransferYn"
-                        type="radio"
-                        (click)="manageChoice(0)" >
-                    <label class="form-check-label fw-bold">No</label>
-                </div>
+                    id="applyTransferYn" formControlName="applyTransferYn"
+                    [checked]="empTransferradioButton == '0'" type="radio"
+                    (click)="manageChoice(0)" >
+                <label class="form-check-label fw-bold">No</label>
                 </div>
                 <div class="form-check form-check-inline" *ngIf="onlyDcFill">
                     <span
@@ -129,10 +99,10 @@
                                 type="button" id="button-addon2"><i class='bx bx-reset'
                                     title="Reset" (click)="restStationSelection(2)"></i></button>
                                <button class="btn btn-sm btn-outline-secondary btn-bdr-color input-group-text"type="button" id="button-addon2"><i
-                                    class="fa fa-search SearchIconSet"
-                                    (click)="selectSchool('2')"></i></button>
-             </div>        
-            </div>
+                               class="fa fa-search SearchIconSet"
+                              (click)="selectSchool('2')"></i></button>
+                       </div>        
+               </div>
         </div>
         <div class="row">
             <div class="col-md-6">
@@ -177,7 +147,6 @@
                         placeholder="Station Name (Preference Four)"
                         aria-label="Recipient's username" aria-describedby="button-addon2"
                         disabled>
-
                     <button
                         class="btn btn-sm btn-outline-secondary btn-bdr-color input-group-text"
                         type="button" id="button-addon2"><i class='bx bx-reset'
@@ -205,7 +174,6 @@
                         placeholder="Station Name (Preference Five)"
                         aria-label="Recipient's username" aria-describedby="button-addon2"
                         disabled>
-
                     <button
                         class="btn btn-sm btn-outline-secondary btn-bdr-color input-group-text"
                         type="button" id="button-addon2"><i class='bx bx-reset'
@@ -220,15 +188,16 @@
         </div>
         <h3 class="mb-0"> <b>Note :</b> All are Mandatory <span class="required-asterisk">*</span></h3>
     </div>
-</div>
+
 <div class="mt-2 d-flex align-items-center justify-content-between " >
-    <div class="button-back mt-2">
-    <input type="button" name="previous" class=" me-2 back-button"   value="Back" /><i class="fa fa-chevron-circle-left" aria-hidden="true"></i></div>  
-    <div class="button-save mt-2">
-   <input  type="button"  class="me-2 add-teacher"  value="Next" /> <i class="fa fa-floppy-o" aria-hidden="true"></i> </div>
-   </div>
+<div class="button-back mt-2">
+<input type="button" name="previous" class=" me-2 back-button"   value="Back" /><i class="fa fa-chevron-circle-left" aria-hidden="true"></i></div>  
+<div class="button-save mt-2">
+<input [disabled]="((!stationChoiceForm.get('choiceKv1StationName').valid || !stationChoiceForm.get('choiceKv2StationName').valid || !stationChoiceForm.get('choiceKv3StationName').valid || !stationChoiceForm.get('choiceKv4StationName').valid || !stationChoiceForm.get('choiceKv5StationName').valid)) || transDisable"
+type="submit"  class="me-2 add-teacher"  value="Save & Next" /> <i class="fa fa-floppy-o" aria-hidden="true"></i> </div>
+</div>
 </form>
-</div>
+
 </div>
 </div>
 </div>
@@ -237,60 +206,51 @@
 </div>
 </div>
 
-
-<ng-template #selectSchoolModalInterStation let-modal style="min-width: 100%;">
-    <div class="modal-header">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="clearfix">
-                    <div class="float-left">
-                        <h2 class="mb-0 text-green">Select Station</h2>
+<div mat-dialog-content>
+    <ng-template #selectSchoolModalInterStation let-modal style="min-width: 100%;">
+        <div class="modal-header">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="clearfix">
+                        <div class="float-left">
+                            <h2 class="mb-0 text-green">Select Station</h2>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+        <div class="" style="min-width: 100%; max-height: 750px;">
+            <div class="container-fluid">
+                <div class="row p-4">
+                    <div class="col-md-6 ">
+                        <select class="form-select form-select-sm" aria-label="Default select example"
+                            (change)="getTransfersStationByEmployee($event)">
+                            <option selected disabled> Select Region</option>
+                            <option *ngFor="let data of AllregionList; let i=index;" value="{{data.region_code}}">
+                                {{data.region_name}}
+                            </option>
 
-
-    <div class="" style="min-width: 100%; max-height: 750px;">
-        <div class="container-fluid">
-            <div class="row p-4">
-                <div class="col-md-6 ">
-                    <!-- <h3>Region</h3> -->
-                    <select class="form-select form-select-sm" aria-label="Default select example"
-                        (change)="getStationByRegionIdWithCond($event)">
-                        <option selected disabled> Select Region</option>
-                        <option *ngFor="let data of regionList; let i=index;" value="{{data.regionCode}}">
-                            {{data.regionName}}
-                        </option>
-
-                    </select>
+                        </select>
+                    </div>
+                    <div class="col-md-6">
+                        <select class="form-select form-select-sm" aria-label="Default select example"
+                             (change)="getKvSchoolByStationIdPreference($event)">
+                            <option selected disabled> Select Station</option>
+                            <option *ngFor="let data of stationList; let i=index;"
+                                value="{{data.station_code}}-{{data.station_name}}">
+                                {{data.station_name}}
+                            </option>
+                        </select>
+                    </div>
                 </div>
-                <div class="col-md-6">
-                    <!-- <h3>Station</h3> -->
-                    <select class="form-select form-select-sm" aria-label="Default select example"
-                        [(ngModel)]="selectedUdiseCode" (change)="getKvSchoolByStationIdPreference($event)">
-                        <option selected disabled> Select Station</option>
-                        <option *ngFor="let data of stationList; let i=index;"
-                            value="{{data.station_code}}-{{data.station_name}}">
-                            {{data.station_name}}
-                        </option>
-
-                    </select>
+                <hr>
+                <div class="ulLeft" style="margin-bottom: 20px; margin-top: 10px;">
+                    <a class=" btn-cancel p-2 me-2" (click)="modal.dismiss('Cross click')" (click)="previousPage()">Cancel</a>
+                    <button class="btn btn-success btn-sm" style="margin-left: 3px;"
+                        (click)="selectSchoolByUdise() ; modal.dismiss('Cross click')"> Ok</button>
                 </div>
-            </div>
-
-            <hr>
-            <div class="ulLeft" style="margin-bottom: 20px; margin-top: 10px;">
-                <a class=" btn-cancel p-2 me-2" (click)="modal.dismiss('Cross click')">Cancel</a>
-                <!-- <button class="btn btn-sm btn-green-logout p-2 me-1"
-            (click)="onVerify('false') ; modal.dismiss('Cross click')">Edit</button> -->
-                <button class="btn btn-success btn-sm" style="margin-left: 3px;"
-                    (click)="selectTransferFormSchoolByUdise() ; modal.dismiss('Cross click')"> Ok</button>
             </div>
         </div>
-    </div>
-
-
-</ng-template>
+    </ng-template>
+</div>
 </div>

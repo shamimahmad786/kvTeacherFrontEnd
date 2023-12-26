@@ -61,7 +61,7 @@ export class AuthInterceptorService implements HttpInterceptor {
 
         
         if (JSON.parse(sessionStorage.getItem('authTeacherDetails'))?.token != undefined) {
-
+            var token = JSON.parse(sessionStorage.getItem('authTeacherDetails'))?.token
             if ( req.url.indexOf('getProfileImage') !== -1 || req.url.indexOf('uploadProfileImage') !== -1 || req.url.indexOf('deleteDocumentByTeacherIdAndName') !== -1 ||
                 req.url.indexOf('getDocumentByTeacherId') !== -1 || req.url.indexOf('uploadDocument') !== -1 || req.url.indexOf('resetPassword') !== -1 || req.url.indexOf('create-kvuser') !== -1
                 || req.url.indexOf('get-usercradential') !== -1 || req.url.indexOf('renamePassword') !== -1 || req.url.indexOf('getKey') !== -1 || req.url.indexOf('translate') !== -1) {
@@ -92,7 +92,7 @@ export class AuthInterceptorService implements HttpInterceptor {
                         })
                     ))
             } else if(req.url.indexOf('unee-api/v1') !==-1){
-                var token = JSON.parse(sessionStorage.getItem('authTeacherDetails'))?.token
+                 token = JSON.parse(sessionStorage.getItem('authTeacherDetails'))?.token
                 // var token = ''
                 const modifiedReq = req.clone(
                     {

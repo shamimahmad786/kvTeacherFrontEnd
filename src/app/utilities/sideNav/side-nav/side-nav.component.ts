@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import * as $ from 'jquery';
 import { OutsideServicesService } from 'src/app/service/outside-services.service';
 import Swal from 'sweetalert2';
+
 @Component({
   selector: 'app-side-nav',
   templateUrl: './side-nav.component.html',
@@ -15,7 +17,14 @@ export class SideNavComponent implements OnInit {
   basicProfile: any = false;
   workExperience: any = false;
   PreviewConfirm: any = false;
-  constructor(private outSideService: OutsideServicesService) { }
+
+  formRoutingObj:any;
+  miscellaneous: any = false;
+  stationChoice: any = false;
+  previewUnderTaking: any = false;
+
+  tempTeacherId: string;
+  constructor(private outSideService: OutsideServicesService,private route: ActivatedRoute) { }
   public ngOnInit(): void {
    this.basicProfile=true;
    this.workExperience=true;
@@ -40,23 +49,48 @@ export class SideNavComponent implements OnInit {
     $("#imageUpload").change(function () {
       readURL(this);
     });
+    this.tempTeacherId = sessionStorage.getItem('kvTeacherId');
+   this.getFormStatusLinkV2();
   }
 
-  getTeacherConfirmation(){
-    var data = {"teacherId": this.teacherId}
-    this.outSideService.getTeacherConfirmationV2(data).subscribe((res)=>{
-      debugger
-      if(res){
-      }   
-  },
-  error => {
-    Swal.fire({
-      'icon':'error',
-      'text':error.error
-    }  
-    )
-  })
+  getFormStatusLinkV2(){
+    debugger
+  
+  // this.formRoutingObj = this.route.snapshot.queryParamMap.get('form');
+
+
+    var data ={
+      "teacherId": this.tempTeacherId
+    }
+    this.outSideService.getFormStatusV2(data).subscribe((res) => {
+     
+     if(res.response['form1Status']=='1' ){
+      this.miscellaneous=true;
+     }
+     if(res.response['form2Status']=='1'){
+      this.stationChoice=true;
+     }
+     if(res.response['form3Status']=='1'){
+      this.previewUnderTaking=true;
+     }
+   
+    })
   }
+  // getTeacherConfirmation(){
+  //   var data = {"teacherId": this.teacherId}
+  //   this.outSideService.getTeacherConfirmationV2(data).subscribe((res)=>{
+  //     debugger
+  //     if(res){
+  //     }   
+  // },
+  // error => {
+  //   Swal.fire({
+  //     'icon':'error',
+  //     'text':error.error
+  //   }  
+  //   )
+  // })
+  // }
   fileToUpload: File | null = null;
   documentUpload(index) {
     const formData = new FormData();

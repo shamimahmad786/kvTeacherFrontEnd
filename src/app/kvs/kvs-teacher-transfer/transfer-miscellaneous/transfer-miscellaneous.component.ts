@@ -552,21 +552,49 @@ export class TransferMiscellaneousComponent implements OnInit {
     this.fileToRelatedFormUpload = null;
   }
   previousPage(){
-    this.router.navigate(['/teacher/workExperience']);
+    this.router.navigate(['/teacher/profileVerifiation']);
   }
   submit(){
     this.miscellaneousForm.patchValue({
       inityear: '2024'
       })
-    this.outSideService.saveTransProfile(this.miscellaneousForm.value).subscribe((res) => {
-      if (res.status == 1) {
-        Swal.fire(
-          'Your Data has been saved Successfully!',
-          '',
-          'success'
+      debugger
+    Swal.fire({
+      'icon':'warning',
+      'text': "Do you want to proceed ?",
+      'allowEscapeKey': false,
+      'allowOutsideClick': false,
+      'showCancelButton': true,
+      'confirmButtonColor': "#DD6B55",
+      'confirmButtonText': "Yes",
+      'cancelButtonText': "No",
+      'showLoaderOnConfirm': true,
+    }
+    ).then((isConfirm) => {
+      if (isConfirm.value === true) {
+        this.outSideService.saveTransProfile(this.miscellaneousForm.value).subscribe((res)=>{
+            debugger
+            console.log(res)
+            if (res.status == 1) {
+              Swal.fire(
+                'Your Data has been saved Successfully!',
+                '',
+                'success'
+              )
+              this.router.navigate(['/teacher/transferStationChoice']);
+            }
+      },
+      error => {
+        Swal.fire({
+          'icon':'error',
+          'text':error.error
+        }
         )
-      }
-    })
-
-  }
+      })
+    }
+    return false;
+    });
+ }
 }
+
+

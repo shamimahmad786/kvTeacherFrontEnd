@@ -512,22 +512,44 @@ debugger
     }
   }
   previousPage(){
-    debugger
     this.router.navigate(['/teacher/transferMiscellaneous']);
   }
   onSubmit() {
     this.stationChoiceForm.patchValue({
       inityear: '2024'
       })
-      debugger
-    this.outSideService.saveStationChoice(this.stationChoiceForm.value).subscribe((res) => {  
-      if (res.status == 1) {
-        Swal.fire(
-          'Your Station choice has been saved Successfully! ',
-          '',
-          'success'
+    Swal.fire({
+      'icon':'warning',
+      'text': "Do you want to proceed ?",
+      'allowEscapeKey': false,
+      'allowOutsideClick': false,
+      'showCancelButton': true,
+      'confirmButtonColor': "#DD6B55",
+      'confirmButtonText': "Yes",
+      'cancelButtonText': "No",
+      'showLoaderOnConfirm': true,
+    }
+    ).then((isConfirm) => {
+      if (isConfirm.value === true) {
+        this.outSideService.saveStationChoice(this.stationChoiceForm.value).subscribe((res)=>{
+          if (res.status == 1) {
+            Swal.fire(
+              'Your Station choice has been saved Successfully! ',
+              '',
+              'success'
+            )
+            this.router.navigate(['/teacher/preview-undertaking']);
+          }
+      },
+      error => {
+        Swal.fire({
+          'icon':'error',
+          'text':error.error
+        }
         )
-      }
-    })
+      })
+    }
+    return false;
+    });
   }
 }

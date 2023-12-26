@@ -30,12 +30,10 @@
         <div id="collapseSeven" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
             <div class="accordion-body">
                 <ul>
-                    <li><a routerLinkActive="active" routerLink="/teacher/profileVerifiation"><i class="bi bi-dot"></i>Profile Verification</a></li>
-                    <li><a routerLinkActive="active" routerLink="/teacher/transferMiscellaneous"><i class="bi bi-dot"></i>Miscellaneous</a></li>
-                    <li><a routerLinkActive="active" routerLink="/teacher/transferStationChoice"><i class="bi bi-dot"></i>Station Choice</a></li>
-                    <!-- <li><a routerLinkActive="active" routerLink="/teacher/transferDcCount"><i class="bi bi-dot"></i>Displacement Count</a></li>
-                    <li><a routerLinkActive="active" routerLink="/teacher/transferTcCount"><i class="bi bi-dot"></i>Transfer Count</a></li> -->
-                    <li><a routerLinkActive="active" routerLink="/teacher/preview-undertaking"><i class="bi bi-dot"></i>Preview And Undertaking</a></li>
+                    <li><a routerLinkActive="active" routerLink="/teacher/profileVerifiation" ><i class="bi bi-dot"></i>Profile Verification</a></li>
+                    <li><a routerLinkActive="active" routerLink="{{miscellaneous == true ? '/teacher/transferMiscellaneous/' : '/same/route'}}" ><i class="bi bi-dot"></i>Miscellaneous</a></li>
+                    <li><a routerLinkActive="active" routerLink="{{stationChoice == true ? '/teacher/transferStationChoice/' : '/same/route'}}"><i class="bi bi-dot"></i>Station Choice</a></li>
+                    <li><a routerLinkActive="active" routerLink="{{previewUnderTaking == true ? '/teacher/preview-undertaking/' : '/same/route'}}" ><i class="bi bi-dot"></i>Preview And Undertaking</a></li>
                 </ul>
             </div>
         </div>

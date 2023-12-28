@@ -563,10 +563,12 @@
                 </div>
             </div>
         </div>
+
+        {{profileFinalStatus}}
         <div class="mt-2 d-flex align-items-center justify-content-between " >
         <div class="button-back mt-2"><input type="button" name="previous" class="action-save me-2 back-button" (click)="previousPage()"  value="Back" /><i class="fa fa-chevron-circle-left" aria-hidden="true"></i></div>  
         <div class="button-save mt-2">
-        <input [disabled]="                            
+        <input *ngIf="!profileFinalStatus" [disabled]="                            
         ((!miscellaneousForm.get('patientName').valid ||
         !miscellaneousForm.get('patientAilment').valid || 
         !miscellaneousForm.get('patientHospital').valid ||
@@ -579,8 +581,10 @@
         !miscellaneousForm.get('careGiverRelation').valid || 
         !miscellaneousForm.get('careGiverDisabilityName').valid || 
         !miscellaneousForm.get('careGiverDisabilityPrcnt').valid) && careGiver) || ((!miscellaneousForm.get('positionOfNjcmRjcm').valid 
-       ) && positionHeld) || !miscellaneousForm.get('absenceDaysOne').valid || buttonVisible!=true  || (gkFilebenefit ? fileUpgkFilebenefit : false) || (gkFilemMedical ? fileUpgkFilemMedical : false) || (spGround ? fileUpspGround : false) || (dfpGround ? fileUpdfpGround : false) || (careGiver ? fileUpcareGiver : false) || (positionHeld ? fileUppositionHeld : false)" type="submit" id="submit4" value="Save & Next" class="me-2 add-user" /> <i class="fa fa-floppy-o" aria-hidden="true"></i> </div>
- </div>
+       ) && positionHeld) || !miscellaneousForm.get('absenceDaysOne').valid || buttonVisible!=true  || (gkFilebenefit ? fileUpgkFilebenefit : false) || (gkFilemMedical ? fileUpgkFilemMedical : false) || (spGround ? fileUpspGround : false) || (dfpGround ? fileUpdfpGround : false) || (careGiver ? fileUpcareGiver : false) || (positionHeld ? fileUppositionHeld : false)" type="submit" id="submit4" value="Save & Next" class="me-2 add-user" />
+       <input *ngIf="profileFinalStatus"  type="submit" id="submit4" (click)="next()" value="Next" class="me-2 add-user" />
+       <i class="fa fa-floppy-o" aria-hidden="true"></i> </div>
+    </div>
 </form>
 </div>
 </div>

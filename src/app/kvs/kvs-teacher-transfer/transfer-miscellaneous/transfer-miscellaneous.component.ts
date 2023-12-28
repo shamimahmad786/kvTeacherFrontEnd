@@ -79,6 +79,7 @@ export class TransferMiscellaneousComponent implements OnInit {
   deleteDeclairaionFormDocUpdate7: boolean = false;
   deleteDeclairaionFormDocUpdate8: boolean = false;
   fileUpload: boolean = true;
+  profileFinalStatus: boolean = false;
   constructor(private pdfServive: TeacherAppPdfService,private router: Router, private date: DatePipe, private dataService: DataService,
     private modalService: NgbModal, private outSideService: OutsideServicesService,
     private route: ActivatedRoute, private fb: FormBuilder, private formData: FormDataService, private _adapter: DateAdapter<any>) {
@@ -128,6 +129,7 @@ export class TransferMiscellaneousComponent implements OnInit {
       'careGiverDisabilityPrcnt': new FormControl('', [Validators.required, Validators.maxLength(3), Validators.min(0), Validators.max(100), RxwebValidators.numeric({ allowDecimal: true, isFormat: true })]),
     })
     this.getTransferProfile();
+    this.getFormStatusV2();
   }
 
   declarationtransferRelated1(event) {
@@ -145,7 +147,18 @@ export class TransferMiscellaneousComponent implements OnInit {
       this.gkFilemMedical = false;
     }
   }
-
+  getFormStatusV2(){
+    var data ={
+      "teacherId": this.tempTeacherId
+    }
+    this.outSideService.getFormStatusV2(data).subscribe((res) => {
+    
+     if(res.response['form4Status']==1 || res.response['form4Status']=='1')
+     {
+      this.profileFinalStatus=true;
+     }
+    })
+  }
   getTransferProfile() {
     const data = {
        "teacherId": this.tempTeacherId,
@@ -553,6 +566,9 @@ export class TransferMiscellaneousComponent implements OnInit {
   }
   previousPage(){
     this.router.navigate(['/teacher/profileVerifiation']);
+  }
+  next(){
+    this.router.navigate(['/teacher/transferStationChoice']);
   }
   submit(){
     this.miscellaneousForm.patchValue({

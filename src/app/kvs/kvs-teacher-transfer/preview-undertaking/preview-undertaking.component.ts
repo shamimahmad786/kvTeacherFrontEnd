@@ -42,6 +42,7 @@ export class PreviewUndertakingComponent implements OnInit {
   empTransferradioButton:any;
   tcSaveYn: any;
   user_name: any;
+  profileFinalStatus: boolean = false;
   constructor(private outSideService: OutsideServicesService,private fb: FormBuilder,private modalService: NgbModal) { }
   ngOnInit(): void {
     this.displacementCountForm = new FormGroup({
@@ -94,16 +95,17 @@ export class PreviewUndertakingComponent implements OnInit {
 
     this.tempTeacherId = sessionStorage.getItem('kvTeacherId');
     this.getFormStatusV2();
-    this.getTransferProfile();
+   
   }
   getFormStatusV2(){
     var data ={
       "teacherId": this.tempTeacherId
     }
     this.outSideService.getFormStatusV2(data).subscribe((res) => {
-     console.log(res.response['form4Status']==1);
+     console.log(res.response);
      if(res.response['form4Status']==1 || res.response['form4Status']=='1')
      {
+      this.profileFinalStatus=true;
       this.getTcDcPointByTeacherIdAndInityearV2();
      }
      else{
@@ -148,9 +150,8 @@ export class PreviewUndertakingComponent implements OnInit {
          tcRjcmNjcmPoint: this.responseTcDcData.tcRjcmNjcmPoint,
          tcTotalPoint: this.responseTcDcData.tcTotalPoint
      })
-
-
     })
+    this.getTransferProfile();
   }
   getTransferProfile() {
     const data = {
@@ -158,9 +159,18 @@ export class PreviewUndertakingComponent implements OnInit {
        "inityear":"2024" 
       };
     this.outSideService.getTransferData(data).subscribe((res) => {
+      console.log("------transfer data-----------------")
       console.log(res.response) 
       this.teacherrofileData=res.response
-
+      this.teacherPreviewUndertakingForm.patchValue({
+        stationOne:  res.response['choiceKv1StationName'],
+        stationTwo:  res.response['choiceKv2StationName'],
+        stationThree:  res.response['choiceKv3StationName'],
+        stationFour:  res.response['choiceKv4StationName'],
+        stationFive:  res.response['choiceKv5StationName'],
+        dcCountStatus:  this.responseTcDcData.dcTotalPoint,
+        tcCountStatus:  this.responseTcDcData.tcTotalPoint,
+    });
       this.empTransferradioButton = res.response.applyTransferYn
       if (this.empTransferradioButton == null || this.empTransferradioButton == "" || this.empTransferradioButton == 0 || this.empTransferradioButton == '0') {
         this.disabled = true;
@@ -235,6 +245,7 @@ export class PreviewUndertakingComponent implements OnInit {
       this.canculateDcPoint();
       this.canculateTcPoint();
     })
+    this.getTransferProfile();
   }
   canculateDcPoint() {
     if (this.responseTcDcData.dcSinglePoint == '-12') {

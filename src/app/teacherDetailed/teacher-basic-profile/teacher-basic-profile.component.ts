@@ -157,7 +157,7 @@ export class TeacherBasicProfileComponent implements OnInit {
     this.getAllMaster();
     this.getSchoolDetailsByKvCode();
     this.getStateMaster();
-    this.getDocumentByTeacherId();
+   
   }
 
   getEmployeeData(){
@@ -236,6 +236,7 @@ export class TeacherBasicProfileComponent implements OnInit {
       }
       this.clickOnDisability(this.teacherDisabilityType);
       }   
+      this.getDocumentByTeacherId();  
   },
   error => {
     Swal.fire({
@@ -701,9 +702,9 @@ export class TeacherBasicProfileComponent implements OnInit {
     }
   }
   getDocumentByTeacherId() {
-    this.outSideService.fetchUploadedDoc(this.tempTeacherId).subscribe((res) => {
+    this.outSideService.fetchUploadedDoc(this.emplyeeData['teacherId']).subscribe((res) => {
       this.documentUploadArray = res;
-
+debugger
       for (let i = 0; i < res.length; i++) {
         if (res[i].docName == 'Physically_Handicap_Certificate.pdf') {
           this.fileUpload = false;

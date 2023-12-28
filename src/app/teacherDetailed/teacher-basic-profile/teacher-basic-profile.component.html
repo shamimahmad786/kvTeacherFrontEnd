@@ -21,14 +21,14 @@
                                         <div class="row">
                                             <div class="col-md-6 mb-3">
                                                 <h4 class="titleSet"> Employee Code<span class="required-asterisk">*</span></h4>
-                                                <input type="text" class="form-control" name="empCode" formControlName="empCode" maxlength="10">
+                                                <input type="text" class="form-control" name="empCode" formControlName="empCode" maxlength="10" disabled>
                                                 <span class="help-block text-danger" *ngIf="!basicProfileForm.get('empCode').valid && basicProfileForm.get('empCode').touched">
                                                     Enter a valid employee code!</span>
                                             </div>
                                             <div class="col-md-6 mb-3">
                                                 <h4 class="titleSet">Full Name<span class="required-asterisk">*</span>
                                                 </h4>
-                                                <input type="text" class="form-control" (keyup)="onKeyUp($event)" name="fullName" formControlName="fullName" style="text-transform:uppercase" maxlength="50" >
+                                                <input type="text" class="form-control" (keyup)="onKeyUp($event)" name="fullName" formControlName="fullName" style="text-transform:uppercase" maxlength="50" disabled >
                                                 <span class="help-block text-danger" *ngIf="!basicProfileForm.get('fullName').valid && basicProfileForm.get('fullName').touched">
                                                     Enter your valid name!</span>
                                             </div>
@@ -36,11 +36,11 @@
                                             <div class="col-md-6 mb-3">
                                                 <h4 class="titleSet">Gender<span class="required-asterisk">*</span></h4>
                                                 <div class="form-check form-check-inline">
-                                                    <input class="form-check-input" type="radio" id="gender" value="1"  name="gender" formControlName="gender">
+                                                    <input class="form-check-input" type="radio" id="gender" value="1"  name="gender" formControlName="gender" disabled>
                                                     <label class="form-check-label font16 ff">Male</label>
                                                 </div>
                                                 <div class="form-check form-check-inline">
-                                                    <input class="form-check-input" type="radio" id="gender" value="2" name="gender" formControlName="gender">
+                                                    <input class="form-check-input" type="radio" id="gender" value="2" name="gender" formControlName="gender" disabled>
                                                     <label class="form-check-label font16 ff">Female</label>
                                                 </div>
                                                 <span class="help-block text-danger" *ngIf="!basicProfileForm.get('gender').valid && basicProfileForm.get('gender').touched ">
@@ -52,7 +52,7 @@
                                                             <mat-datepicker #pickers></mat-datepicker>
                                                         </div>
                                                         <input class="form-control"  id="wordStartDate" [max]="maxDate" placeholder="DD/MM/YYYY"  [matDatepicker]="pickers"   (click)="pickers.open()"
-                                                        formControlName="dob" >
+                                                        formControlName="dob" disabled >
                                                 <span class="help-block text-danger" *ngIf="!basicProfileForm.get('dob').valid && basicProfileForm.get('dob').touched ">
                                                     <span class="help-block text-danger"
                                                         *ngIf="basicProfileForm.get('dob').errors['invalidDate'] ">
@@ -66,7 +66,7 @@
                                        
                                             <div class="col-md-6 mb-3">
                                                 <h4 class="titleSet">Mobile<span class="required-asterisk">*</span></h4>
-                                                <input type="text" class="form-control" name="mobile" (blur)="checkMobileNumber($event)" formControlName="mobile" maxlength="10" minlength="10">
+                                                <input type="text" class="form-control" name="mobile" (blur)="checkMobileNumber($event)" formControlName="mobile" maxlength="10" minlength="10" disabled>
                                                 <span class="help-block text-danger" *ngIf="!basicProfileForm.get('mobile').valid 
                                                 && basicProfileForm.get('mobile').touched
                                                 ">Enter valid mobile number of 10 digit !</span>
@@ -74,7 +74,7 @@
     
                                             <div class="col-md-6 mb-3">
                                                 <h4 class="titleSet">Email <span class="required-asterisk">*</span></h4>
-                                                <input type="email" class="form-control" name="email" formControlName="email"  style="text-transform: none">
+                                                <input type="email" class="form-control" name="email" formControlName="email"  style="text-transform: none" disabled>
                                                 <span class="help-block text-danger" *ngIf="!basicProfileForm.get('email').valid && basicProfileForm.get('email').touched ">
                                                     Enter your email id!</span>
                                             </div>
@@ -84,11 +84,11 @@
                                             <div class="col-md-6 mb-3">
                                                 <h4 class="titleSet">
                                                     Correspondence Address <span class="required-asterisk">*</span></h4>
-                                                <textarea class="form-control" rows="1" name="crspndncAddress" formControlName="crspndncAddress" style="text-transform:uppercase"  (change)="addOrPinChange('A')"></textarea>
+                                                <textarea class="form-control" rows="1" name="crspndncAddress" formControlName="crspndncAddress" style="text-transform:uppercase"  (change)="addOrPinChange('A')" disabled></textarea>
                                             </div>
                                             <div class="col-md-6 mb-3">
                                                 <h4 class="titleSet">State <span class="required-asterisk">*</span></h4>
-                                                <select class="form-select" aria-label="Default select example" name="crspndncState" formControlName="crspndncState"  (change)="getDistrictListByStateId($event, 'C')">
+                                                <select class="form-select" aria-label="Default select example" name="crspndncState" formControlName="crspndncState"  (change)="getDistrictListByStateId($event, 'C')" disabled>
                                                     <option selected disabled>Select State
                                                     </option>
                                                     <option *ngFor="let data of stateMasterList"
@@ -98,7 +98,7 @@
                                             </div>
                                             <div class="col-md-6 mb-3">
                                                 <h4 class="titleSet">District <span class="required-asterisk">*</span></h4>
-                                                <select class="form-select" aria-label="Default select example" name="crspndncDistrict" formControlName="crspndncDistrict"  (change)="cDistrictChange($event.target.value)">
+                                                <select class="form-select" aria-label="Default select example" name="crspndncDistrict" formControlName="crspndncDistrict"  (change)="cDistrictChange($event.target.value)" disabled>
                                                     <option selected disabled>Select District
                                                     </option>
                                                     <option *ngFor="let data of districListByStateIdC"
@@ -109,7 +109,7 @@
                                             </div>
                                             <div class="col-md-6 mb-3">
                                                 <h4 class="titleSet">Pin Code <span class="required-asterisk">*</span></h4>
-                                                <input class="form-control" name="crspndncPinCode" minlength="6" type="text" formControlName="crspndncPinCode" maxlength="6"  (change)="addOrPinChange('p')">
+                                                <input class="form-control" name="crspndncPinCode" minlength="6" type="text" formControlName="crspndncPinCode" maxlength="6"  (change)="addOrPinChange('p')" disabled>
                                                 <span class="help-block text-danger" *ngIf="!basicProfileForm.get('crspndncPinCode').valid ">
                                                     Enter a valid pincode!</span>                                          
                                             </div>
@@ -120,11 +120,11 @@
                                                 <h4 class="titleSet">
                                                     Home Town Address as per Service Record <span class="required-asterisk">*</span>
                                                 </h4>
-                                                <textarea class="form-control" rows="1" name="prmntAddress" style="text-transform:uppercase" formControlName="prmntAddress" ></textarea>                                          
+                                                <textarea class="form-control" rows="1" name="prmntAddress" style="text-transform:uppercase" formControlName="prmntAddress" disabled></textarea>                                          
                                             </div>
                                             <div class="col-md-6 mb-3">
                                                 <h4 class="titleSet">State <span class="required-asterisk">*</span></h4>
-                                                <select class="form-select" aria-label="Default select example" name="prmntState" formControlName="prmntState"  (change)="getDistrictListByStateId($event, 'P')">
+                                                <select class="form-select" aria-label="Default select example" name="prmntState" formControlName="prmntState"  (change)="getDistrictListByStateId($event, 'P')" disabled>
                                                     <option selected disabled>Select
                                                     </option>
                                                     <option *ngFor="let data of stateMasterList"
@@ -134,7 +134,7 @@
                                             </div>
                                             <div class="col-md-6 mb-3">
                                                 <h4 class="titleSet">District <span class="required-asterisk">*</span></h4>
-                                                <select class="form-select" aria-label="Default select example" name="prmntDistrict" formControlName="prmntDistrict"  (blur)="pDistrictChange($event.target.value)">
+                                                <select class="form-select" aria-label="Default select example" name="prmntDistrict" formControlName="prmntDistrict"  (blur)="pDistrictChange($event.target.value)" disabled>
                                                     <option selected disabled>Select</option>
                                                     <option *ngFor="let data of districListByStateIdP"
                                                         value="{{data.district_id}}">
@@ -144,7 +144,7 @@
                                             </div>
                                             <div class="col-md-6 mb-3">
                                                 <h4 class="titleSet">Pin Code <span class="required-asterisk">*</span></h4>
-                                                <input type="text" class="form-control" maxlength="6" minlength="6" name="prmntPinCode" formControlName="prmntPinCode" >
+                                                <input type="text" class="form-control" maxlength="6" minlength="6" name="prmntPinCode" formControlName="prmntPinCode" disabled >
                                        
                                                 <span class="help-block text-danger" *ngIf="basicProfileForm.get('prmntPinCode').status != 'VALID' && basicProfileForm.get('prmntPinCode').status != 'DISABLED'">
                                                     Enter a valid pincode!</span>
@@ -162,7 +162,7 @@
     
                                             <div class="col-md-6 mb-3">
                                            <h4 class="titleSet">Present Post Name(Code)<span class="required-asterisk">*</span></h4>
-                                           <select class="form-select" aria-label="Default select example" name="presentPostName" formControlName="presentPostName" (change)="teacherTypeSelect($event)" >
+                                           <select class="form-select" aria-label="Default select example" name="presentPostName" formControlName="presentPostName" (change)="teacherTypeSelect($event)" disabled>
                                                <option selected disabled>Select</option>
                                                <option
                                                    *ngFor="let data of teacherTypeDataNameCode;"
@@ -181,7 +181,7 @@
     
                                             <div class="col-md-6 mb-3">
                                                 <h4 class="titleSet"> Subject Name(Code)<span class="required-asterisk">*</span></h4>
-                                                <select class="form-select" aria-label="Default select example" name="presentSubjectName" formControlName="presentSubjectName" >
+                                                <select class="form-select" aria-label="Default select example" name="presentSubjectName" formControlName="presentSubjectName" disabled >
                                                     <option selected disabled>Select</option>
                                                     <option
                                                         *ngFor="let data of subjectListNameCode;"
@@ -200,7 +200,7 @@
                                                             <mat-datepicker #pickers12></mat-datepicker>
                                                         </div>
                                                         <input class="form-control"  id="wordStartDate" [max]="maxDate" placeholder="DD/MM/YYYY"  [matDatepicker]="pickers12"   (click)="pickers12.open()"
-                                                        formControlName="lastPromotionPositionDate" >
+                                                        formControlName="lastPromotionPositionDate" disabled >
                                                 <span class="help-block text-danger" *ngIf="!basicProfileForm.get('lastPromotionPositionDate').valid && basicProfileForm.get('lastPromotionPositionDate').touched ">
                                                 <span class="help-block text-danger" *ngIf="basicProfileForm.get('lastPromotionPositionDate').errors['required'] ">
                                                         Enter last promotion position date!
@@ -211,11 +211,11 @@
                                             <div class="col-md-6 mb-3">                                        
                                                 <h4 class="titleSet">Have you been recruited under special recruitment for NER ?</h4>
                                                 <div class="form-check form-check-inline">
-                                                    <input class="form-check-input" value="13" id="singleparentyes" name="specialRecruitmentYn" type="radio" formControlName="specialRecruitmentYn" >
+                                                    <input class="form-check-input" value="13" id="singleparentyes" name="specialRecruitmentYn" type="radio" formControlName="specialRecruitmentYn" disabled >
                                                     <label class="form-check-label font16 ff" for="inlineRadio1">Yes</label>
                                                 </div>
                                                 <div class="form-check form-check-inline">
-                                                    <input class="form-check-input" value="14" id="singleparentno" name="specialRecruitmentYn" type="radio" formControlName="specialRecruitmentYn" >
+                                                    <input class="form-check-input" value="14" id="singleparentno" name="specialRecruitmentYn" type="radio" formControlName="specialRecruitmentYn" disabled >
                                                     <label class="form-check-label font16 ff" for="inlineRadio2">No</label>
                                                 </div>                                                                                  
                                                 <span class="help-block text-danger" *ngIf="!basicProfileForm.get('specialRecruitmentYn').valid  && basicProfileForm.get('specialRecruitmentYn').touched">
@@ -225,7 +225,7 @@
                                             <div class="col-md-6 mb-3">
                                                 <h4 class="titleSet">Staff Type<span class="required-asterisk">*</span></h4>
                                                 <div class="form-check form-check-inline">
-                                                    <input class="form-check-input" type="radio" id="inlineRadio1" value="1" disabled  name="staffType" formControlName="staffType">
+                                                    <input class="form-check-input" type="radio" id="inlineRadio1" value="1" disabled  name="staffType" formControlName="staffType" >
                                                     <label class="form-check-label font16 ff" for="inlineRadio1">Teaching</label>
                                                 </div>
                                                 <div class="form-check form-check-inline">
@@ -242,11 +242,11 @@
                                             <div class="col-md-6">
                                                 <h4 class="titleSet">Do you have any kind of disability,if any ?</h4>
                                                 <div class="form-check form-check-inline">
-                                                    <input class="form-check-input" value="1" name="disabilityYN" type="radio" formControlName="disabilityYN" (click)="clickOnDisability('yes')">
+                                                    <input class="form-check-input" value="1" name="disabilityYN" type="radio" formControlName="disabilityYN" (click)="clickOnDisability('yes')" disabled>
                                                     <label class="form-check-label font16 ff" for="inlineRadio1">Yes</label>
                                                 </div>
                                                 <div class="form-check form-check-inline">
-                                                    <input class="form-check-input" value="0" name="disabilityYN" type="radio" formControlName="disabilityYN"  (click)="clickOnDisability('no')">
+                                                    <input class="form-check-input" value="0" name="disabilityYN" type="radio" formControlName="disabilityYN"  (click)="clickOnDisability('no')" disabled>
                                                     <label class="form-check-label font16 ff" for="inlineRadio2">No</label>
                                                 </div>
                                                 <span class="help-block text-danger" *ngIf="!basicProfileForm.get('disabilityYN').valid ">
@@ -322,7 +322,7 @@
                                             id="maritalStatusF" value="1"
                                             (click)="maritalStatusCheck($event)"
                                             name="maritalStatusF"
-                                            formControlName="maritalStatusF">
+                                            formControlName="maritalStatusF" disabled>
     
                                             
                                             <label
@@ -334,7 +334,7 @@
                                             <input class="form-check-input" type="radio" value="4"
                                             (click)="maritalStatusCheck($event)"
                                             id="maritalStatusF" name="maritalStatusF"
-                                            formControlName="maritalStatusF">
+                                            formControlName="maritalStatusF" disabled>
                                             <label class="form-check-label font16 ff">Single</label>
                                         </div></div>
                                     
@@ -344,7 +344,7 @@
                                                 <input class="form-check-input" type="radio" value="7"
                                                     (click)="maritalStatusCheck($event)"
                                                     id="maritalStatusF" name="maritalStatusF"
-                                                    formControlName="maritalStatusF">
+                                                    formControlName="maritalStatusF" disabled>
                                                     <label class="form-check-label font16 ff">Widow/Widower</label>
                                             </div></div>
                                             <span class="help-block text-danger"
@@ -364,7 +364,7 @@
                                                  
                                                     name="spouseStatusF" id="spouseStatusF"
                                                     formControlName="spouseStatusF" value="1"
-                                                    (click)="onSpouseClick($event)">
+                                                    (click)="onSpouseClick($event)" disabled>
                                                 <label class="form-check-label" for="exampleRadios1">
                                                     KVS Employee
                                                 </label>
@@ -374,7 +374,7 @@
                                                  
                                                     name="spouseStatusF" id="spouseStatusF"
                                                     formControlName="spouseStatusF" value="2"
-                                                    (click)="onSpouseClick($event)">
+                                                    (click)="onSpouseClick($event)" disabled>
                                                 <label class="form-check-label" for="exampleRadios2">
                                                     Central Govt. / PSU / Defence Employee and Central Armed
                                                     Police Force Employee
@@ -385,7 +385,7 @@
                                                    
                                                     name="spouseStatusF" id="spouseStatusF"
                                                     formControlName="spouseStatusF" value="3"
-                                                    (click)="onSpouseClick($event)">
+                                                    (click)="onSpouseClick($event)" disabled>
                                                 <label class="form-check-label" for="exampleRadios3">
                                                     State Govt. / State Govt. PSU Employee
                                                 </label>
@@ -395,7 +395,7 @@
                                                   
                                                     name="spouseStatusF" id="spouseStatusF"
                                                     formControlName="spouseStatusF" value="5"
-                                                    (click)="onSpouseClick($event)">
+                                                    (click)="onSpouseClick($event)" disabled>
                                                 <label class="form-check-label" for="exampleRadios4">
                                                     None of these
                                                 </label>
@@ -408,14 +408,14 @@
                                                     class="required-asterisk">*</span> </h4>
                                             <input type="text" class="form-control" name="spouseEmpCode"
                                                 (blur)="getSpouseDetails($event)" id="spouseEmpCode"
-                                                formControlName="spouseEmpCode">
+                                                formControlName="spouseEmpCode" disabled>
                                         </div>
                                         <div *ngIf="spouseNone" class="col-md-6 mb-3">
                                             <h4 class="titleSet"> Serving Spouse Name<span
                                                     class="required-asterisk">*</span> </h4>
                                             <input type="text" class="form-control "
                                                  style="text-transform:uppercase" name="spouseName"
-                                                id="spouseName" formControlName="spouseName">
+                                                id="spouseName" formControlName="spouseName" disabled>
                                         </div>
                                         <div *ngIf="spouseNone && spouseKVSStation" class="col-md-6 mb-3">
                                             <h4 class="titleSet"> Position Held<span
@@ -453,31 +453,32 @@
                             </div>
                         </div>
                      </div>
-                        <div class="mt-4 button-save float-end " >
-                            <i class="fa fa-floppy-o" aria-hidden="true"></i>  <input [disabled]="(!basicProfileForm.get('maritalStatusF').valid || !basicProfileForm.get('dob').valid ||
-                           !basicProfileForm.get('fullName').valid || !basicProfileForm.get('specialRecruitmentYn').valid ||
-                           !basicProfileForm.get('mobile').valid ||
-                           !basicProfileForm.get('gender').valid ||
-                           !basicProfileForm.get('staffType').valid ||
-                           !basicProfileForm.get('empCode').valid ||
-                           !basicProfileForm.get('presentPostName').valid ||
-                           !basicProfileForm.get('presentSubjectName').valid || !basicProfileForm.get('email').valid || 
-                           !basicProfileForm.get('crspndncAddress').valid  || !basicProfileForm.get('crspndncState').valid  ||
-                           !basicProfileForm.get('crspndncDistrict').valid || !basicProfileForm.get('crspndncPinCode').valid ||
-                           !basicProfileForm.get('prmntState').valid || !basicProfileForm.get('prmntDistrict').valid  || 
-                           !basicProfileForm.get('prmntPinCode').valid || !basicProfileForm.get('prmntAddress').valid || 
-                           !basicProfileForm.get('disabilityYN').valid || (!basicProfileForm.get('disabilityType').valid &&
-                           basicProfileForm.get('disabilityYN').value == '1') || ((basicProfileForm.get('spouseStatusF').value == '1') &&
-                           (!basicProfileForm.get('spouseEmpCode').valid ||
-                           !basicProfileForm.get('spouseName').valid ||
-                           !basicProfileForm.get('spousePost').valid ||
-                           !basicProfileForm.get('spouseStationName').valid)) ||    
-                           ((basicProfileForm.get('spouseStatusF').value == '2' ||
-                           basicProfileForm.get('spouseStatusF').value == '3') &&
-                           (!basicProfileForm.get('spouseName').valid ||
-                           !basicProfileForm.get('spouseStationName').valid)) || (!basicProfileForm.get('crspndncPinCode').valid ||
-                           (basicProfileForm.get('prmntPinCode').status != 'VALID' && basicProfileForm.get('prmntPinCode').status != 'DISABLED') || (documentUploadArray[4]?.docName != 'Physically_Handicap_Certificate' &&  basicProfileForm.get('disabilityYN').value == '1'))) "  type="submit" name="Save & Next"  class="me-2 add-teacher" value="Next" /> 
-                           </div>
+                     <div class="mt-4 button-save float-end " >
+                        <i class="fa fa-floppy-o" aria-hidden="true"></i>  <input  [disabled]="(!basicProfileForm.get('maritalStatusF').valid || !basicProfileForm.get('dob').valid ||
+                       !basicProfileForm.get('fullName').valid || !basicProfileForm.get('specialRecruitmentYn').valid ||
+                       !basicProfileForm.get('mobile').valid ||
+                       !basicProfileForm.get('gender').valid ||
+                       !basicProfileForm.get('staffType').valid ||
+                       !basicProfileForm.get('empCode').valid ||
+                       !basicProfileForm.get('presentPostName').valid ||
+                       !basicProfileForm.get('presentSubjectName').valid || !basicProfileForm.get('email').valid || 
+                       !basicProfileForm.get('crspndncAddress').valid  || !basicProfileForm.get('crspndncState').valid  ||
+                       !basicProfileForm.get('crspndncDistrict').valid || !basicProfileForm.get('crspndncPinCode').valid ||
+                       !basicProfileForm.get('prmntState').valid || !basicProfileForm.get('prmntDistrict').valid  || 
+                       !basicProfileForm.get('prmntPinCode').valid || !basicProfileForm.get('prmntAddress').valid || 
+                       !basicProfileForm.get('disabilityYN').valid || (!basicProfileForm.get('disabilityType').valid &&
+                       basicProfileForm.get('disabilityYN').value == '1') || ((basicProfileForm.get('spouseStatusF').value == '1') &&
+                       (!basicProfileForm.get('spouseEmpCode').valid ||
+                       !basicProfileForm.get('spouseName').valid ||
+                       !basicProfileForm.get('spousePost').valid ||
+                       !basicProfileForm.get('spouseStationName').valid)) ||    
+                       ((basicProfileForm.get('spouseStatusF').value == '2' ||
+                       basicProfileForm.get('spouseStatusF').value == '3') &&
+                       (!basicProfileForm.get('spouseName').valid ||
+                       !basicProfileForm.get('spouseStationName').valid)) || (!basicProfileForm.get('crspndncPinCode').valid ||
+                       (basicProfileForm.get('prmntPinCode').status != 'VALID' && basicProfileForm.get('prmntPinCode').status != 'DISABLED') || (documentUploadArray[4]?.docName != 'Physically_Handicap_Certificate.pdf' &&  basicProfileForm.get('disabilityYN').value == '1'))) "  type="submit" name="Save & Next"  class="me-2 add-teacher" value="Next" /> 
+                    </div>
+
                 </form>    
         </div>
     </div>

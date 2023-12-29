@@ -82,6 +82,16 @@ export class OutsideServicesService {
     });
     return this._http.post<any>(environment.BASE_URL_DATA_TEACHER_TRANSFER + "saveStationChoice", data, { headers });
   }
+
+  getSpouseDetailsV2(data) {
+    var token = JSON.parse(sessionStorage.getItem('authTeacherDetails'))?.token
+    var headers = new HttpHeaders({
+      'Authorization': token,
+      'Content-Type': 'text/plain; charset=utf-8',
+    });
+    return this._http.post<any>(environment.BASE_URL_DATA_TEACHER + "getSpouseDetailsV2", data, { headers });
+  }
+
   fetchTcDcData(data: any) {
     var token = JSON.parse(sessionStorage.getItem('authTeacherDetails'))?.token
     var headers = new HttpHeaders({

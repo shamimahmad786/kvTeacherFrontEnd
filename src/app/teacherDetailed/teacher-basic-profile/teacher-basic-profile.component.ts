@@ -228,7 +228,7 @@ export class TeacherBasicProfileComponent implements OnInit {
         "teacherTypeId": this.emplyeeData['lastPromotionPositionType']
       }
       this.getSubjectByTchType(data);
-      if(this.emplyeeData['teacherDisabilityType']=='1'){
+      if(this.emplyeeData['teacherDisabilityYn']=='1'){
         this.teacherDisabilityType='yes';
       }
       else{

@@ -36,6 +36,7 @@ export class TransferStationChoiceComponent implements OnInit {
   kvSchoolListP4: any;
   kvSchoolListP5: any;
   empTransferradioButton:any;
+  profileFinalStatus: boolean = false;
   constructor(private outSideService: OutsideServicesService,private router: Router,private modalService: NgbModal) { }
 
   ngOnInit(): void {
@@ -131,9 +132,21 @@ debugger
         this.showTcField =true;
       }
     })
-
+     this.getFormStatusV2();
   }
 
+  getFormStatusV2(){
+    var data ={
+      "teacherId": this.tempTeacherId
+    }
+    this.outSideService.getFormStatusV2(data).subscribe((res) => {
+    
+     if(res.response['form4Status']==1 || res.response['form4Status']=='1')
+     {
+      this.profileFinalStatus=true;
+     }
+    })
+  }
   selectSchool(val) {
     this.position = val;
     this.getTransferRegionsByEmployee()
@@ -513,6 +526,9 @@ debugger
   }
   previousPage(){
     this.router.navigate(['/teacher/transferMiscellaneous']);
+  }
+  next(){
+    this.router.navigate(['/teacher/preview-undertaking']);
   }
   onSubmit() {
     this.stationChoiceForm.patchValue({

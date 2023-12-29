@@ -36,6 +36,7 @@ export class ProfileVerificationComponent implements OnInit {
   verifyTchTeacherTraining: any;
   profileTeacherName: any;
   blinkClass: boolean = true;
+  profileFinalStatus: boolean = false;
   constructor(private pdfServive: TeacherAppPdfService,private router: Router, private date: DatePipe, private dataService: DataService,
     private modalService: NgbModal, private outSideService: OutsideServicesService,
     private route: ActivatedRoute, private fb: FormBuilder, private formData: FormDataService, private _adapter: DateAdapter<any>) { }
@@ -53,6 +54,7 @@ export class ProfileVerificationComponent implements OnInit {
     }
     this.tempTeacherId = sessionStorage.getItem('kvTeacherId');
     this.profileTeacherName=sessionStorage.getItem('profileTeacherName');
+    this.getFormStatusV2();
     this.onVerifyClick();
   }
   teacherPdf() {
@@ -61,6 +63,26 @@ export class ProfileVerificationComponent implements OnInit {
     //   this.pdfServive.testFnc(this.verifyTchTeacherProfileData this.verifyTchTeacherWorkExp, this.teacherStationChioce);
     // }, 1000);
 
+  }
+
+  getFormStatusV2(){
+    var data ={
+      "teacherId": this.tempTeacherId
+    }
+    debugger
+    this.outSideService.getFormStatusV2(data).subscribe((res)=>{
+      console.log(res);
+      if(res.response['form1Status']=='1' || res.response['form1Status']==1){
+        this.profileFinalStatus=true;
+       }
+  },
+  error => {
+    Swal.fire({
+      'icon':'error',
+      'text':error.error
+    }
+    )
+  })
   }
   onVerifyClick() {
     this.outSideService.getUpdatedFlag(this.tempTeacherId).subscribe((res) => {
@@ -91,6 +113,9 @@ export class ProfileVerificationComponent implements OnInit {
   // previousPage(){
   //   this.router.navigate(['/teacher/teacherWorkExperience']);
   // }
+  next(){
+    this.router.navigate(['/teacher/transferMiscellaneous']);  
+  }
   submit(){
    // this.router.navigate(['/teacher/transferMiscellaneous'], { queryParams: { 'form': 2 } })
     if (this.teacherPreviewConfirmForm.invalid) {

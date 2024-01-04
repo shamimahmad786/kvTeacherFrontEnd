@@ -58,7 +58,7 @@ export class SideNavComponent implements OnInit {
   
   // this.formRoutingObj = this.route.snapshot.queryParamMap.get('form');
 
-
+  this.tempTeacherId = sessionStorage.getItem('kvTeacherId');
     var data ={
       "teacherId": this.tempTeacherId
     }

@@ -150,8 +150,9 @@ export class PreviewUndertakingComponent implements OnInit {
          tcRjcmNjcmPoint: this.responseTcDcData.tcRjcmNjcmPoint,
          tcTotalPoint: this.responseTcDcData.tcTotalPoint
      })
+     this.getTransferProfile();
     })
-    this.getTransferProfile();
+  
   }
   getTransferProfile() {
     const data = {
@@ -168,10 +169,11 @@ export class PreviewUndertakingComponent implements OnInit {
         stationThree:  res.response['choiceKv3StationName'],
         stationFour:  res.response['choiceKv4StationName'],
         stationFive:  res.response['choiceKv5StationName'],
-        dcCountStatus:  this.responseTcDcData.dcTotalPoint,
-        tcCountStatus:  this.responseTcDcData.tcTotalPoint,
+        dcCountStatus:  String(this.responseTcDcData.dcTotalPoint),
+        tcCountStatus:  String(this.responseTcDcData.tcTotalPoint),
     });
-      this.empTransferradioButton = res.response.applyTransferYn
+      this.empTransferradioButton = res.response.applyTransferYn;
+      debugger
       if (this.empTransferradioButton == null || this.empTransferradioButton == "" || this.empTransferradioButton == 0 || this.empTransferradioButton == '0') {
         this.disabled = true;
         this.showTcField =true;
@@ -195,22 +197,6 @@ export class PreviewUndertakingComponent implements OnInit {
       this.responseTcDcData = res;
       if (this.responseTcDcData.transferId != null && this.responseTcDcData.transferId != '') {
         this.transDisable = true;
-      }
-      this.displacementCountForm.patchValue({
-        displacementCount: {
-          id: this.responseTcDcData.id
-        },
-      })
-      this.transferCountForm.patchValue({
-        transferCount: {
-          id: this.responseTcDcData.id
-        },
-      })
-
-      if(this.responseTcDcData.tcSaveYn=="1"){
-        this.statUsMessage="Application Submitted";
-      }else if(this.responseTcDcData.dcSaveYn=="1"){
-        this.statUsMessage="Application Submitted";
       }
       this.totaldaysPresent = this.responseTcDcData.dcStayAtStation + this.responseTcDcData.dcReturnStation - this.responseTcDcData.dcPeriodAbsence
       this.totaldaysPresentTc = this.responseTcDcData.tcStayAtStation - this.responseTcDcData.tcPeriodAbsence
@@ -244,8 +230,9 @@ export class PreviewUndertakingComponent implements OnInit {
       })
       this.canculateDcPoint();
       this.canculateTcPoint();
+      this.getTransferProfile();
     })
-    this.getTransferProfile();
+  
   }
   canculateDcPoint() {
     if (this.responseTcDcData.dcSinglePoint == '-12') {
@@ -376,20 +363,7 @@ export class PreviewUndertakingComponent implements OnInit {
     "stationCodeChoice4":this.responseTcDcData.choiceKv4StationCode,
     "stationCodeChoice5":this.responseTcDcData.choiceKv5StationCode
   }
-    Swal.fire({
-      'icon':'warning',
-      'text': "Do you want to proceed ?",
-      'allowEscapeKey': false,
-      'allowOutsideClick': false,
-      'showCancelButton': true,
-      'confirmButtonColor': "#DD6B55",
-      'confirmButtonText': "Yes",
-      'cancelButtonText': "No",
-      'showLoaderOnConfirm': true,
-    }
-    ).then((isConfirm) => {
-      if (isConfirm.value === true) {
-        this.outSideService.saveTransferConfirmation(data).subscribe((res)=>{
+    this.outSideService.saveTransferConfirmation(data).subscribe((res)=>{
           if (res) {
             Swal.fire(
               'Your transfer has been submitted  successfully.',
@@ -397,6 +371,7 @@ export class PreviewUndertakingComponent implements OnInit {
               'success'
             );
           }
+          this.getFormStatusV2();
       },
       error => {
         Swal.fire({
@@ -405,8 +380,5 @@ export class PreviewUndertakingComponent implements OnInit {
         }
         )
       })
-    }
-    return false;
-    });
 }
 }

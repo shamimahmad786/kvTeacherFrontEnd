@@ -35,7 +35,10 @@
     font-weight: 600;
     font-size: 18px;
   }
-
+  .btn-sml {
+    padding: 2px 6px;
+   
+}
   .button-back { 
     position: relative; 
 } 

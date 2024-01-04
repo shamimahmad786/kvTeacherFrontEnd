@@ -66,7 +66,7 @@ export class TransferStationChoiceComponent implements OnInit {
     this.getKvRegion();
     this.getTransferProfile();
   }
-
+ 
   getTransferProfile() {
       this.stationChoiceForm.patchValue({
           applyTransferYn: '0',
@@ -74,7 +74,6 @@ export class TransferStationChoiceComponent implements OnInit {
     const data = { "teacherId": this.tempTeacherId ,
     "inityear":"2024" 
   }
-debugger
     this.outSideService.getTransferData(data).subscribe((res) => {
       if (res.response != null || res.response == '') {
         this.stationChoiceForm.patchValue({
@@ -105,7 +104,6 @@ debugger
 
         )
       }
-
       this.empTransferradioButton = res.response.applyTransferYn
       if (this.empTransferradioButton == null || this.empTransferradioButton == "") {
         this.stationChoiceForm.patchValue({
@@ -157,8 +155,6 @@ debugger
     this.regionList = res.response.rowValue;
     })
   }
-
-
   getTransferRegionsByEmployee(){
     debugger
     const data={
@@ -175,7 +171,6 @@ debugger
     this.selectedUdiseCode = str
     var splitted = str.split("-", 2);
     this.outSideService.fetchKvSchoolByStationCode(splitted[0]).subscribe((res) => {
-
       if (this.position == '1') {
         this.kvSchoolListP1 = res.response;
       } else if (this.position == '2') {
@@ -206,7 +201,6 @@ debugger
     var splitted = str.split("-", 2);
      
     if (this.position == '1') {
-
       // choiceKv1StationName
       if (this.stationChoiceForm.value.choiceKv2StationName == splitted[1] ||
         this.stationChoiceForm.value.choiceKv3StationName == splitted[1] ||
@@ -218,17 +212,13 @@ debugger
           'error'
         )
         this.stationChoiceForm.patchValue({
-     
             choiceKv1StationCode: '',
             choiceKv1StationName: ''
-        
         })
       } else {
         this.stationChoiceForm.patchValue({
-        
             choiceKv1StationName: splitted[1],
             choiceKv1StationCode: splitted[0]
-          
         })
       }
 
@@ -243,17 +233,13 @@ debugger
           'error'
         )
         this.stationChoiceForm.patchValue({
-     
             choiceKv2StationCode: '',
             choiceKv2StationName: ''
-          
         })
       } else {
         this.stationChoiceForm.patchValue({
-         
             choiceKv2StationName: splitted[1],
             choiceKv2StationCode: splitted[0]
-          
         })
       }
     } else if (this.position == '3') {
@@ -267,17 +253,13 @@ debugger
           'error'
         )
         this.stationChoiceForm.patchValue({
-      
             choiceKv3StationCode: '',
             choiceKv3StationName: ''
-          
         })
       } else {
         this.stationChoiceForm.patchValue({
-       
             choiceKv3StationName: splitted[1],
             choiceKv3StationCode: splitted[0]
-          
         })
       }
     } else if (this.position == '4') {
@@ -291,17 +273,13 @@ debugger
           'error'
         )
         this.stationChoiceForm.patchValue({
-        
             choiceKv4StationCode: '',
             choiceKv4StationName: ''
-          
         })
       } else {
         this.stationChoiceForm.patchValue({
-       
             choiceKv4StationName: splitted[1],
             choiceKv4StationCode: splitted[0]
-          
         })
       }
     } else if (this.position == '5') {
@@ -315,17 +293,13 @@ debugger
           'error'
         )
         this.stationChoiceForm.patchValue({
-       
             choiceKv5StationCode: '',
             choiceKv5StationName: ''
-          
         })
       } else {
         this.stationChoiceForm.patchValue({
-      
             choiceKv5StationName: splitted[1],
             choiceKv5StationCode: splitted[0]
-          
         })
       }
     } else if (this.position == '191') {
@@ -339,17 +313,13 @@ debugger
           'error'
         )
         this.stationChoiceForm.patchValue({
-        
             displacement1StationCode: '',
             displacement1StationName: ''
-          
         })
       } else {
         this.stationChoiceForm.patchValue({
-        
             displacement1StationName: splitted[1],
             displacement1StationCode: splitted[0]
-          
         })
       }
     } else if (this.position == '192') {

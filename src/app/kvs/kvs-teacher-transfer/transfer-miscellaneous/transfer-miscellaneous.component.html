@@ -30,7 +30,7 @@
                             </li>
                         </ul>
                     </div>
-                   
+        
                     <div class="col-md-2 mb-2">
                         <div class="form-check form-check-inline">
                             <input class="form-check-input" type="radio" id="inlineRadio13" value="1" (click)="declarationtransferRelated1($event)" id="spouseKvsYnD"  formControlName="spouseKvsYnD" name="spouseKvsYnD" >
@@ -48,7 +48,7 @@
                       
                         <div class="col-md-3">
                             <h4 class="titleSet">Spouse name</h4>
-                            <input type="text" class="form-control mb-3" style="text-transform:uppercase" id="spouseName" name="spouseName" value="">
+                            <input type="text" class="form-control mb-3" style="text-transform:uppercase" value="{{spouseName}}" id="spouseName" name="spouseName" value="">
                         </div>
                         <div class="col-md-3">
                             <h4 class="titleSet">Name of Station</h4>
@@ -563,8 +563,6 @@
                 </div>
             </div>
         </div>
-
-        {{profileFinalStatus}}
         <div class="mt-2 d-flex align-items-center justify-content-between " >
         <div class="button-back mt-2"><input type="button" name="previous" class="action-save me-2 back-button" (click)="previousPage()"  value="Back" /><i class="fa fa-chevron-circle-left" aria-hidden="true"></i></div>  
         <div class="button-save mt-2">

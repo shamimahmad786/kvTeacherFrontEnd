@@ -80,6 +80,23 @@ export class TransferMiscellaneousComponent implements OnInit {
   deleteDeclairaionFormDocUpdate8: boolean = false;
   fileUpload: boolean = true;
   profileFinalStatus: boolean = false;
+  spouseName: any;
+  deleteDocUpdate0: boolean = true;
+  deleteDocUpdate1: boolean = true;
+  deleteDocUpdate2: boolean = true;
+  deleteDocUpdate3: boolean = true;
+  deleteDocUpdate4: boolean = true;
+  nJCMRJCMDocName:any;
+  medicalDocName:any;
+  medicalDocURLName:any;
+  disabilityCertiDocName:any;
+  disabilityCertiDocURLName:any;
+  singleParentDocName:any;
+  singleParentDocURLName:any;
+  spouseDeclarationDocUrlName:any;
+  nJCMRJCMDocURLName:any;
+  dFPDocName:any;
+  dFPDocURLName:any;
   constructor(private pdfServive: TeacherAppPdfService,private router: Router, private date: DatePipe, private dataService: DataService,
     private modalService: NgbModal, private outSideService: OutsideServicesService,
     private route: ActivatedRoute, private fb: FormBuilder, private formData: FormDataService, private _adapter: DateAdapter<any>) {
@@ -128,9 +145,14 @@ export class TransferMiscellaneousComponent implements OnInit {
       'careGiverDisabilityName': new FormControl('', [Validators.required, Validators.maxLength(50), Validators.pattern("^[A-Za-z0-9 ]*$")]),
       'careGiverDisabilityPrcnt': new FormControl('', [Validators.required, Validators.maxLength(3), Validators.min(0), Validators.max(100), RxwebValidators.numeric({ allowDecimal: true, isFormat: true })]),
     })
+
     this.getTransferProfile();
-    this.getFormStatusV2();
+    this.getFormStatusV2()
+    this.getDocumentByTeacherId();
   }
+
+ 
+
 
   declarationtransferRelated1(event) {
     if (event.target.value == '1') {
@@ -159,12 +181,14 @@ export class TransferMiscellaneousComponent implements OnInit {
      }
     })
   }
+
   getTransferProfile() {
     const data = {
        "teacherId": this.tempTeacherId,
        "inityear":"2024" 
       };
     this.outSideService.getTransferData(data).subscribe((res) => {
+      debugger
       console.log(res.response.spouseKvsYnD)
       if (res.response != null || res.response == '') {
         this.patientAilmentData = res.response.patientAilment
@@ -221,17 +245,21 @@ export class TransferMiscellaneousComponent implements OnInit {
             childDifferentDisabilityPrcnt: res.response.childDifferentDisabilityPrcnt,
         })
       }
-    debugger
+
+      
       // ---------------------------  declairation from radio button start  here ---------------------------------
-      if (this.miscellaneousForm.value.spouseKvsYnD == 1) {
-        this.gkFilebenefit = true;
+      if (this.miscellaneousForm.value.spouseKvsYnD == 1 || this.miscellaneousForm.value.spouseKvsYnD == '1') {
+       this.getSpouseDeatails();
       }
-      if(this.miscellaneousForm.value.spouseKvsYnD == 0 ||  this.miscellaneousForm.value.spouseKvsYnD == '' || this.miscellaneousForm.value.spouseKvsYnD == 'null')
+      if(this.miscellaneousForm.value.spouseKvsYnD == 0 ||  this.miscellaneousForm.value.spouseKvsYnD == '' )
       {
         this.gkFilebenefit = false;
         this.miscellaneousForm.patchValue({
           spouseKvsYnD: '0'
           })
+      }
+      if(this.miscellaneousForm.value.spouseKvsYnD == 'null'){
+        this.getSpouseDeatails();
       }
 
       if (this.miscellaneousForm.value.personalStatusMdgD == 1) {
@@ -293,6 +321,41 @@ export class TransferMiscellaneousComponent implements OnInit {
         })
        }
     })
+   
+  }
+  getSpouseDeatails(){
+    var data ={
+      "teacherId": this.tempTeacherId
+    }
+    debugger
+    this.outSideService.getSpouseDetailsV2(data).subscribe((res)=>{ 
+      console.log("-------spouse details----------------")
+      console.log(res);
+
+      if (res.response['spouse_name'] == '' || res.response['spouse_name'] ==null ) {
+        this.gkFilebenefit = false;
+        this.miscellaneousForm.patchValue({
+          spouseKvsYnD: '0'
+          })
+      }
+      else
+      {
+        this.gkFilebenefit = true;
+        this.spouseName=res.response['spouse_name'],
+        this.miscellaneousForm.patchValue({
+          spouseName:res.response['spouse_name'],
+          spouseStationName:res.response['spouse_station_name'],
+          spouseKvsYnD: '1'
+          })
+      }
+  },
+  error => {
+    Swal.fire({
+      'icon':'error',
+      'text':error.error
+    }
+    )
+  })
   }
   declarationtransferRelated6(event) {
     if (event.target.value == '1') {
@@ -461,7 +524,6 @@ export class TransferMiscellaneousComponent implements OnInit {
     }
   }
   documentUploadRelatedForm(index) {
-    debugger
     const formData = new FormData();
     if (this.fileToRelatedFormUpload != null) {
       formData.append('teacherId', this.tempTeacherId);
@@ -564,6 +626,59 @@ export class TransferMiscellaneousComponent implements OnInit {
     }
     this.fileToRelatedFormUpload = null;
   }
+
+  getDocumentByTeacherId() {
+    this.outSideService.fetchUploadedDoc(this.tempTeacherId ).subscribe((res) => {
+
+      this.documentUploadArray = res;
+      for (let i = 0; i < res.length; i++) {
+        if (res[i].docName == 'Medical_Certificate.pdf') {
+          this.fileUpgkFilemMedical=false;
+          this.deleteDocUpdate0 = false;
+          this.medicalDocName = res[i].docName;
+          this.medicalDocURLName = res[i].url;
+        }
+        if (res[i].docName == 'Board_examination_Proof.pdf') {
+          this.deleteDocUpdate1 = false;
+        }
+        if (res[i].docName == 'Disability_Certificate.pdf') {
+          this.fileUpcareGiver = false;
+          this.deleteDocUpdate2 = false;
+          this.disabilityCertiDocName = res[i].docName;
+          this.disabilityCertiDocURLName = res[i].url
+        }
+        if (res[i].docName == 'Differentially_Abled_Certificate.pdf') {
+          this.deleteDocUpdate3 = false;
+        }
+        if (res[i].docName == 'Spouse_Declaration.pdf') {
+          this.fileUpgkFilebenefit = false;
+          this.deleteDocUpdate0 = false;
+          this.spouseDeclarationDocUrlName = res[i].url
+        }
+        if (res[i].docName == 'Single_Parent_Declaration.pdf') {
+          this.fileUpspGround = false;
+          this.singleParentDocName = res[i].docName;
+          this.singleParentDocURLName = res[i].url;
+        }
+
+        if (res[i].docName == 'DFP_Declaration.pdf') {
+          this.fileUpdfpGround = false;
+          this.dFPDocName = res[i].docName;
+          this.dFPDocURLName = res[i].url;
+        }
+        if (res[i].docName == 'NJCM_RJCM_Declaration.pdf') {
+          this.fileUppositionHeld = false;
+          this.nJCMRJCMDocName = res[i].docName;
+          this.nJCMRJCMDocURLName = res[i].url;
+        }
+       
+        if (res[i].docName == 'Disability_Certificate.pdf') {
+          this.deleteDocUpdate2 = false;
+        }
+      }
+    })
+  }
+
   previousPage(){
     this.router.navigate(['/teacher/profileVerifiation']);
   }
@@ -574,7 +689,6 @@ export class TransferMiscellaneousComponent implements OnInit {
     this.miscellaneousForm.patchValue({
       inityear: '2024'
       })
-      debugger
     Swal.fire({
       'icon':'warning',
       'text': "Do you want to proceed ?",
@@ -589,7 +703,6 @@ export class TransferMiscellaneousComponent implements OnInit {
     ).then((isConfirm) => {
       if (isConfirm.value === true) {
         this.outSideService.saveTransProfile(this.miscellaneousForm.value).subscribe((res)=>{
-            debugger
             console.log(res)
             if (res.status == 1) {
               Swal.fire(

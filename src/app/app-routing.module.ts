@@ -21,6 +21,7 @@ import { TransferMiscellaneousComponent } from './kvs/kvs-teacher-transfer/trans
 import { TransferStationChoiceComponent } from './kvs/kvs-teacher-transfer/transfer-station-choice/transfer-station-choice.component';
 import { TransferDcCountComponent } from './kvs/kvs-teacher-transfer/transfer-dc-count/transfer-dc-count.component';
 import { TransferTcCountComponent } from './kvs/kvs-teacher-transfer/transfer-tc-count/transfer-tc-count.component';
+import { KvsTicketComponent } from './kvs/ticket/kvs-ticket/kvs-ticket.component';
 import { PreviewUndertakingComponent } from './kvs/kvs-teacher-transfer/preview-undertaking/preview-undertaking.component';
 
 const routes: Routes = [
@@ -47,7 +48,8 @@ const routes: Routes = [
       {path:'kvsteacherprofile', component:KvsTeacherProfileComponent},
       {path:'kvsteachertransfer', component:KvsTeacherTransferComponent},
       {path:'disclaimer', component:DisclaimerComponent},
-      {path:'changePassword', component:ChangePasswordComponent}
+      {path:'changePassword', component:ChangePasswordComponent},
+      {path:'kvsTicket', component:KvsTicketComponent}
       // {path:'appFlow',component:ApplicationFlowComponent}
     ]},  
 

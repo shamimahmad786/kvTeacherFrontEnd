@@ -2,7 +2,7 @@
     <img src="assets/images/kvs-logo.svg">
 </div>
 <div class="sidebar-inner">
-    <div class="accordion" id="accordionExample" >
+    <div class="accordion" id="accordionExample">
         <div class="accordion-item">
             <div class="accordion-header m-0">
                 <button class="accordion-button " type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
@@ -12,7 +12,7 @@
             <div id="collapseFour" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
                 <div class="accordion-body">
                     <ul>
-                        <li><a routerLinkActive="active"  routerLink="{{basicProfile == true ? '/teacher/teacherBasicProfile/' : '/same/route'}}"><i class="bi bi-dot"></i>Basic Details</a></li>
+                        <li><a routerLinkActive="active" routerLink="{{basicProfile == true ? '/teacher/teacherBasicProfile/' : '/same/route'}}"><i class="bi bi-dot"></i>Basic Details</a></li>
                         <li><a routerLinkActive="active" routerLink="{{workExperience == true ? '/teacher/teacherWorkExperience/' : '/same/route'}}"><i class="bi bi-dot"></i>Work Experience</a></li>
                         <li><a routerLinkActive="active" routerLink="{{PreviewConfirm == true ? '/teacher/teacherPreviewConfirm/' : '/same/route'}}"><i class="bi bi-dot"></i>Preview And Confirm</a></li>
                     </ul>
@@ -21,7 +21,7 @@
         </div>
     </div>
 
-    <div class="accordion-item"  style="border-top: 1px solid white;">
+    <div class="accordion-item" style="border-top: 1px solid white;">
         <div class="accordion-header m-0">
             <button class="accordion-button collapsed" type="button" routerLink="/teacher/kvsteachertransfer" data-bs-toggle="collapse" data-bs-target="#collapseSeven" aria-expanded="false" aria-controls="collapseSeven">
     <i class="bi bi-person-video3 me-2"></i>Transfer Management
@@ -39,26 +39,31 @@
         </div>
     </div>
 
-    <ul class="list" >
+    <ul class="list">
+
         <li>
-            <a routerLinkActive="active" routerLink="/teacher/kvsteachertransfer"  style="border-top: 1px solid;"> <i class="bi bi-pencil-square me-2"></i>Fill Preferred Stations</a>
+            <a routerLinkActive="active" routerLink="/teacher/kvsTicket" style="border-top: 1px solid;"> <i class="bi bi-pencil-square me-2"></i>Ticket</a>
+        </li>
+
+        <li>
+            <a routerLinkActive="active" routerLink="/teacher/kvsteachertransfer"> <i class="bi bi-pencil-square me-2"></i>Fill Preferred Stations</a>
         </li>
 
         <li>
             <a routerLinkActive="active" routerLink="/teacher/changePassword"> <i class="bi bi-file-text me-2"></i>Change Password</a>
         </li>
         <li>
-            <a class="" download  href="assets/user_manual.pdf"><i class="bi bi-file-earmark-pdf me-2" aria-hidden="true"></i>User Manual</a>
+            <a class="" download href="assets/user_manual.pdf"><i class="bi bi-file-earmark-pdf me-2" aria-hidden="true"></i>User Manual</a>
         </li>
         <li>
-            <a class="" download  href="assets/transferPolicy.pdf"><i class="bi bi-file-earmark-pdf me-2" aria-hidden="true"></i>Transfer Policy 2023</a>
+            <a class="" download href="assets/transferPolicy.pdf"><i class="bi bi-file-earmark-pdf me-2" aria-hidden="true"></i>Transfer Policy 2023</a>
         </li>
 
         <li>
-            <a class="" download  href="assets/Annexure.pdf"><i class="bi bi-file-earmark-pdf me-2" aria-hidden="true"></i>List of Annexure</a>
+            <a class="" download href="assets/Annexure.pdf"><i class="bi bi-file-earmark-pdf me-2" aria-hidden="true"></i>List of Annexure</a>
         </li>
         <li>
-            <a class="" download  href="assets/faq.pdf"><i class="bi bi-file-earmark-pdf me-2" aria-hidden="true"></i>FAQ</a>
+            <a class="" download href="assets/faq.pdf"><i class="bi bi-file-earmark-pdf me-2" aria-hidden="true"></i>FAQ</a>
         </li>
     </ul>
 </div>

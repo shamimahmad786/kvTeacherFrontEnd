@@ -1,0 +1,96 @@
+<div class="dashboard-main-content" style="min-height: 600px;">
+    <div class="dashboard-main-content__header">
+        <h1>Ticket Management System</h1>
+    </div>
+
+
+
+    <div class="dashboard-main-content-info p-4 ticket">
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="mb-3 row">
+                    <label for="inputPassword" class="col-sm-3 col-form-label">Ticket Initiate to</label>
+                    <div class="col-sm-9">
+                        <select class="form-select" aria-label="Default select example">
+                          <option selected>Select</option>
+                          <option value="1">One</option>
+                          <option value="2">Two</option>
+                          <option value="3">Three</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="mb-3 row">
+                    <label for="inputPassword" class="col-sm-3 col-form-label">Subject</label>
+                    <div class="col-sm-9">
+                        <input type="password" class="form-control" id="inputPassword">
+                    </div>
+                </div>
+                <div class="mb-3 row">
+                    <label for="inputPassword" class="col-sm-3 col-form-label">Description</label>
+                    <div class="col-sm-9">
+                        <div class="form-floating">
+                            <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea"></textarea>
+                            <label for="floatingTextarea">Comments</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="upload-card">
+                    <div class="mb-3 row" style="border-bottom:1px solid #e7e7e7; padding-bottom:20px;">
+                        <label class="col-sm-3 col-form-label">File Upload</label>
+                        <div class="col-sm-9">
+                            <input class="form-control" type="file" id="formFile">
+                            <span class="note">Note: File type JPG, PNG & PDF File size 2MB</span>
+                        </div>
+                    </div>
+                    <div class="d-flex justify-content-between" style="width:170px;">
+                        <p class="filename">Lorem-ipsum-dolor.pdf</p>
+                        <a href="#" title=""><img src="images/delete.png" width="16" height="16" alt=""></a>
+                    </div>
+                    <div class="d-flex justify-content-between" style="width:170px;">
+                        <p class="filename">Lorem-ipsum-dolor.pdf</p>
+                        <a href="#" title=""><img src="src/assets/images/delete.png" width="16" height="16" alt=""></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="d-flex justify-content-center mt-4">
+            <button type="button" class="btn btn-success">Submit</button>
+        </div>
+
+    </div>
+    <!--close main-content-info-->
+
+    <div class="dashboard-main-content-info p-4 mt-4">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th width="5%">SN.</th>
+                    <th>Ticket ID</th>
+                    <th>Subject</th>
+                    <th>Initiate Date</th>
+                    <th>Initiate To</th>
+                    <th>Status</th>
+                    <th>Resolved By</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>01</td>
+                    <td>16524</td>
+                    <td>Lorem Ipsum Dolor Amet</td>
+                    <td>21/12/2023</td>
+                    <td>-----</td>
+                    <td>In Process</td>
+                    <td></td>
+                    <td><button type="button" class="btn btn-success btn-sm">Revoke</button></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+</div>

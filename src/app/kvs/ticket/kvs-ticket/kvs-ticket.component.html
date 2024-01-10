@@ -2,35 +2,36 @@
     <div class="dashboard-main-content__header">
         <h1>Ticket Management System</h1>
     </div>
-
-
-
+    <nav aria-label="breadcrumb" class="mt-0">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a>Home</a></li>
+          <li class="breadcrumb-item"><a>Ticket Management System</a></li>
+        </ol>
+      </nav>
     <div class="dashboard-main-content-info p-4 ticket">
-
+        <form [formGroup]="kvsTicketForm" (ngSubmit)="submit()">
         <div class="row">
             <div class="col-md-6">
                 <div class="mb-3 row">
                     <label for="inputPassword" class="col-sm-3 col-form-label">Ticket Initiate to</label>
                     <div class="col-sm-9">
-                        <select class="form-select" aria-label="Default select example">
+                        <select class="form-select" formControlName="ticketInitiateTo" aria-label="Default select example">
                           <option selected>Select</option>
-                          <option value="1">One</option>
-                          <option value="2">Two</option>
-                          <option value="3">Three</option>
+                          <option value="School">School</option>
                         </select>
                     </div>
                 </div>
                 <div class="mb-3 row">
                     <label for="inputPassword" class="col-sm-3 col-form-label">Subject</label>
                     <div class="col-sm-9">
-                        <input type="password" class="form-control" id="inputPassword">
+                        <input type="text" formControlName="subject" class="form-control" id="inputPassword">
                     </div>
                 </div>
                 <div class="mb-3 row">
                     <label for="inputPassword" class="col-sm-3 col-form-label">Description</label>
                     <div class="col-sm-9">
                         <div class="form-floating">
-                            <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea"></textarea>
+                            <textarea class="form-control" formControlName="description" placeholder="Leave a comment here" id="floatingTextarea"></textarea>
                             <label for="floatingTextarea">Comments</label>
                         </div>
                     </div>
@@ -41,56 +42,255 @@
                     <div class="mb-3 row" style="border-bottom:1px solid #e7e7e7; padding-bottom:20px;">
                         <label class="col-sm-3 col-form-label">File Upload</label>
                         <div class="col-sm-9">
-                            <input class="form-control" type="file" id="formFile">
-                            <span class="note">Note: File type JPG, PNG & PDF File size 2MB</span>
+                            <div class="d-flex justify-content-start">
+                            <div>
+                                <input type="file" class="form-control" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04" aria-label="Upload" id="file" (blur)="handleFileInput($event.target.files, '4')" >
+                            </div>
+                            <button class="btn btn-secondary" style="height: 38px; margin-right: 10px;" type="button" id="inputGroupFileAddon04" (click)="documentUpload(4)">Upload</button>
+                            <span class="note">Note: File type JPG File size 5MB</span>
+                        </div>
+                        <span class="help-block text-danger" *ngIf="fileUpload">Please upload the file</span>
+                        </div>
+                        
+                    </div>
+                    <div *ngIf="isVisible" style="width:250px;"  >
+                    <div  class="d-flex justify-content-between" *ngFor="let data of image2; let i=index;">
+                        <p class="filename">{{data}}</p>
+                        <div>
+                            <a href="#" title="" class="me-2" >
+                                <a href="http://10.25.26.251:8015/api/ticket/downloadDocument?folderId={{randonNumber}}&fileName={{data}}" >  <i class="fa fa-eye eye-icon" aria-hidden="true"></i></a>
+                               
+                            </a>
+                            <i class="fa fa-trash delete-icon" (click)="deleteFile(data)" aria-hidden="true"></i>
                         </div>
                     </div>
-                    <div class="d-flex justify-content-between" style="width:170px;">
-                        <p class="filename">Lorem-ipsum-dolor.pdf</p>
-                        <a href="#" title=""><img src="images/delete.png" width="16" height="16" alt=""></a>
-                    </div>
-                    <div class="d-flex justify-content-between" style="width:170px;">
-                        <p class="filename">Lorem-ipsum-dolor.pdf</p>
-                        <a href="#" title=""><img src="src/assets/images/delete.png" width="16" height="16" alt=""></a>
-                    </div>
+                    </div> 
                 </div>
             </div>
         </div>
-
         <div class="d-flex justify-content-center mt-4">
-            <button type="button" class="btn btn-success">Submit</button>
+            <input [disabled]="(!kvsTicketForm.get('ticketInitiateTo').valid || !kvsTicketForm.get('subject').valid || !kvsTicketForm.get('description').valid  || documentUploadArray[4]?.Action != 'upload' ) " type="submit"  name="Next"   value="Submit" class="btn btn-success">
         </div>
-
+    </form>
     </div>
-    <!--close main-content-info-->
-
     <div class="dashboard-main-content-info p-4 mt-4">
-        <table class="table table-bordered">
-            <thead>
-                <tr>
-                    <th width="5%">SN.</th>
-                    <th>Ticket ID</th>
-                    <th>Subject</th>
-                    <th>Initiate Date</th>
-                    <th>Initiate To</th>
-                    <th>Status</th>
-                    <th>Resolved By</th>
-                    <th>Action</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>01</td>
-                    <td>16524</td>
-                    <td>Lorem Ipsum Dolor Amet</td>
-                    <td>21/12/2023</td>
-                    <td>-----</td>
-                    <td>In Process</td>
-                    <td></td>
-                    <td><button type="button" class="btn btn-success btn-sm">Revoke</button></td>
-                </tr>
-            </tbody>
+        <table mat-table 
+            [dataSource]="dataSource" matSort>
+            <ng-container matColumnDef="sno">
+                <th mat-header-cell *matHeaderCellDef> S.No. </th>
+                <td mat-cell *matCellDef="let element"> {{element.sno}}
+                </td>
+            </ng-container>
+            <ng-container matColumnDef="ticketId">
+                <th mat-header-cell *matHeaderCellDef> Ticket ID </th>
+                <td mat-cell *matCellDef="let element">
+                    {{element.ticketId}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="subject">
+                <th mat-header-cell *matHeaderCellDef> Subject </th>
+                <td mat-cell *matCellDef="let element">
+                    {{element.ticketSubject}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="InitiateDate">
+                <th mat-header-cell *matHeaderCellDef> Initiate Date </th>
+                <td mat-cell *matCellDef="let element">
+                    {{element.ticketdateTime}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="InitiateTo">
+                <th mat-header-cell *matHeaderCellDef> Initiate To </th>
+                <td mat-cell *matCellDef="let element">
+                    {{element.ticketToId}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="Status">
+                <th mat-header-cell *matHeaderCellDef> Status </th>
+                <td mat-cell *matCellDef="let element">
+                    {{element.ticketStatus}} </td>
+            </ng-container>
+
+
+            <ng-container matColumnDef="resolvedBy">
+                <th mat-header-cell *matHeaderCellDef> Resolved By </th>
+                <td mat-cell *matCellDef="let element">
+                    {{element.ticketResolvedBy}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="Action">
+                <th mat-header-cell *matHeaderCellDef> Action </th>
+                <td mat-cell *matCellDef="let element">
+                    <button type="button" *ngIf="element.ticketStatus=='In Process'"  class="btn btn-success btn-sm" (click)="openRevokemodal(element.ticketId)">Revoke</button>
+                    &nbsp;<button type="button" class="btn btn-success btn-sm" (click)="openPreviewmodal(element.ticketId)">Preview</button>
+                   </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+            <tr class="mat-row" *matNoDataRow>
+                <td class="mat-cell" colspan="8">No data Found</td>
+            </tr>
         </table>
+        <mat-paginator [pageSizeOptions]="[10,20, 25]"> </mat-paginator>
     </div>
 
+
+    <div mat-dialog-content>
+        <ng-template #PreviewBox let-modal style="min-width: 100%;">
+            <div class="modal-header">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="clearfix">
+                            <div class="float-left">
+                                <h2 class="mb-0 text-green">Ticket Preview </h2>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="" style="min-width: 100%; max-height: 1000px;">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <table class="table table-bordered w-100">
+                                <thead>
+                                    <tr style="background-color:#7492cb;">
+                                        <th colspan="7" class="text-center text-white">Ticket ( {{ticketDetails?.ticketId}} )</th>
+                                    </tr>
+                                    <tr style="background-color:#E5EEFF;">
+                                        <th >Ticket Subject</th>
+                                        <th >Ticket Description </th>
+                                        <th >School Remarks</th>
+                                        <th >Teacher Remarks</th>
+                                        <th>Ticket Status</th>
+                                        <th >Ticket Genration Date</th>
+                                        <th >Ticket Resolve Date</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>{{ticketDetails?.ticketSubject}}</td>
+                                        <td>{{ticketDetails?.ticketDescription}}</td>
+                                        <td>{{ticketDetails?.schoolRemarks}}</td>
+                                        <td>{{ticketDetails?.teacherRemarks}}</td>
+                                        <td>{{ticketStatusForPreview}}</td>
+                                        <td>{{ticketDetails?.ticketdateTime}}</td>
+                                        <td>{{ticketDetails?.ticketResolveDateTime}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="" style="min-width: 100%; max-height: 1000px;">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <table class="table table-bordered w-100">
+                                <thead>
+                                    <tr style="background-color:#7492cb;">
+                                        <th colspan="7" class="text-center text-white">Document details</th>
+                                    </tr>
+                                    <tr style="background-color:#E5EEFF;">
+                                        <th>S.No</th>
+                                        <th>Document</th>
+                                        <th>Download</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr style="background-color:white;" *ngFor="let data of docList; let i=index;">
+                                        <td>{{i+1}}</td>
+                                        <td>{{data}}</td>
+                                        <td><a href="http://10.25.26.251:8015/api/ticket/downloadDocument?folderId={{ticketDetails?.folderId}}&fileName={{data}}" target="_blank"> <img src="/assets/images/download.png"></a>
+                                            </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="p-3" style="text-align: right;">
+                <button type="button" class="btn btn-danger btn-sm" style="margin-left: 3px;" (click)="modal.dismiss('Cross click')">Cancel</button>
+            </div>
+        </ng-template>
+    </div>
+
+    <div mat-dialog-content>
+        <ng-template #RevokeBox let-modal style="min-width: 100%;">
+            <div class="modal-header">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="clearfix">
+                            <div class="float-left">
+                                <h2 class="mb-0 text-green">Ticket Revoke </h2>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="" >
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-12 ">
+                            <table class="table table-bordered w-100 ">
+                                <thead>
+                                    <tr style="background-color:#7492cb;">
+                                        <th colspan="7" class="text-center text-white">Ticket ( {{ticketDetails?.ticketId}} )</th>
+                                    </tr>
+                                    <tr style="background-color:#E5EEFF;">
+                                        <th >Ticket Subject</th>
+                                        <th >Ticket Description </th>
+                                        <th >School Remarks</th>
+                                        <th >Teacher Remarks</th>
+                                        <th>Ticket Status</th>
+                                        <th >Ticket Genration Date</th>
+                                        <th >Ticket Resolve Date</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>{{ticketDetails?.ticketSubject}}</td>
+                                        <td>{{ticketDetails?.ticketDescription}}</td>
+                                        <td>{{ticketDetails?.schoolRemarks}}</td>
+                                        <td>{{ticketDetails?.teacherRemarks}}</td>
+                                        <td>{{ticketStatusForRevoke}}</td>
+                                        <td>{{ticketDetails?.ticketdateTime}}</td>
+                                        <td>{{ticketDetails?.ticketResolveDateTime}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="" style="min-width: 100%; max-height: 1000px;">
+                <div class="container-fluid">
+                    <form id="msform" class="msform" [formGroup]="revokeForm" (ngSubmit)="revokeFormSubmit()">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class=" m-3 p-3">
+                                    <div class="row">
+
+                                        <div class="col-md-6">
+                                            <h4 class="titleSet"> Remark :</h4>
+                                            <textarea class="form-control" formControlName="revokeRemarks" placeholder="Leave a remark here" id="floatingTextarea"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="p-3" style="text-align: center;">
+                                        <button type="button" class="btn btn-danger btn-sm" style="margin-left: 3px;" (click)="modal.dismiss('Cross click')">Cancel</button>
+
+                                        <input [disabled]="!revokeForm.get('revokeRemarks').valid " type="submit" id="submit1" value="Submit" class="action-button" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </ng-template>
+    </div>
 </div>

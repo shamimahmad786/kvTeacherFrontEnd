@@ -27,7 +27,8 @@ export class KvsTicketComponent implements OnInit {
   ticketList: any=[];
   imageName: any=[];
   isVisible: boolean = false;
-  fileNameWithoutExt: string;
+  fileNameWithoutExt: any;
+  uploadMessage:any;
   imageName1: any;
   image2: any;
   docList: any;
@@ -353,6 +354,11 @@ this.teacherName=JSON.parse(sessionStorage.getItem("authTeacherDetails"))?.appli
 
   //   }
   submit(){
+    debugger
+    this.uploadMessage='';
+    if(this.randonNumber=='' || this.randonNumber==null || this.randonNumber=='undefined' || this.randonNumber==undefined)  {
+    this.uploadMessage="without Uploading Document?"
+    } 
   var data={
       "teacherId": this.tempTeacherId,
       "teacherEmployeeCode": this.loginUserNameForChild,
@@ -370,7 +376,7 @@ this.teacherName=JSON.parse(sessionStorage.getItem("authTeacherDetails"))?.appli
   }
     Swal.fire({
       'icon':'warning',
-      'text': "Do you want to proceed ?",
+      'text': "Do you want to proceed "+' '+this.uploadMessage,
       'allowEscapeKey': false,
       'allowOutsideClick': false,
       'showCancelButton': true,
@@ -383,6 +389,12 @@ this.teacherName=JSON.parse(sessionStorage.getItem("authTeacherDetails"))?.appli
     if (isConfirm.value === true) {
         this.outSideService.initiateTicket(data).subscribe((res)=>{
           if(res){
+            this.randonNumber='';
+            this.kvsTicketForm.patchValue({
+              ticketInitiateTo: '',
+              subject: '',
+              description: '',
+          })
             Swal.fire(
               'Ticket raised successfully!',
               '',

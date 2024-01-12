@@ -69,7 +69,7 @@
             </div>
         </div>
         <div class="d-flex justify-content-center mt-4">
-            <input [disabled]="(!kvsTicketForm.get('ticketInitiateTo').valid || !kvsTicketForm.get('subject').valid || !kvsTicketForm.get('description').valid  || documentUploadArray[4]?.Action != 'upload' ) " type="submit"  name="Next"   value="Submit" class="btn btn-success">
+            <input [disabled]="(!kvsTicketForm.get('ticketInitiateTo').valid || !kvsTicketForm.get('subject').valid || !kvsTicketForm.get('description').valid  ) " type="submit"  name="Next"   value="Submit" class="btn btn-success">
         </div>
     </form>
     </div>
@@ -205,7 +205,7 @@
                                         <td>{{i+1}}</td>
                                         <td>{{data}}</td>
                                         <td><a href="http://10.25.26.251:8015/api/ticket/downloadDocument?folderId={{ticketDetails?.folderId}}&fileName={{data}}" target="_blank"> <img src="/assets/images/download.png"></a>
-                                            </td>
+                                        </td>
                                     </tr>
                                 </tbody>
                             </table>

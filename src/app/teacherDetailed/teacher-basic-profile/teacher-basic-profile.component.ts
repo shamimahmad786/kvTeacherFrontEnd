@@ -702,14 +702,20 @@ export class TeacherBasicProfileComponent implements OnInit {
     }
   }
   getDocumentByTeacherId() {
+    
     this.outSideService.fetchUploadedDoc(this.emplyeeData['teacherId']).subscribe((res) => {
-      this.documentUploadArray = res;
-debugger
       for (let i = 0; i < res.length; i++) {
-        if (res[i].docName == 'Physically_Handicap_Certificate.pdf') {
-          this.fileUpload = false;
-        }   
+        var token = JSON.parse(sessionStorage.getItem('authTeacherDetails'))?.token
+        if(JSON.stringify(res[i]) !="{}" && res[i]?.url !='undefined' && res[i]?.url.length>0){
+          res[i].url=res[i].url+"&docId="+token+"&username="+JSON.parse(sessionStorage.getItem("authTeacherDetails")).user_name;;
       }
+      if (res[i].docName == 'Physically_Handicap_Certificate.pdf') {
+        this.fileUpload = false;
+      }
+      
+      }
+      this.documentUploadArray = res;
+
     })
   }
   deleteDocumentUploaded(documentName) {

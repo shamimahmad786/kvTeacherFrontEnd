@@ -128,7 +128,7 @@ this.teacherName=JSON.parse(sessionStorage.getItem("authTeacherDetails"))?.appli
       } else {
         this.fileToUpload = null;
         Swal.fire(
-          'File size allowed upto 500KB only !',
+          'File size allowed upto 5MB only !',
           '',
           'error'
         )

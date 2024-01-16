@@ -33,6 +33,7 @@
     "jquery": "^3.6.0",
     "jspdf": "^2.5.1",
     "jspdf-autotable": "^3.5.23",
+    "md5": "^2.3.0",
     "moment": "^2.29.1",
     "ngx-translate-multi-http-loader": "^3.0.0",
     "pdfmake": "^0.2.4",

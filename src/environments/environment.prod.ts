@@ -49,7 +49,7 @@ export const environment = {
   LOGIN_URL_INDIVIDUAL: 'http://10.25.26.251:8385/meauth/oauth/authorize?response_type=code&user_oauth_approval=true&client_id=teachermodule&redirect_uri=http://10.25.26.10:6200/teacher/profile&scopes=read',
   AUTH_GUARD_HREF1:'http://10.25.26.10:4200',
   BASE_URL_DATA_MASTER1:'https://demopgi.udiseplus.gov.in/MOE-RAD-TEACHER-V1/unee-api/v1/master/',
-
+  BASE_URL_DATA_API_TICKET:'https://demopgi.udiseplus.gov.in/MOE-RAD-TICKET/api/ticket/',
 
   // LOGIN_URL_JWT:'https://demopgi.udiseplus.gov.in/MOE-RAD-TEACHER-V1/api/login/',
   // BASE_URL_DATA: 'https://demopgi.udiseplus.gov.in/MOE-RAD-TEACHER-V1/api/teacher/',

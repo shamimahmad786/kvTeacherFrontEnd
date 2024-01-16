@@ -20,7 +20,18 @@ export class AuthService {
      return this.http.post<any>(environment.LOGIN_URL_JWT + "sign-in", userDto,{ headers });
   
   }
-
+  fetchOtp(data:any){
+    var headers = new HttpHeaders({
+      'Content-Type': 'text/plain; charset=utf-8',
+    }); 
+    return this.http.post<any>(environment.LOGIN_URL_JWT + "getOtpForAuthentication", data,{headers});
+  }
+  otpLogin(data:any){
+    var headers = new HttpHeaders({
+      'Content-Type': 'text/plain; charset=utf-8',
+    }); 
+    return this.http.post<any>(environment.LOGIN_URL_JWT + "otpSignin", data,{headers});
+  }
 //   getRoles()
 //   {
 //     return this.http.get<any>(environment.user_service_url + "/getRole")

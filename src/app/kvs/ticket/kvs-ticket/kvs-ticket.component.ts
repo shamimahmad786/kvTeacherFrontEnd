@@ -59,6 +59,7 @@ this.teacherName=JSON.parse(sessionStorage.getItem("authTeacherDetails"))?.appli
       'ticketInitiateTo':new FormControl('', Validators.required),
       'subject': new FormControl('', Validators.required),
       'description': new FormControl('', Validators.required),
+      'fileUpload': new FormControl(''),
     });
     this.revokeForm = new FormGroup({
       revokeRemarks: new FormControl('', Validators.required),
@@ -151,6 +152,14 @@ this.teacherName=JSON.parse(sessionStorage.getItem("authTeacherDetails"))?.appli
   documentUpload(index) {
     debugger
     this.fileUpload = true;
+    if(this.fileNameWithoutExt==''){
+      Swal.fire(
+        'Select JPG to be uploaded !',
+        '',
+        'error'
+      )
+      return false;
+    }
     const formData = new FormData();
     if (this.fileToUpload != null) {
       formData.append('teacherId', this.tempTeacherId);
@@ -389,11 +398,14 @@ this.teacherName=JSON.parse(sessionStorage.getItem("authTeacherDetails"))?.appli
     if (isConfirm.value === true) {
         this.outSideService.initiateTicket(data).subscribe((res)=>{
           if(res){
+            this.fileUpload = true;
             this.randonNumber='';
+            this.fileNameWithoutExt='';
             this.kvsTicketForm.patchValue({
               ticketInitiateTo: '',
               subject: '',
               description: '',
+              fileUpload: '',
           })
             Swal.fire(
               'Ticket raised successfully!',

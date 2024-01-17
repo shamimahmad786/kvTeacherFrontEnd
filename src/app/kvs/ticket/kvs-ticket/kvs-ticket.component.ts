@@ -30,7 +30,7 @@ export class KvsTicketComponent implements OnInit {
   fileNameWithoutExt: any;
   uploadMessage:any;
   imageName1: any;
-  image2: any;
+  image2: any[] = [];
   docList: any;
   ticketDetails: any;
   ticketId: any;
@@ -194,6 +194,7 @@ this.teacherName=JSON.parse(sessionStorage.getItem("authTeacherDetails"))?.appli
   }
   getDocumentByFolderId(){
     var data={"folderId": this.randonNumber}
+    this.image2=[];
     this.imageName=[];
     this.outSideService.getDocumentByFolderId(data).subscribe((res) => {
      this.image2=res;
@@ -401,6 +402,7 @@ this.teacherName=JSON.parse(sessionStorage.getItem("authTeacherDetails"))?.appli
             this.fileUpload = true;
             this.randonNumber='';
             this.fileNameWithoutExt='';
+            this.image2=[];
             this.kvsTicketForm.patchValue({
               ticketInitiateTo: '',
               subject: '',

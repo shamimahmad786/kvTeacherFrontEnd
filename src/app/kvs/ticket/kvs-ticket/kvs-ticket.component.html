@@ -13,7 +13,7 @@
         <div class="row">
             <div class="col-md-6">
                 <div class="mb-3 row">
-                    <label for="inputPassword" class="col-sm-3 col-form-label">Ticket Initiate to</label>
+                    <label for="inputPassword" class="col-sm-3 col-form-label">Ticket Initiate to <span class="required-asterisk">*</span></label>
                     <div class="col-sm-9">
                         <select class="form-select" formControlName="ticketInitiateTo" aria-label="Default select example">
                         
@@ -22,13 +22,13 @@
                     </div>
                 </div>
                 <div class="mb-3 row">
-                    <label for="inputPassword" class="col-sm-3 col-form-label">Subject</label>
+                    <label for="inputPassword" class="col-sm-3 col-form-label">Subject <span class="required-asterisk">*</span></label>
                     <div class="col-sm-9">
                         <input type="text" formControlName="subject" class="form-control" id="inputPassword">
                     </div>
                 </div>
                 <div class="mb-3 row">
-                    <label for="inputPassword" class="col-sm-3 col-form-label">Description</label>
+                    <label for="inputPassword" class="col-sm-3 col-form-label">Description <span class="required-asterisk">*</span></label>
                     <div class="col-sm-9">
                         <div class="form-floating">
                             <textarea class="form-control" formControlName="description" placeholder="Leave a comment here" id="floatingTextarea"></textarea>
@@ -58,10 +58,9 @@
                     <div  class="d-flex justify-content-between" *ngFor="let data of image2; let i=index;">
                         <p class="filename">{{data}}</p>
                         <div>
-                            <a href="#" title="" class="me-2" >
-                                <a href="http://10.25.26.251:8015/api/ticket/downloadDocument?folderId={{randonNumber}}&fileName={{data}}" >  <i class="fa fa-eye eye-icon" aria-hidden="true"></i></a>
-                               
-                            </a>
+
+                                <i   class="me-2" (click)="downloadDocument(data,randonNumber)" class="fa fa-eye eye-icon" aria-hidden="true"></i>
+                     
                             <i class="fa fa-trash delete-icon" (click)="deleteFile(data)" aria-hidden="true"></i>
                         </div>
                     </div>
@@ -205,8 +204,8 @@
                                     <tr style="background-color:white;" *ngFor="let data of docList; let i=index;">
                                         <td>{{i+1}}</td>
                                         <td>{{data}}</td>
-                                        <td><a href="http://10.25.26.251:8015/api/ticket/downloadDocument?folderId={{ticketDetails?.folderId}}&fileName={{data}}" target="_blank"> <img src="/assets/images/download.png"></a>
-                                        </td>
+                                        <td><button (click)="downloadDocument(data,ticketDetails['folderId'])"> <img src="/assets/images/download.png"></button></td>
+                                        
                                     </tr>
                                 </tbody>
                             </table>

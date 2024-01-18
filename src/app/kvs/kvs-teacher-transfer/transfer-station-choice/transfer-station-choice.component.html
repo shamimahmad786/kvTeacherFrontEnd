@@ -1,60 +1,56 @@
 <div class="dashboard-main-content" style="min-height: 600px;">
     <app-transfer-progresion-bar></app-transfer-progresion-bar>
 <div class="dashboard-main-content-info  p-4 mt-3">   
-    <div class="row">
-        <div class="col-lg-12">
-            <div class="row">
-                <div class="col-4">
-                    <h2 class="mb-0">Preferred Station For Transfer/Displacement</h2>
-                </div>
-             
-            </div>
-            <div  class="container-fluid">
-            <div class="row">
-            <div class="col-md-12">
-           <div class="shadow-sm bg-white rounded">
+    <h2 class="form-heading mb-3">Preferred Station For Transfer/Displacement</h2>
 
     <form id="msform" class="msform" [formGroup]="stationChoiceForm" (ngSubmit)="onSubmit()">
-        <div class="card" style="height:95%; border-radius: 1%;padding: 1%;">
+        <div class="card-transfr mt-2">
         <div class="row">
-            <div class="col-sm-3">
-                <h3 class="youWant"> Do you want to apply for transfer?</h3> </div>
-                <div class="col-sm-1"> 
-                    <div class="form-check form-check-inline ms-4" *ngIf="!onlyDcFill">
-                        <input class="form-check-input" value="1" name="applyTransferYn"
-                            id="applyTransferYn" formControlName="applyTransferYn"
-                            [checked]="empTransferradioButton == '1'" type="radio"
-                            (click)="manageChoice(1)" />
-                        <label class="form-check-label fw-bold">Yes</label>
-                    </div>
-               </div>
-               <div class="col-sm-1"> 
-                <div class="form-check form-check-inline ms-4" *ngIf="onlyDcFill">
+            <div class="col-sm-3 text-start">
+                <h3 class="youWant mb-0 fw-bold"> Do you want to apply for transfer?</h3> 
+            </div> 
+                    
+            <div class="col-sm-9 text-start">
+                <div class="form-check form-check-inline" *ngIf="!onlyDcFill">
+                    <input class="form-check-input" value="1" name="applyTransferYn"
+                        id="applyTransferYn" formControlName="applyTransferYn"
+                        [checked]="empTransferradioButton == '1'" type="radio"
+                        (click)="manageChoice(1)" />
+                    <label class="form-check-label fw-bold">Yes</label>
+                </div>
+
+                <div class="form-check form-check-inline" *ngIf="onlyDcFill">
                     <input class="form-check-input" value="1" name="applyTransferYn"
                         id="applyTransferYn" formControlName="applyTransferYn"
                         [checked]="empTransferradioButton == '1'" type="radio"
                         (click)="manageChoice(1)"  disabled/>
                     <label class="form-check-label fw-bold">Yes</label>
                 </div>
-           </div>
-                <div class="col-sm-1">
-                    <input class="form-check-input" value="0" name="applyTransferYn"
-                    id="applyTransferYn" formControlName="applyTransferYn"
-                    [checked]="empTransferradioButton == '0'" type="radio"
-                    (click)="manageChoice(0)" >
-                <label class="form-check-label fw-bold">No</label>
+                <div class="form-check form-check-inline">
+                <input class="form-check-input " value="0" name="applyTransferYn"
+                id="applyTransferYn" formControlName="applyTransferYn"
+                [checked]="empTransferradioButton == '0'" type="radio"
+                (click)="manageChoice(0)" >
+            <label class="form-check-label fw-bold">No</label>
+            </div>
                 </div>
+
+
+            
+               
                 <div class="form-check form-check-inline" *ngIf="onlyDcFill">
                     <span
                     class="required-asterisk">You are not eligible for the request transfer due to insufficient active stay as per transfer policy.</span>
                 </div>
-            <hr>
         </div>
-        <div class="row ">
-            <div class="col-md-6">
-                <h4 class="titleSet">Preferred Station (I) <span
-                    class="required-asterisk">*</span></h4>
-                <div class="input-group mb-3">
+    </div>
+<div class="row mt-4">
+    <div class="col-md-6">
+        <div class="mb-3 row">
+            <label for="inputPassword" class="col-sm-4 col-form-label text-center fw-bold">Preferred Station (I)<span
+                class="required-asterisk">*</span></label>
+            <div class="col-sm-8 text-start">
+                <div class="input-group">
                     <input type="text" class="input-group-text input"
                         id="choiceKv1StationCode" formControlName="choiceKv1StationCode"
                         name="choiceKv1StationCode" disabled
@@ -76,14 +72,15 @@
                             (click)="selectSchool('1')"></i></button>
                 </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-md-6">
-                <h4 class="titleSet">Preferred Station (II) <span
-                        class="required-asterisk">*</span></h4>
-                    
-                        <div class="input-group mb-3">
-                            <input type="text" class="input-group-text input"
+          </div>
+    </div>
+    <div class="col-md-6">
+        <div class="mb-3 row">
+            <label for="inputPassword" class="col-sm-4 col-form-label text-center fw-bold">Preferred Station (II)<span
+                class="required-asterisk">*</span></label>
+            <div class="col-sm-8 text-start">
+                <div class="input-group">
+                    <input type="text" class="input-group-text input"
                                 id="choiceKv2StationCode" formControlName="choiceKv2StationCode"
                                 name="choiceKv2StationCode" disabled
                                 style="width:70px; height:33px;">
@@ -101,15 +98,17 @@
                                <button class="btn btn-sm btn-outline-secondary btn-bdr-color input-group-text"type="button" id="button-addon2"><i
                                class="fa fa-search SearchIconSet"
                               (click)="selectSchool('2')"></i></button>
-                       </div>        
-               </div>
-        </div>
-        <div class="row">
-            <div class="col-md-6">
-                <h4 class="titleSet">Preferred Station (III) <span
-                    class="required-asterisk">*</span></h4>
-                    <div class="input-group mb-3">
-                        <input type="text" class="input-group-text input"
+                </div>
+            </div>
+          </div>
+    </div>
+    <div class="col-md-6">
+        <div class="mb-3 row">
+            <label for="inputPassword" class="col-sm-4 col-form-label text-center fw-bold">Preferred Station (III)<span
+                class="required-asterisk">*</span></label>
+            <div class="col-sm-8 text-start">
+                <div class="input-group">
+                    <input type="text" class="input-group-text input"
                             id="choiceKv3StationCode" formControlName="choiceKv3StationCode"
                             name="choiceKv3StationCode" disabled
                             style="width:70px; height:33px;">
@@ -129,14 +128,16 @@
                             type="button" id="button-addon2"><i
                                 class="fa fa-search SearchIconSet"
                                 (click)="selectSchool('3')"></i></button>
-                    </div>
+                </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-md-6">
-                <h4 class="titleSet">Preferred Station (IV) <span
-                    class="required-asterisk">*</span></h4>
-                <div class="input-group mb-3">
+          </div>
+    </div>
+    <div class="col-md-6">
+        <div class="mb-3 row">
+            <label for="inputPassword" class="col-sm-4 col-form-label text-center fw-bold">Preferred Station (IV)<span
+                class="required-asterisk">*</span></label>
+            <div class="col-sm-8 text-start">
+                <div class="input-group">
                     <input type="text" class="input-group-text input"
                         id="choiceKv4StationCode" formControlName="choiceKv4StationCode"
                         name="choiceKv4StationCode" disabled
@@ -158,12 +159,14 @@
                             (click)="selectSchool('4')"></i></button>
                 </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-md-6">
-                <h4 class="titleSet">Preferred Station (V) <span
-                    class="required-asterisk">*</span></h4>
-                <div class="input-group mb-3">
+          </div>
+    </div>
+    <div class="col-md-6">
+        <div class="mb-3 row">
+            <label for="inputPassword" class="col-sm-4 col-form-label text-center fw-bold">Preferred Station (V)<span
+                class="required-asterisk">*</span></label>
+            <div class="col-sm-8 text-start">
+                <div class="input-group">
                     <input type="text" class="input-group-text input"
                         id="choiceKv5StationCode" formControlName="choiceKv5StationCode"
                         name="choiceKv5StationCode" disabled
@@ -185,9 +188,12 @@
                             (click)="selectSchool('5')"></i></button>
                 </div>
             </div>
-        </div>
-        <h3 class="mb-0"> <b>Note :</b> All are Mandatory <span class="required-asterisk">*</span></h3>
+          </div>
     </div>
+    <div class="col-md-6"></div>
+</div> 
+<h3 class="mb-0 text-start border-top pt-2"> <strong>Note :</strong> All are Mandatory <span class="required-asterisk">*</span></h3>
+
 
 <div class="mt-2 d-flex align-items-center justify-content-between " >
 <div class="button-back mt-2">
@@ -200,13 +206,6 @@ type="submit"  class="me-2 add-teacher"  value="Save & Next" />
 <i class="fa fa-floppy-o" aria-hidden="true"></i> </div>
 </div>
 </form>
-
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
 </div>
 
 <div mat-dialog-content>

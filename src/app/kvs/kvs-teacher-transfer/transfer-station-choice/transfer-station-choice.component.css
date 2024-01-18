@@ -238,6 +238,16 @@ ul.ulLeft li {
   font-size: 1.2em;
 }
 
+.card-transfr {
+  border: 1px solid #ccc;
+  padding: 10px;
+}
+
+.form-heading {
+  font-size: 24px;
+  font-weight: 500;
+}
+
 
 
 

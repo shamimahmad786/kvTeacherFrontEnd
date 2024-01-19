@@ -243,7 +243,6 @@ this.teacherName=JSON.parse(sessionStorage.getItem("authTeacherDetails"))?.appli
   });
   }
   openPreviewmodal(ticketid:any) {
-    debugger
     var data = {
       "ticketId":ticketid
     }
@@ -299,6 +298,20 @@ this.teacherName=JSON.parse(sessionStorage.getItem("authTeacherDetails"))?.appli
       )
     })
   this.modalService.open(this.RevokeBox, { size: 'xl', backdrop: 'static', keyboard: false ,centered: true});
+  }
+  downloadDocument(data:any,folderIds:any) {
+    const folderId = folderIds;
+    const fileName = data;
+    this.outSideService.downloadDocument(folderId, fileName).subscribe((blob: Blob) => {
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = fileName;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      window.URL.revokeObjectURL(url);
+    });
   }
   revokeFormSubmit(){
     var data={

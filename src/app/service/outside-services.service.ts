@@ -772,12 +772,14 @@ export class OutsideServicesService {
     }); 
       return this._http.post<any>(environment.BASE_URL_DATA_API_TICKET + "resolveTicketByTicketId",  data,{headers});
   }
-  downloadDocument(data){
+  downloadDocument(folderId: string, fileName: string): Observable<Blob> {
+    var baseUrl = environment.BASE_URL_DATA_API_TICKET;
     var token = JSON.parse(sessionStorage.getItem('authTeacherDetails'))?.token
     var headers = new HttpHeaders({
       'Authorization':token, 
     }); 
-      return this._http.post<any>(environment.BASE_URL_DATA_API_TICKET + "downloadDocument",  data,{headers});
+    const url = `${baseUrl}downloadDocument?folderId=${folderId}&fileName=${fileName}`;
+    return this._http.get(url, { responseType: 'blob' });
   }
 
 

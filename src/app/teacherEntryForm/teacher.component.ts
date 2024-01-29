@@ -59,7 +59,7 @@ export class TeacherComponent implements OnInit {
         dashboardRemainingPart["style"].marginLeft = "320px";
         openSideBar["style"].display = "none";
     });
-    
+    debugger
       this.applicationId = environment.applicationId;
       for (let i = 0; i < JSON.parse(sessionStorage.getItem("authTeacherDetails"))?.applicationDetails.length; i++) {
         console.log(JSON.parse(sessionStorage.getItem("authTeacherDetails")));

@@ -21,6 +21,8 @@ export class TeacherComponent implements OnInit {
   showStation:boolean = false;
   showSchool:boolean = false;
   username: any;
+  userFistName: any;
+  userLastName:any;
   loginUserNameForChild: any;
   constructor(private router: Router) {
 
@@ -64,6 +66,8 @@ export class TeacherComponent implements OnInit {
       for (let i = 0; i < JSON.parse(sessionStorage.getItem("authTeacherDetails"))?.applicationDetails.length; i++) {
         console.log(JSON.parse(sessionStorage.getItem("authTeacherDetails")));
         this.username=JSON.parse(sessionStorage.getItem("authTeacherDetails"))?.applicationDetails[i].firstname + " "+ JSON.parse(sessionStorage.getItem("authTeacherDetails"))?.applicationDetails[i].lastname;
+        this.userFistName = JSON.parse(sessionStorage.getItem("authTeacherDetails"))?.applicationDetails[i].firstname;
+        this.userLastName = JSON.parse(sessionStorage.getItem("authTeacherDetails"))?.applicationDetails[i].lastname;
         this.loginUserNameForChild=JSON.parse(sessionStorage.getItem("authTeacherDetails")).user_name;
         this.kvicons += JSON.parse(sessionStorage.getItem("authTeacherDetails"))?.applicationDetails[i].application_id + ",";
         this.businessUnitTypeId = JSON.parse(sessionStorage.getItem("authTeacherDetails"))?.applicationDetails[i].business_unit_type_id;

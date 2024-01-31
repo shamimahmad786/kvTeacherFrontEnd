@@ -9,14 +9,14 @@
               <div class="header-top">
                   <div class="container-flued d-flex align-items-center justify-content-between">
                       <ul class="list-unstyled d-flex align-items-center mb-0 left-list mob-header">
-                          <li><a>भारत सरकार
+                          <li  style="pointer-events: None !important; "><a>भारत सरकार
                         <span>Government of India</span></a></li>
-                          <li><a >
+                          <li  style="pointer-events: None !important; "><a >
                         शिक्षा मंत्रालय<span>
                         Ministry of Education</span></a></li>
 
                       </ul>
-                      <ul class="list-unstyled d-flex align-items-center mb-0 me-3">
+                      <!-- <ul class="list-unstyled d-flex align-items-center mb-0 me-3">
                           <li class="d-none d-lg-block">
                               <a><i class="bi bi-house"></i>Home</a>
                           </li>
@@ -33,7 +33,7 @@
                         Screen Reader Access</a>
                           </li>
 
-                      </ul>
+                      </ul> -->
                   </div>
               </div>
               <!--close top-header-->
@@ -46,8 +46,9 @@
                       <!-- <div class="dashboard-header--notification">
                           <i class="bi bi-person"></i>
                       </div> -->
-                      <div class="dashboard-header--details">
-                          <p class="dashboard-header--hello">{{username}}</p>
+                      <div class="dashboard-header--details" >
+                          <p class="dashboard-header--hello" *ngIf="userLastName == null">{{userFistName}}</p>
+                          <p class="dashboard-header--hello" *ngIf="userLastName != null">{{username}}</p>
                           <p class="dashboard-header--name">{{loginUserNameForChild}}</p>
 
                       </div>

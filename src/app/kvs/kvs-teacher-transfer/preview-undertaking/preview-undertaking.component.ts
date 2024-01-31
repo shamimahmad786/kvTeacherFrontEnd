@@ -113,6 +113,21 @@ export class PreviewUndertakingComponent implements OnInit {
      }
     })
   }
+
+  downloadDocument(data:any,folderIds:any) {
+    const folderId = folderIds;
+    const fileName = data;
+    this.outSideService.downloadDocument(folderId, fileName).subscribe((blob: Blob) => {
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = fileName;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      window.URL.revokeObjectURL(url);
+    });
+  }
   getTcDcPointByTeacherIdAndInityearV2(){
     var data ={
       "teacherId": this.tempTeacherId,

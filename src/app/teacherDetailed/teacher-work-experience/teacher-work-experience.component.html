@@ -19,7 +19,7 @@
                         <th width="20%"> KV/RO/ZIET/HQ</th>
                         <th>From</th>
                         <th>To</th>
-                        <th style="width: 182px; "> Position Held</th>
+                        <th style="position: relative; width:209px; padding-right: 22px !important"> Position Held</th>
                         <th style="width: 209px;">Appointed for Subject</th>
                         <th>Transfer Ground</th>
                         <!-- <th style="width: 140px; ">
@@ -47,17 +47,17 @@
                                 Enter KV/RO/ZIET/HQ !</span>
                         </td>
                         <td>
-                            <mat-form-field style="width: 100%;">
-                                <input matInput [matDatepicker]="si" id="wordStartDate-{{i}}" class="form-control" class="form-control form-control-sm " [max]="maxDate" name="workStartDate" (dateChange)="experienceDataManagement($event,i,1)" formControlName="workStartDate" style="text-transform: none">
+                            <mat-form-field style="width: 60%;">
+                                <input matInput [matDatepicker]="si" disabled  id="wordStartDate-{{i}}" class="form-control"  class="form-control form-control-sm " [max]="maxDate" name="workStartDate" (dateChange)="experienceDataManagement($event,i,1)" formControlName="workStartDate" style="text-transform: none; color:black">
                                 <mat-datepicker-toggle matSuffix [for]="si"></mat-datepicker-toggle>
                                 <mat-datepicker #si></mat-datepicker>
                             </mat-form-field>
                             <span class="help-block text-danger" *ngIf="quantity.controls.workStartDate.errors?.required">
                                 Select Work Start Date!</span>
                         </td>
-                        <td>
-                            <mat-form-field style="width: 100%;">
-                                <input matInput [matDatepicker]="ei" id="wordEndDate-{{i}}" class="form-control" class="form-control form-control-sm " [max]="maxDate" name="workStartDate" (dateChange)="experienceDataManagement($event,i,2)" formControlName="workEndDate" style="text-transform: none">
+                        <td >
+                            <mat-form-field style="width: 60%; position:relative; margin-left:-18%">
+                                <input matInput [matDatepicker]="ei" disabled id="wordEndDate-{{i}}" class="form-control" class="form-control form-control-sm " [max]="maxDate" name="workStartDate" (dateChange)="experienceDataManagement($event,i,2)" formControlName="workEndDate" style="text-transform: none; color:black">
                                 <mat-datepicker-toggle matSuffix [for]="ei"></mat-datepicker-toggle>
                                 <mat-datepicker #ei></mat-datepicker>
                             </mat-form-field>
@@ -65,7 +65,7 @@
                                 Enter Work End Date!</span>
                         </td>
                         <td>
-                            <select class="form-select form-select-sm" aria-label="Default select example" name="positionType" formControlName="positionType" value="positionHeld" (blur)="teacherTypeSelectExp($event,i)">
+                            <select class="form-select form-select-sm" style="position: relative; width:190%; margin-left:-100%" disabled aria-label="Default select example" name="positionType" formControlName="positionType" value="positionHeld" (blur)="teacherTypeSelectExp($event,i)">
                                 <option selected disabled>Select</option>
                                 <option
                                     *ngFor="let data of teacherTypeDataNameCode; let i=index;"
@@ -76,7 +76,7 @@
                                 Select Position Held!</span>
                         </td>
                         <td>
-                            <select class="form-select form-select-sm" aria-label="Default select example" name="appointedForSubject" id="appointedSubject-{{i}}" formControlName="appointedForSubject">
+                            <select class="form-select form-select-sm" disabled aria-label="Default select example" name="appointedForSubject" id="appointedSubject-{{i}}" formControlName="appointedForSubject">
                                 <option selected disabled>Select</option>
                                 <option
                                     *ngFor="let data of subjectListNameCode2[i]; let j=index;"
@@ -89,9 +89,9 @@
                         </td>
                         <td>
                             {{groundForTransfer}}
-                            <mat-form-field appearance="fill">
-                                <mat-select formControlName="groundForTransfer" name="groundForTransfer">
-                                    <mat-option *ngFor="let ground of transferGroundList" [value]="ground?.transferGroundId">
+                            <mat-form-field appearance="fill" >
+                                <mat-select formControlName="groundForTransfer" disabled name="groundForTransfer" >
+                                    <mat-option *ngFor="let ground of transferGroundList"  [value]="ground?.transferGroundId">
                                         {{ground?.transferGroundType}}</mat-option>
                                 </mat-select>
                                 <span class="help-block text-danger" *ngIf="quantity.controls.groundForTransfer.errors?.required">

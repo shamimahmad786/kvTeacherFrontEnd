@@ -44,7 +44,7 @@ export class ForgetPasswordComponent implements OnInit {
   }
   //********************************  Forgot Password Form Submit  ******************************/
   onSubmit() {
-    this.router.navigate(['/login'])
+    
     debugger
     this.passwordFormsubmitted = true;
     if (this.forgetPasswordForm.invalid) {

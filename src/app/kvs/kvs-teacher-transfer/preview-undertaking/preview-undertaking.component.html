@@ -36,32 +36,37 @@
                     <td width="2%" class="text-center fw-bold">1</td>
                     <td>Whether the employee is seeking benefit of spouse who is working at the same station where employee is posted/transfer is being sought for.</td>
                     <td>{{teacherrofileData?.spouseKvsYnD == '1' ?'Yes':'No'}}</td>
-                    <td><a href="{{spouseDeclarationDocUrlName}}"  *ngIf="teacherrofileData?.spouseKvsYnD == '1'" target="_blank"> <img src="/assets/images/download.png" ></a></td>
+                    <!-- <td><button (click)="downloadDocument(data,teacherrofileData['folderId'])" *ngIf="teacherrofileData?.spouseKvsYnD == '1'"> <img src="assets/images/download.png"></button></td> -->
+
+                    <a href="#" ><i
+                        class='bx bx-show' style="font-size: 25px; "></i></a> 
+                        <i *ngIf="teacherrofileData?.spouseKvsYnD == '1'"   (click)="downloadDocument('PreviewUndertaking.pdf')" class='bx bx-minus-circle' style="font-size: 25px; "></i>
+                    <!-- <td><a href="{{spouseDeclarationDocUrlName}}"  *ngIf="teacherrofileData?.spouseKvsYnD == '1'" target="_blank"> <img src="assets/images/download.png" ></a></td> -->
                 </tr>
                 <tr>
                     <td class="text-center fw-bold">2</td>
                     <td>Whether the employee is seeking benefit of medical ground (MDG Ground).</td>
                     <td>{{teacherrofileData?.personalStatusMdgD == '1' ?'Yes':'No'}}</td>
-                    <td><a href="{{medicalDocURLName}}" *ngIf="teacherrofileData?.personalStatusMdgD == '1'" style="cursor: pointer;" target="_blank" title="Download"><img src="/assets/images/download.png" ></a></td>
+                    <td><a href="{{medicalDocURLName}}" *ngIf="teacherrofileData?.personalStatusMdgD == '1'" style="cursor: pointer;" target="_blank" title="Download"><img src="assets/images/download.png" ></a></td>
     
                 </tr>
                 <tr>
                     <td class="text-center fw-bold">3</td>
                     <td>Whether the employee is seeking benefit of single parent (SP Ground).</td>
                     <td>{{teacherrofileData?.personalStatusSpD == '1' ?'Yes':'No'}}</td>
-                    <td><a href="{{singleParentDocURLName}}" *ngIf="teacherrofileData?.personalStatusSpD == '1'" target="_blank" title="Download"> <img src="/assets/images/download.png" ></a></td>
+                    <td><a href="{{singleParentDocURLName}}" *ngIf="teacherrofileData?.personalStatusSpD == '1'" target="_blank" title="Download"> <img src="assets/images/download.png" ></a></td>
                 </tr>
                 <tr>
                     <td class="text-center fw-bold">4</td>    
                     <td>Whether the employee is seeking benefit of Death of Family Person (DFP Ground).</td>
                     <td>{{teacherrofileData?.personalStatusDfpD == '1' ?'Yes':'No'}}</td>
-                    <td><a href="{{dFPDocURLName}}" *ngIf="teacherrofileData?.personalStatusDfpD == '1'" target="_blank" title="Download"> <img src="/assets/images/download.png" ></a></td>
+                    <td><a href="{{dFPDocURLName}}" *ngIf="teacherrofileData?.personalStatusDfpD == '1'" target="_blank" title="Download"> <img src="assets/images/download.png" ></a></td>
                 </tr>
                 <tr>
                     <td class="text-center fw-bold">5</td>    
                     <td>Whether your are main care-giver to the person with disability in the family (i.e spouse/son/daughter).</td>
                     <td>{{teacherrofileData?.careGiverFaimlyYnD == '1' ?'Yes':'No'}}</td>
-                    <td><a href="{{disabilityCertiDocURLName}}" *ngIf="teacherrofileData?.careGiverFaimlyYnD == '1'" target="_blank" title="Download"> <img src="/assets/images/download.png" ></a></td>
+                    <td><a href="{{disabilityCertiDocURLName}}" *ngIf="teacherrofileData?.careGiverFaimlyYnD == '1'" target="_blank" title="Download"> <img src="assets/images/download.png" ></a></td>
                 </tr>
                                                                                                        
                 <!-- <tr>
@@ -72,7 +77,7 @@
                     <td class="text-center fw-bold">6</td>    
                     <td>Members of JCM at KVS Regional Office (RJCM) / KVS Headquarters (NJCM).</td>
                     <td>{{teacherrofileData?.memberJCM == '1' ?'RJCM': teacherrofileData?.memberJCM == '2'? 'NJCM': teacherrofileData?.memberJCM == '0'?'None':" " }}</td>
-                    <td><a href="{{nJCMRJCMDocURLName}}" *ngIf="teacherrofileData?.memberJCM != '0'" target="_blank" title="Download"> <img src="/assets/images/download.png" ></a></td>
+                    <td><a href="{{nJCMRJCMDocURLName}}" *ngIf="teacherrofileData?.memberJCM != '0'" target="_blank" title="Download"> <img src="assets/images/download.png" ></a></td>
                 </tr>
                 <tr>
                     <td class="text-center fw-bold">7</td>
@@ -644,7 +649,7 @@
     </div>
 </div>
 <div class="mt-4 button-save  " style="text-align: center; " >
-    <input *ngIf="!profileFinalStatus" [disabled]="(!teacherPreviewUndertakingForm.get('stationOne').valid ||  !teacherPreviewUndertakingForm.get('stationTwo').valid  ||  !teacherPreviewUndertakingForm.get('stationThree').valid  ||  !teacherPreviewUndertakingForm.get('stationFour').valid  ||  !teacherPreviewUndertakingForm.get('stationFive').valid  ||  !teacherPreviewUndertakingForm.get('dcCountStatus').valid  ||  !teacherPreviewUndertakingForm.get('tcCountStatus').valid )"  type="submit" name="Next"  class="me-2 add-teacher" value="Confirm" /> 
+    <input *ngIf="!profileFinalStatus" [disabled]="(!teacherPreviewUndertakingForm.get('stationOne').valid &&  !teacherPreviewUndertakingForm.get('stationTwo').valid  &&  !teacherPreviewUndertakingForm.get('stationThree').valid  &&  !teacherPreviewUndertakingForm.get('stationFour').valid  &&  !teacherPreviewUndertakingForm.get('stationFive').valid  &&  !teacherPreviewUndertakingForm.get('dcCountStatus').valid  &&  !teacherPreviewUndertakingForm.get('tcCountStatus').valid )"  type="submit" name="Next"  class="me-2 add-teacher" value="Confirm" /> 
   </div>
 </form>
 </div>

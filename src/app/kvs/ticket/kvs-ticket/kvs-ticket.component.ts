@@ -115,6 +115,7 @@ this.teacherName=JSON.parse(sessionStorage.getItem("authTeacherDetails"))?.appli
   fileToUpload: File | null = null;
   handleFileInput(files: FileList, index) {
     this.documentUploadArray[index] = { "Action":'' };
+    console.log( this.documentUploadArray)
     this.fileUpload = true;
     this.fileName = files.item(0).name;
     var splitted = this.fileName.split('.', 2)
@@ -151,6 +152,14 @@ this.teacherName=JSON.parse(sessionStorage.getItem("authTeacherDetails"))?.appli
   }
   documentUpload(index) {
     debugger
+    if( this.image2.length>4){
+      Swal.fire(
+        'You  can upload Only 5 Images !',
+        '',
+        'error'
+      )
+      return false;
+    }
     this.fileUpload = true;
     if(this.fileNameWithoutExt==''){
       Swal.fire(

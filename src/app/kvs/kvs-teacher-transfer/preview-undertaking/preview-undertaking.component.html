@@ -615,7 +615,7 @@
     <div class="px-5" *ngIf="!showTcField"><label>Total TC Count</label>  <input class="form-check-input" type="checkbox" value=""  formControlName="tcCountStatus" id="tcCountStatus" >&nbsp;&nbsp;{{transferCountForm.get('tcTotalPoint').value}}</div>
   </div>
 </div> 
-  <div class="form-card mt-3">
+  <div class="form-card mt-3" *ngIf="!profileFinalStatus">
     <div class="row">
         <div class="col-7">
             <h2 class="mb-0 font8958"> Undertaking: </h2>

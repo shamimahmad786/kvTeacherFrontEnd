@@ -46,6 +46,7 @@ export class PreviewUndertakingComponent implements OnInit {
   tcSaveYn: any;
   user_name: any;
   buttonVisible: any
+  schoolProfileFinalStatus:any;
   profileFinalStatus: boolean = false;
   constructor(private outSideService: OutsideServicesService,private fb: FormBuilder,private modalService: NgbModal) { }
   ngOnInit(): void {
@@ -106,6 +107,7 @@ export class PreviewUndertakingComponent implements OnInit {
       "teacherId": this.tempTeacherId
     }
     this.outSideService.getFormStatusV2(data).subscribe((res) => {
+     this.schoolProfileFinalStatus = res.response['profileFinalStatus']
      console.log(res.response);
      if(res.response['form4Status']==1 || res.response['form4Status']=='1')
      {
@@ -321,6 +323,13 @@ export class PreviewUndertakingComponent implements OnInit {
     }
   }
   onSubmitConfermation(){
+    if(this.schoolProfileFinalStatus=='SP'){
+      Swal.fire({
+        icon: 'info',
+        'text':'Your basic profile is yet to be verified by your controling officer. Please get it verified before proceeding further'
+      })
+    }
+   else{
       if( this.empTransferradioButton==1){
         this.tcSaveYn=1;
       }else{
@@ -381,6 +390,7 @@ export class PreviewUndertakingComponent implements OnInit {
       }
       return false;
       });
+    }
     }
     saveConfirmation(){
     var data =  {

@@ -170,7 +170,7 @@ export class AuthInterceptorService implements HttpInterceptor {
                     ))
             }
         } else {
-            if (req.url.indexOf('sign-in') !== -1 || req.url.indexOf('translate') !== -1) {
+            if (req.url.indexOf('sign-in') !== -1 || req.url.indexOf('translate') !== -1 || req.url.indexOf('getOtpForAuthentication') !== -1 ||  req.url.indexOf('restPassword') !== -1 ||  req.url.indexOf('changePassword') !== -1) {
                 return next.handle(req);
             } else {
 

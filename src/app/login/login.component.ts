@@ -114,7 +114,13 @@ export class LoginComponent implements OnInit {
       console.log(res)
       })
     }
-    }    
+    }  
+    omit_special_char(event)
+    {   
+       var k;  
+       k = event.charCode;
+       return((k >= 48 && k <= 57)); 
+    }  
   onSubmit(event: Event) {
     debugger
    var formSubmitAction = document.activeElement.id;

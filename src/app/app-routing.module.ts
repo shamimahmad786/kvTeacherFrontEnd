@@ -23,6 +23,7 @@ import { TransferDcCountComponent } from './kvs/kvs-teacher-transfer/transfer-dc
 import { TransferTcCountComponent } from './kvs/kvs-teacher-transfer/transfer-tc-count/transfer-tc-count.component';
 
 import { PreviewUndertakingComponent } from './kvs/kvs-teacher-transfer/preview-undertaking/preview-undertaking.component';
+import { ForgetPasswordComponent } from './forget-password/forget-password.component';
 
 const routes: Routes = [
   // {path:'', component: TDashboardComponent},
@@ -30,6 +31,7 @@ const routes: Routes = [
   // {path:'loginuser', component:LoginuserComponent},
   {path:'registration', component:RegistrationComponent},
   {path:'login', component:LoginComponent},
+  {path:'forgetPassword', component:ForgetPasswordComponent},
   {path: 'teacher', component:TeacherComponent,canActivate: [AuthGuard], children:[
       {path: 'mainPage', component:MainPageComponent},
       {path:'profile',component:TeacherProfileComponent}, 
@@ -41,7 +43,7 @@ const routes: Routes = [
       {path:'transferStationChoice', component:TransferStationChoiceComponent},     
 
       {path:'preview-undertaking', component:PreviewUndertakingComponent},
-
+   
 
       {path:'teacherWorkExperience', component:TeacherWorkExperienceComponent}, 
       {path:'teacherPreviewConfirm', component:TeacherPreviewConfirmComponent}, 

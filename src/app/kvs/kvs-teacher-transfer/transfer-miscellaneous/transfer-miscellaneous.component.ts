@@ -23,8 +23,10 @@ export class TransferMiscellaneousComponent implements OnInit {
   applicationId: any;
   loginUserNameForChild: any;
   kvicons: string;
+  employeeCode:any;
   kvCode: any;
   responseData: any;
+  emplyeeData:any;
   tempTeacherId: any;
   patientAilmentData: any;
   medicalCertificateIssueDateData: string;
@@ -109,7 +111,9 @@ export class TransferMiscellaneousComponent implements OnInit {
       this.kvicons += JSON.parse(sessionStorage.getItem("authTeacherDetails"))?.applicationDetails[i].application_id + ",";
       this.kvCode = JSON.parse(sessionStorage.getItem("authTeacherDetails"))?.applicationDetails[i].business_unit_type_code;
     }
+   
     this.tempTeacherId = sessionStorage.getItem('kvTeacherId');
+    
     this.miscellaneousForm = this.fb.group({
       'id': new FormControl(''),
       'transferStatus': new FormControl(''),
@@ -627,11 +631,36 @@ export class TransferMiscellaneousComponent implements OnInit {
     this.fileToRelatedFormUpload = null;
   }
 
-  getDocumentByTeacherId() {
-    this.outSideService.fetchUploadedDoc(this.tempTeacherId ).subscribe((res) => {
 
-      this.documentUploadArray = res;
+  getEmployeeData(){
+    var data={
+     "teacherEmployeeCode":this.employeeCode
+    }
+      this.outSideService.getEmployeeDetailV2(data).subscribe((res)=>{
+      this.emplyeeData=res.response;
+      
+      this.getDocumentByTeacherId();  
+      this.getFormStatusV2();
+  },
+  error => {
+    Swal.fire({
+      'icon':'error',
+      'text':error.error
+    }  
+    )
+  })
+  }
+
+  getDocumentByTeacherId() {
+   
+    this.outSideService.fetchUploadedDoc(this.tempTeacherId).subscribe((res) => {
+
+     
       for (let i = 0; i < res.length; i++) {
+        var token = JSON.parse(sessionStorage.getItem("authTeacherDetails"))?.token
+        if(JSON.stringify(res[i]) !="{}" && res[i]?.url !='undefined' && res[i]?.url.length>0){
+          res[i].url=res[i].url+"&docId="+token+"&username="+JSON.parse(sessionStorage.getItem("authTeacherDetails")).user_name;;
+      }
         if (res[i].docName == 'Medical_Certificate.pdf') {
           this.fileUpgkFilemMedical=false;
           this.deleteDocUpdate0 = false;
@@ -650,11 +679,20 @@ export class TransferMiscellaneousComponent implements OnInit {
         if (res[i].docName == 'Differentially_Abled_Certificate.pdf') {
           this.deleteDocUpdate3 = false;
         }
+
         if (res[i].docName == 'Spouse_Declaration.pdf') {
+         // alert(res[i].url)
           this.fileUpgkFilebenefit = false;
           this.deleteDocUpdate0 = false;
-          this.spouseDeclarationDocUrlName = res[i].url
-        }
+      this.spouseDeclarationDocUrlName = res[i].url
+        }  
+
+      
+        // if (res[i].docName == 'Spouse_Declaration.pdf') {
+        //   this.fileUpgkFilebenefit = false;
+        //   this.deleteDocUpdate0 = false;
+        //   this.spouseDeclarationDocUrlName = res[i].url
+        // }
         if (res[i].docName == 'Single_Parent_Declaration.pdf') {
           this.fileUpspGround = false;
           this.singleParentDocName = res[i].docName;
@@ -676,6 +714,8 @@ export class TransferMiscellaneousComponent implements OnInit {
           this.deleteDocUpdate2 = false;
         }
       }
+      this.documentUploadArray = res;
+      //this.documentUploadArray = res;
     })
   }
 

@@ -36,7 +36,11 @@
                     <td width="2%" class="text-center fw-bold">1</td>
                     <td>Whether the employee is seeking benefit of spouse who is working at the same station where employee is posted/transfer is being sought for.</td>
                     <td>{{teacherrofileData?.spouseKvsYnD == '1' ?'Yes':'No'}}</td>
-                    <td><button (click)="downloadDocument(data,teacherrofileData['folderId'])" *ngIf="teacherrofileData?.spouseKvsYnD == '1'"> <img src="assets/images/download.png"></button></td>
+                    <!-- <td><button (click)="downloadDocument(data,teacherrofileData['folderId'])" *ngIf="teacherrofileData?.spouseKvsYnD == '1'"> <img src="assets/images/download.png"></button></td> -->
+
+                    <a href="#" ><i
+                        class='bx bx-show' style="font-size: 25px; "></i></a> 
+                        <i *ngIf="teacherrofileData?.spouseKvsYnD == '1'"   (click)="downloadDocument('PreviewUndertaking.pdf')" class='bx bx-minus-circle' style="font-size: 25px; "></i>
                     <!-- <td><a href="{{spouseDeclarationDocUrlName}}"  *ngIf="teacherrofileData?.spouseKvsYnD == '1'" target="_blank"> <img src="assets/images/download.png" ></a></td> -->
                 </tr>
                 <tr>

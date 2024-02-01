@@ -18,6 +18,7 @@ export class PreviewUndertakingComponent implements OnInit {
   teacherrofileData:any;
   enableTransferFormYn: boolean = true;
   kvCode: any;
+  documentUploadArray:any;
   responseTcDcData:any;
   transDisable: boolean = false;
   spouseAtSmaeStation: boolean;
@@ -29,6 +30,8 @@ export class PreviewUndertakingComponent implements OnInit {
   tcSpouseAtStateGovt: boolean;
   tcWooomanEmp: boolean;
   statUsMessage:any
+  docPreview: any;
+  fileUpload: boolean;
   totaldaysPresent: number;
   totaldaysPresentTc: number;
   dcStayAtStation: any;
@@ -114,19 +117,28 @@ export class PreviewUndertakingComponent implements OnInit {
     })
   }
 
-  downloadDocument(data:any,folderIds:any) {
-    const folderId = folderIds;
-    const fileName = data;
-    this.outSideService.downloadDocument(folderId, fileName).subscribe((blob: Blob) => {
-      const url = window.URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = fileName;
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
-      window.URL.revokeObjectURL(url);
-    });
+  downloadDocument(documentName) {
+    for (let i = 0; i < this.documentUploadArray.length; i++) {
+      if (this.documentUploadArray[i].docName == documentName) {
+        this.documentUploadArray[i] = {}
+      }
+    }
+    if(documentName == 'Physically_Handicap_Certificate.pdf'){
+      this.fileUpload = true;
+      this.docPreview.nativeElement.value = "";
+    }
+    var data = {
+      "teacherId": this.responseData.teacherId,
+      "docName": documentName
+    }
+
+    this.outSideService.deleteUploadedDoc(data).subscribe((res) => {
+      Swal.fire(
+        'Deleted !',
+        '',
+        'success'
+      )
+    })
   }
   getTcDcPointByTeacherIdAndInityearV2(){
     var data ={

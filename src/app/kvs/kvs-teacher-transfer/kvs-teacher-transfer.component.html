@@ -30,7 +30,8 @@
           </ul>
      
           <div class="mt-4 button-save  " style="text-align: center; " >
-             <input   type="submit" name="Next"  class="me-2 add-teacher" (click)="processTransfer()"value="Click here to complete transfer process" /> 
+             <input   type="submit" name="Next" *ngIf="!(FormStatus1==true && FormStatus2==true && FormStatus3==true && FormStatus4==true)"  class="me-2 add-teacher" (click)="processTransfer()"value="Click here to complete transfer process" /> 
+             <input   type="submit" *ngIf="FormStatus1==true && FormStatus2==true && FormStatus3==true && FormStatus4==true" name="Next"  class="me-2 add-teacher" (click)="processTransfer()"value="Click here to view your transfer profile" /> 
            </div>                     
       </div><!--close main-content-info-->
   </div><!--close dashboard-main-content-->

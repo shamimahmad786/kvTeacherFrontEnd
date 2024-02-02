@@ -35,7 +35,9 @@ export class ProfileVerificationComponent implements OnInit {
   schoolDetails:any;
   verifyTchTeacherTraining: any;
   profileTeacherName: any;
+  formStatus1: any;
   blinkClass: boolean = true;
+  schoolProfileFinalStatus:any;
   profileFinalStatus: boolean = false;
   constructor(private pdfServive: TeacherAppPdfService,private router: Router, private date: DatePipe, private dataService: DataService,
     private modalService: NgbModal, private outSideService: OutsideServicesService,
@@ -71,6 +73,7 @@ export class ProfileVerificationComponent implements OnInit {
     }
     debugger
     this.outSideService.getFormStatusV2(data).subscribe((res)=>{
+      this.schoolProfileFinalStatus = res.response['profileFinalStatus']
       console.log(res);
       if(res.response['form1Status']=='1' || res.response['form1Status']==1){
         this.profileFinalStatus=true;
@@ -117,6 +120,12 @@ export class ProfileVerificationComponent implements OnInit {
     this.router.navigate(['/teacher/transferMiscellaneous']);  
   }
   submit(){
+    if(this.schoolProfileFinalStatus=='SP'){
+      Swal.fire({
+        icon: 'info',
+        'text':'Your basic profile is yet to be verified by your controling officer. Please get it verified before proceeding further'
+      })
+    }
    // this.router.navigate(['/teacher/transferMiscellaneous'], { queryParams: { 'form': 2 } })
     if (this.teacherPreviewConfirmForm.invalid) {
       Swal.fire({

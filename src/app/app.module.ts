@@ -60,6 +60,7 @@ import { TransferStationChoiceComponent } from './kvs/kvs-teacher-transfer/trans
 import { TransferDcCountComponent } from './kvs/kvs-teacher-transfer/transfer-dc-count/transfer-dc-count.component';
 import { TransferTcCountComponent } from './kvs/kvs-teacher-transfer/transfer-tc-count/transfer-tc-count.component';
 import { PreviewUndertakingComponent } from './kvs/kvs-teacher-transfer/preview-undertaking/preview-undertaking.component';
+import { ForgetPasswordComponent } from './forget-password/forget-password.component';
 // import { MatModuleModule } from './mat/mat-module/mat-module.module';
 // export function HttpLoaderFactory(http: HttpClient) {
 //   return new MultiTranslateHttpLoader(http, [
@@ -117,6 +118,7 @@ import { PreviewUndertakingComponent } from './kvs/kvs-teacher-transfer/preview-
     TransferDcCountComponent,
     TransferTcCountComponent,
     PreviewUndertakingComponent,
+    ForgetPasswordComponent,
 
   ],
   imports: [

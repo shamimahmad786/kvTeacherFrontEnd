@@ -31,17 +31,32 @@
                         </ul>
                     </div>
         
-                    <div class="col-md-2 mb-2">
+                    <div class="col-md-2 mb-2" *ngIf="profileFinalStatus" >
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" id="inlineRadio13" value="1" (click)="declarationtransferRelated1($event)" id="spouseKvsYnD"  formControlName="spouseKvsYnD" name="spouseKvsYnD" >
+                            <input class="form-check-input" type="radio" disabled id="inlineRadio13" value="1"  (click)="declarationtransferRelated1($event)" id="spouseKvsYnD"  formControlName="spouseKvsYnD" name="spouseKvsYnD" >
                             <label class="form-check-label" for="inlineRadio13">Yes
                             </label>
                         </div>
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" id="inlineRadio24" value="0" (click)="declarationtransferRelated1($event)" id="spouseKvsYnD"  formControlName="spouseKvsYnD" name="spouseKvsYnD" >
+                            <input class="form-check-input" type="radio" disabled id="inlineRadio24" value="0" (click)="declarationtransferRelated1($event)" id="spouseKvsYnD"  formControlName="spouseKvsYnD" name="spouseKvsYnD" >
                             <label class="form-check-label" for="inlineRadio24">No</label>
                         </div>
                     </div>
+
+                        <div class="col-md-2 mb-2"  *ngIf="!profileFinalStatus">
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" id="inlineRadio13" value="1"  (click)="declarationtransferRelated1($event)" id="spouseKvsYnD"  formControlName="spouseKvsYnD" name="spouseKvsYnD" >
+                                <label class="form-check-label" for="inlineRadio13">Yes
+                                </label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" id="inlineRadio24" value="0" (click)="declarationtransferRelated1($event)" id="spouseKvsYnD"  formControlName="spouseKvsYnD" name="spouseKvsYnD" >
+                                <label class="form-check-label" for="inlineRadio24">No</label>
+                            </div>
+                        </div>
+
+
+                    
                 </div>
                 <div *ngIf="gkFilebenefit" class="mb-4">
                     <div class="row">
@@ -70,8 +85,9 @@
                         <div *ngIf="documentUploadArray[5]?.docName == 'Spouse_Declaration.pdf'" class="col-md-4">
                             <h4 class="titleSet">Uploaded Document</h4>
                             <div>                 
-                                <a target="_blank" class="btn  btn-sm btn-green" href="{{documentUploadArray[5]?.url}}"> <i class='bx bx-file'>{{documentUploadArray[5]?.docName}}</i>
-                                </a>
+                                <!-- <a target="_blank" class="btn  btn-sm btn-green" href="{{documentUploadArray[5]?.url}}">  </a> -->
+                               <i   class="me-2" (click)="downloadDocument(documentUploadArray[5],'Spouse_Declaration.pdf')" class="fa fa-eye eye-icon" aria-hidden="true"></i>
+                               
                                 <i *ngIf="allowEdit" (click)="deleteDocumentUploaded('Spouse_Declaration.pdf')" class='bx bx-minus-circle'></i>
                             </div>
                         </div>
@@ -95,7 +111,20 @@
                             <span class="text-green">2.</span> Whether the employee is seeking benefit of medical ground (MDG Ground) <a href="assets/assets/declaration/MdgDeclaration.pdf" download class="text-danger">(Mandatory Instruction)</a>
                         </h4>
                     </div> 
-                    <div class="col-md-2 mb-2 py-3">
+
+                    <div class="col-md-2 mb-2 py-3" *ngIf="profileFinalStatus">
+                        <div class="form-check form-check-inline">
+
+                            <input class="form-check-input" value="1" disabled name="personalStatusMdgD" (click)="declarationtransferRelated2($event)" type="radio" formControlName="personalStatusMdgD" >                 
+                            <label class="form-check-label" for="inlineRadio13">Yes
+                            </label>
+                        </div>
+                        <div class="form-check form-check-inline">  
+                            <input class="form-check-input" value="0" disabled name="personalStatusMdgD" (click)="declarationtransferRelated2($event)" type="radio" formControlName="personalStatusMdgD" >                       
+                            <label class="form-check-label" for="inlineRadio24">No</label>
+                        </div>
+                    </div>
+                    <div class="col-md-2 mb-2 py-3" *ngIf="!profileFinalStatus">
                         <div class="form-check form-check-inline">
 
                             <input class="form-check-input" value="1" name="personalStatusMdgD" (click)="declarationtransferRelated2($event)" type="radio" formControlName="personalStatusMdgD" >                 
@@ -214,7 +243,18 @@
                             <span class="text-green">3.</span> Whether the employee is seeking benefit of single parent (SP Ground)
                         </h4>
                     </div>
-                    <div class="col-md-2 mb-2 py-3">
+                    <div class="col-md-2 mb-2 py-3" *ngIf="profileFinalStatus">
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" disabled id="inlineRadio13" value="1" (click)="declarationtransferRelated6($event)" id="personalStatusSpD" formControlName="personalStatusSpD" name="personalStatusSpD" >
+                            <label class="form-check-label" for="inlineRadio13">Yes
+                            </label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" disabled id="inlineRadio24" value="0" (click)="declarationtransferRelated6($event)" id="personalStatusSpD" formControlName="personalStatusSpD" name="personalStatusSpD" >
+                            <label class="form-check-label" for="inlineRadio24">No</label>
+                        </div>
+                    </div>
+                    <div class="col-md-2 mb-2 py-3" *ngIf="!profileFinalStatus">
                         <div class="form-check form-check-inline">
                             <input class="form-check-input" type="radio" id="inlineRadio13" value="1" (click)="declarationtransferRelated6($event)" id="personalStatusSpD" formControlName="personalStatusSpD" name="personalStatusSpD" >
                             <label class="form-check-label" for="inlineRadio13">Yes
@@ -287,7 +327,19 @@
                             <span class="text-green">4.</span> Whether the employee is seeking benefit of Death of Family Person (DFP Ground)
                         </h4>
                     </div>
-                    <div class="col-md-2 mb-2 py-3">
+                    <div class="col-md-2 mb-2 py-3" *ngIf="profileFinalStatus">
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" disabled id="inlineRadio13" value="1" (click)="declarationtransferRelated7($event)" id="personalStatusDfpD" formControlName="personalStatusDfpD" name="personalStatusDfpD" >
+                            <label class="form-check-label" for="inlineRadio13">Yes
+                            </label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" disabled id="inlineRadio24" value="0" (click)="declarationtransferRelated7($event)" id="personalStatusDfpD" formControlName="personalStatusDfpD" name="personalStatusDfpD" >
+                            <label class="form-check-label" for="inlineRadio24">No</label>
+                        </div>
+                    </div>
+
+                    <div class="col-md-2 mb-2 py-3" *ngIf="!profileFinalStatus">
                         <div class="form-check form-check-inline">
                             <input class="form-check-input" type="radio" id="inlineRadio13" value="1" (click)="declarationtransferRelated7($event)" id="personalStatusDfpD" formControlName="personalStatusDfpD" name="personalStatusDfpD" >
                             <label class="form-check-label" for="inlineRadio13">Yes
@@ -351,7 +403,18 @@
                             <span class="text-green">5.</span> Whether your are main care-giver to the person with disability in the family (i.e. spouse/son/daughter).
                         </h4>
                     </div>
-                    <div class="col-md-2 mb-2 py-3">
+                    <div class="col-md-2 mb-2 py-3" *ngIf="profileFinalStatus">
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" disabled id="inlineRadio13" value="1" (click)="declarationtransferRelated4($event)" id="careGiverFaimlyYnD" formControlName="careGiverFaimlyYnD" name="careGiverFaimlyYnD" >
+                            <label class="form-check-label" for="inlineRadio13">Yes
+                            </label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" disabled id="inlineRadio24" value="0" (click)="declarationtransferRelated4($event)" id="careGiverFaimlyYnD" formControlName="careGiverFaimlyYnD" name="careGiverFaimlyYnD" >
+                            <label class="form-check-label" for="inlineRadio24">NO</label>
+                        </div>
+                    </div>
+                    <div class="col-md-2 mb-2 py-3" *ngIf="!profileFinalStatus">
                         <div class="form-check form-check-inline">
                             <input class="form-check-input" type="radio" id="inlineRadio13" value="1" (click)="declarationtransferRelated4($event)" id="careGiverFaimlyYnD" formControlName="careGiverFaimlyYnD" name="careGiverFaimlyYnD" >
                             <label class="form-check-label" for="inlineRadio13">Yes
@@ -436,7 +499,24 @@
                             <span class="text-green">6.</span> Members of JCM at KVS Regional Office (RJCM) / KVS Headquarters (NJCM).
                         </h4>
                     </div>
-                    <div class="col-md-2 mb-2 py-3">
+                    <div class="col-md-2 mb-2 py-3" *ngIf="profileFinalStatus">
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" disabled id="inlineRadio13" value="1" id="memberJCM" (click)="checkRjcmNjcm('show')" formControlName="memberJCM"  name="memberJCM">
+                            <label class="form-check-label" for="inlineRadio13">RJCM
+                            </label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" disabled id="inlineRadio13" value="2" id="memberJCM" formControlName="memberJCM" (click)="checkRjcmNjcm('show')"  name="memberJCM">
+                            <label class="form-check-label" for="inlineRadio13">NJCM
+                            </label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" disabled id="inlineRadio24" value="0" id="memberJCM" formControlName="memberJCM" (click)="checkRjcmNjcm('notShow')" name="memberJCM">
+                            <label class="form-check-label" for="inlineRadio24">None</label>
+                        </div>
+                    </div>
+
+                    <div class="col-md-2 mb-2 py-3" *ngIf="!profileFinalStatus">
                         <div class="form-check form-check-inline">
                             <input class="form-check-input" type="radio" id="inlineRadio13" value="1" id="memberJCM" (click)="checkRjcmNjcm('show')" formControlName="memberJCM"  name="memberJCM">
                             <label class="form-check-label" for="inlineRadio13">RJCM
@@ -494,7 +574,14 @@
                         </h4>
                     </div>
 
-                    <div class="col-md-1 mb-2 py-3">
+                    <div class="col-md-1 mb-2 py-3" *ngIf="profileFinalStatus">
+                        <div class="input-group ">
+                            <input type="text" class="form-control  mb-3" disabled id="absenceDaysOne" formControlName="absenceDaysOne" value="0" name="absenceDaysOne" (blur)="checkActiveStaty($event)" maxlength="2">
+                        </div>
+
+                    </div>
+
+                    <div class="col-md-1 mb-2 py-3" *ngIf="!profileFinalStatus">
                         <div class="input-group ">
                             <input type="text" class="form-control  mb-3" id="absenceDaysOne" formControlName="absenceDaysOne" value="0" name="absenceDaysOne" (blur)="checkActiveStaty($event)" maxlength="2">
                         </div>
@@ -509,8 +596,21 @@
                             <span class="text-green">8.</span> Whether disciplinary proceedings are in progress.
                         </h4>
                     </div>
+
+                    <div class="col-md-2 mb-2 py-3" *ngIf="profileFinalStatus">
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" disabled id="disciplinaryYn" value="1" id="disciplinaryYn" formControlName="disciplinaryYn" name="disciplinaryYn" >
+                            <label class="form-check-label" for="disciplinaryYn">Yes
+                            </label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" disabled id="disciplinaryYn" value="0" id="disciplinaryYn" formControlName="disciplinaryYn" name="disciplinaryYn" >
+                            <label class="form-check-label" for="disciplinaryYn">No
+                            </label>
+                        </div>
+                    </div>
                   
-                    <div class="col-md-2 mb-2 py-3">
+                    <div class="col-md-2 mb-2 py-3" *ngIf="!profileFinalStatus">
                         <div class="form-check form-check-inline">
                             <input class="form-check-input" type="radio" id="disciplinaryYn" value="1" id="disciplinaryYn" formControlName="disciplinaryYn" name="disciplinaryYn" >
                             <label class="form-check-label" for="disciplinaryYn">Yes
@@ -531,7 +631,20 @@
                         </h4>
                     </div>
 
-                    <div class="col-md-2 mb-2 py-3">
+                    <div class="col-md-2 mb-2 py-3" *ngIf="profileFinalStatus">
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" disabled id="surveHardYn" value="1" id="surveHardYn" formControlName="surveHardYn" name="surveHardYn" >
+                            <label class="form-check-label" for="surveHardYn">Yes
+                            </label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" disabled id="surveHardYn" value="0" id="surveHardYn" formControlName="surveHardYn" name="surveHardYn" >
+                            <label class="form-check-label" for="surveHardYn">No
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="col-md-2 mb-2 py-3" *ngIf="!profileFinalStatus">
                         <div class="form-check form-check-inline">
                             <input class="form-check-input" type="radio" id="surveHardYn" value="1" id="surveHardYn" formControlName="surveHardYn" name="surveHardYn" >
                             <label class="form-check-label" for="surveHardYn">Yes
@@ -551,7 +664,15 @@
                             Undertaking
                         </h4>
                     </div>
-                    <div class="col-md-12">
+                    <div class="col-md-12" *ngIf="profileFinalStatus">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" [checked]="profileFinalStatus" disabled value="" id="flexCheckDefault" (click)="showSaveBuuton($event)">
+                            <p>I hereby undertake that information given by me, as below is absolutely correct and true as per my knowledge and belief.If later on, any thing is found misleading /wrong then my application is liable
+                                to be rejected by KVS and i shall be opened for any disciplinary action as deemed fit against me for giving misleading information.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-md-12" *ngIf="!profileFinalStatus">
                         <div class="form-check">
                             <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" (click)="showSaveBuuton($event)">
                             <p>I hereby undertake that information given by me, as below is absolutely correct and true as per my knowledge and belief.If later on, any thing is found misleading /wrong then my application is liable

@@ -99,6 +99,7 @@ export class TransferMiscellaneousComponent implements OnInit {
   nJCMRJCMDocURLName:any;
   dFPDocName:any;
   dFPDocURLName:any;
+  formStatus2: any;
   constructor(private pdfServive: TeacherAppPdfService,private router: Router, private date: DatePipe, private dataService: DataService,
     private modalService: NgbModal, private outSideService: OutsideServicesService,
     private route: ActivatedRoute, private fb: FormBuilder, private formData: FormDataService, private _adapter: DateAdapter<any>) {
@@ -650,6 +651,23 @@ export class TransferMiscellaneousComponent implements OnInit {
     )
   })
   }
+
+  downloadDocument(data:any,folderIds:any) {
+    const folderId = folderIds;
+    const fileName = data;
+    this.outSideService.downloadDocument(folderId, fileName).subscribe((blob: Blob) => {
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = fileName;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      window.URL.revokeObjectURL(url);
+    });
+  }
+
+
 
   getDocumentByTeacherId() {
    

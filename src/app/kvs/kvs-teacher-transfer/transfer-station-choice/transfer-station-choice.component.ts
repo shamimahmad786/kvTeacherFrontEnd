@@ -107,9 +107,9 @@ export class TransferStationChoiceComponent implements OnInit {
       this.empTransferradioButton = res.response.applyTransferYn
       if (this.empTransferradioButton == null || this.empTransferradioButton == "") {
         this.stationChoiceForm.patchValue({
-            applyTransferYn: '0',
+            applyTransferYn: '',
         })
-        this.empTransferradioButton = 0;
+        this.empTransferradioButton = -1;
         this.disabled = true;
         this.showTcField =true;
       }

@@ -35,6 +35,7 @@ export class ProfileVerificationComponent implements OnInit {
   schoolDetails:any;
   verifyTchTeacherTraining: any;
   profileTeacherName: any;
+  formStatus1: any;
   blinkClass: boolean = true;
   schoolProfileFinalStatus:any;
   profileFinalStatus: boolean = false;

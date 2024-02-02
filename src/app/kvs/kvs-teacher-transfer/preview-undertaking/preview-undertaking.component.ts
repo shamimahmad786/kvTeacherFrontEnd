@@ -45,6 +45,7 @@ export class PreviewUndertakingComponent implements OnInit {
   empTransferradioButton:any;
   tcSaveYn: any;
   user_name: any;
+  buttonVisible: any
   schoolProfileFinalStatus:any;
   profileFinalStatus: boolean = false;
   constructor(private outSideService: OutsideServicesService,private fb: FormBuilder,private modalService: NgbModal) { }
@@ -285,6 +286,14 @@ export class PreviewUndertakingComponent implements OnInit {
       if (this.responseTcDcData.dcSpousePoint == '-4') {
         this.wooomanEmp = true;
       }
+    }
+  }
+
+  showSaveBuuton(event: any) {
+    if (this.buttonVisible == true) {
+      this.buttonVisible = false;
+    } else {
+      this.buttonVisible = true;
     }
   }
 

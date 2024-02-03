@@ -35,6 +35,7 @@ export class TeacherPreviewConfirmComponent implements OnInit {
   schoolDetails:any;
   verifyTchTeacherTraining: any;
   profileTeacherName: any;
+  token:any;
   constructor(private pdfServive: TeacherAppPdfService,private router: Router, private date: DatePipe, private dataService: DataService,
     private modalService: NgbModal, private outSideService: OutsideServicesService,
     private route: ActivatedRoute, private fb: FormBuilder, private formData: FormDataService, private _adapter: DateAdapter<any>) { }
@@ -63,6 +64,8 @@ export class TeacherPreviewConfirmComponent implements OnInit {
     this.profileTeacherName=sessionStorage.getItem('profileTeacherName');
     this.onVerifyClick();
     this.getTeacherConfirmationV2();
+
+    this.token =JSON.parse(sessionStorage.getItem('authTeacherDetails'))?.token;
   }
   teacherPdf() {
     // this.onVerifyClick();

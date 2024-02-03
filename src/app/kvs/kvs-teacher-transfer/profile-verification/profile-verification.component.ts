@@ -120,11 +120,12 @@ export class ProfileVerificationComponent implements OnInit {
     this.router.navigate(['/teacher/transferMiscellaneous']);  
   }
   submit(){
-    if(this.schoolProfileFinalStatus=='SP'){
+    if(this.schoolProfileFinalStatus=='SP' || this.schoolProfileFinalStatus=='' || this.schoolProfileFinalStatus==null){
       Swal.fire({
         icon: 'info',
         'text':'Your basic profile is yet to be verified by your controling officer. Please get it verified before proceeding further'
       })
+      return false;
     }
    // this.router.navigate(['/teacher/transferMiscellaneous'], { queryParams: { 'form': 2 } })
     if (this.teacherPreviewConfirmForm.invalid) {

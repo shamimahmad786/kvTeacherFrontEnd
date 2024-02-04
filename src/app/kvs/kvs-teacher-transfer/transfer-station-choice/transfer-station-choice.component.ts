@@ -75,6 +75,7 @@ export class TransferStationChoiceComponent implements OnInit {
     "inityear":"2024" 
   }
     this.outSideService.getTransferData(data).subscribe((res) => {
+      console.log(res)
       if (res.response != null || res.response == '') {
         this.stationChoiceForm.patchValue({
             id: res.response.id,

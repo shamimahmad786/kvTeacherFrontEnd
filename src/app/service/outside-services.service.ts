@@ -889,10 +889,6 @@ export class OutsideServicesService {
 
   }
 
-
-
-
-
   getTransferData(data) {
     var token = JSON.parse(sessionStorage.getItem('authTeacherDetails'))?.token
     var headers = new HttpHeaders({

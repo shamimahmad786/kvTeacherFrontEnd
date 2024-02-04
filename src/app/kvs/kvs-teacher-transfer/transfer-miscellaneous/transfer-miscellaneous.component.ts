@@ -88,6 +88,7 @@ export class TransferMiscellaneousComponent implements OnInit {
   deleteDocUpdate2: boolean = true;
   deleteDocUpdate3: boolean = true;
   deleteDocUpdate4: boolean = true;
+  isDisabled: boolean = false;
   nJCMRJCMDocName:any;
   medicalDocName:any;
   medicalDocURLName:any;
@@ -134,7 +135,7 @@ export class TransferMiscellaneousComponent implements OnInit {
       'spouseStationName': new FormControl(''),
       'careGiverFaimlyYnD': new FormControl(''),
       'positionOfNjcmRjcm': new FormControl('', Validators.required),
-      'nameOfFamilyMember': new FormControl('', Validators.required),
+      'nameOfFamilyMember':new FormControl('', [Validators.required, Validators.maxLength(50), Validators.pattern("^[A-Za-z ]*$")]),
       'medicalCertificateIssueDate': new FormControl('', Validators.required),
       'singleParentGround': new FormControl('', Validators.required),
       'deathOfFamilyGround': new FormControl('', Validators.required),
@@ -339,6 +340,7 @@ export class TransferMiscellaneousComponent implements OnInit {
 
       if (res.response['spouse_name'] == '' || res.response['spouse_name'] ==null ) {
         this.gkFilebenefit = false;
+        this.isDisabled = true;
         this.miscellaneousForm.patchValue({
           spouseKvsYnD: '0'
           })
@@ -744,9 +746,11 @@ export class TransferMiscellaneousComponent implements OnInit {
     this.router.navigate(['/teacher/transferStationChoice']);
   }
   submit(){
+    debugger
     this.miscellaneousForm.patchValue({
       inityear: '2024'
       })
+     // return
     Swal.fire({
       'icon':'warning',
       'text': "Do you want to proceed ?",

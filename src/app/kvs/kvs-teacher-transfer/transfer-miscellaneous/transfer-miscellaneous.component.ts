@@ -124,6 +124,7 @@ export class TransferMiscellaneousComponent implements OnInit {
       'teacherId': new FormControl('', Validators.required),
       'spouseKvsYnD': new FormControl(),
       'inityear': new FormControl(),
+      'applyTransferYn': new FormControl(''),
       'personalStatusMdgD': new FormControl(),
       'personalStatusSpD': new FormControl(),
       'personalStatusDfpD': new FormControl(),
@@ -564,10 +565,15 @@ export class TransferMiscellaneousComponent implements OnInit {
           this.documentUploadArray = res;
           // alert(JSON.stringify(this.documentUploadArray));
           for (let i = 0; i < res.length; i++) {
-
+            var token = JSON.parse(sessionStorage.getItem("authTeacherDetails"))?.token
+            if(JSON.stringify(res[i]) !="{}" && res[i]?.url !='undefined' && res[i]?.url.length>0){
+              res[i].url=res[i].url+"&docId="+token+"&username="+JSON.parse(sessionStorage.getItem("authTeacherDetails")).user_name;;
+          }
             if (res[i].docName == 'Medical_Certificate.pdf') {
               this.fileUpgkFilemMedical = false;
               this.deleteDeclairaionFormDocUpdate0 = false;
+              this.medicalDocName = res[i].docName;
+              this.medicalDocURLName = res[i].url;
             }
             if (res[i].docName == 'Board_examination_Proof.pdf') {
               this.deleteDeclairaionFormDocUpdate1 = false;
@@ -575,6 +581,8 @@ export class TransferMiscellaneousComponent implements OnInit {
             if (res[i].docName == 'Disability_Certificate.pdf') {
               this.fileUpcareGiver = false;
               this.deleteDeclairaionFormDocUpdate2 = false;
+              this.disabilityCertiDocName = res[i].docName;
+              this.disabilityCertiDocURLName = res[i].url
             }
             if (res[i].docName == 'Differentially_Abled_Certificate.pdf') {
               this.deleteDeclairaionFormDocUpdate3 = false;
@@ -582,18 +590,25 @@ export class TransferMiscellaneousComponent implements OnInit {
             if (res[i].docName == 'Spouse_Declaration.pdf') {
               this.deleteDeclairaionFormDocUpdate5 = false;
               this.fileUpgkFilebenefit = false;
+              this.spouseDeclarationDocUrlName = res[i].url
             }
             if (res[i].docName == 'Single_Parent_Declaration.pdf') {
               this.fileUpspGround = false;
               this.deleteDeclairaionFormDocUpdate6 = false;
+              this.singleParentDocName = res[i].docName;
+              this.singleParentDocURLName = res[i].url;
             }
             if (res[i].docName == 'DFP_Declaration.pdf') {
               this.fileUpdfpGround = false;
               this.deleteDeclairaionFormDocUpdate7 = false;
+              this.dFPDocName = res[i].docName;
+              this.dFPDocURLName = res[i].url;
             }
             if (res[i].docName == 'NJCM_RJCM_Declaration.pdf') {
               this.fileUppositionHeld = false;
               this.deleteDeclairaionFormDocUpdate8 = false;
+              this.nJCMRJCMDocName = res[i].docName;
+              this.nJCMRJCMDocURLName = res[i].url;
             }
 
           }

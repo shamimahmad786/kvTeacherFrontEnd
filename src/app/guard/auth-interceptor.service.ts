@@ -7,7 +7,6 @@ import { environment } from "src/environments/environment";
 export class AuthInterceptorService implements HttpInterceptor {
 
     intercept(req: HttpRequest<any>, next: HttpHandler) {
-        debugger
         if (JSON.parse(sessionStorage.getItem('authTeacherDetails'))?.token != undefined) {
             var token = JSON.parse(sessionStorage.getItem('authTeacherDetails'))?.token
             if ( req.url.indexOf('getProfileImage') !== -1 || req.url.indexOf('uploadProfileImage') !== -1 || req.url.indexOf('deleteDocumentByTeacherIdAndName') !== -1 ||

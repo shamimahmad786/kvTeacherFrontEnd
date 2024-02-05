@@ -48,6 +48,12 @@ export class PreviewUndertakingComponent implements OnInit {
   buttonVisible: any
   schoolProfileFinalStatus:any;
   profileFinalStatus: boolean = false;
+  medicalDocURLName: any;
+  disabilityCertiDocURLName: any;
+  spouseDeclarationDocUrlName: any;
+  singleParentDocURLName: any;
+  dFPDocURLName: any;
+  nJCMRJCMDocURLName: any;
   constructor(private outSideService: OutsideServicesService,private fb: FormBuilder,private modalService: NgbModal) { }
   ngOnInit(): void {
     this.displacementCountForm = new FormGroup({
@@ -92,6 +98,8 @@ export class PreviewUndertakingComponent implements OnInit {
       "stationFive": new FormControl('', Validators.required),
       "dcCountStatus": new FormControl('', Validators.required),
       "tcCountStatus": new FormControl('', Validators.required),
+      "undertaking1": new FormControl('', Validators.required),
+      "undertaking2": new FormControl('', Validators.required),
     });
     this.user_name = JSON.parse(sessionStorage.getItem("authTeacherDetails"))?.user_name;
     for (let i = 0; i < JSON.parse(sessionStorage.getItem("authTeacherDetails"))?.applicationDetails.length; i++) {
@@ -100,6 +108,7 @@ export class PreviewUndertakingComponent implements OnInit {
 
     this.tempTeacherId = sessionStorage.getItem('kvTeacherId');
     this.getFormStatusV2();
+    this.getDocumentByTeacherId();
    
   }
   getFormStatusV2(){
@@ -120,27 +129,39 @@ export class PreviewUndertakingComponent implements OnInit {
     })
   }
 
-  downloadDocument(documentName) {
-    for (let i = 0; i < this.documentUploadArray.length; i++) {
-      if (this.documentUploadArray[i].docName == documentName) {
-        this.documentUploadArray[i] = {}
-      }
-    }
-    if(documentName == 'Physically_Handicap_Certificate.pdf'){
-      this.fileUpload = true;
-      this.docPreview.nativeElement.value = "";
-    }
-    var data = {
-      "teacherId": this.responseData.teacherId,
-      "docName": documentName
-    }
+  getDocumentByTeacherId() {
+    debugger
+    var token = JSON.parse(sessionStorage.getItem('authTeacherDetails'))?.token
+    this.outSideService.fetchUploadedDoc( this.tempTeacherId).subscribe((res) => {
+      this.documentUploadArray = res;
+      for (let i = 0; i < res.length; i++) {
 
-    this.outSideService.deleteUploadedDoc(data).subscribe((res) => {
-      Swal.fire(
-        'Deleted !',
-        '',
-        'success'
-      )
+        if (res[i].docName == 'Medical_Certificate.pdf') {
+         
+          this.medicalDocURLName = res[i].url+"&docId="+token+"&username="+JSON.parse(sessionStorage.getItem("authTeacherDetails")).user_name;
+        }
+        if (res[i].docName == 'Disability_Certificate.pdf') {
+   
+          this.disabilityCertiDocURLName = res[i].url+"&docId="+token+"&username="+JSON.parse(sessionStorage.getItem("authTeacherDetails")).user_name;
+        }
+        if (res[i].docName == 'Spouse_Declaration.pdf') {
+
+          this.spouseDeclarationDocUrlName = res[i].url+"&docId="+token+"&username="+JSON.parse(sessionStorage.getItem("authTeacherDetails")).user_name;
+        }
+        if (res[i].docName == 'Single_Parent_Declaration.pdf') {
+   
+          this.singleParentDocURLName = res[i].url+"&docId="+token+"&username="+JSON.parse(sessionStorage.getItem("authTeacherDetails")).user_name;
+        }
+
+        if (res[i].docName == 'DFP_Declaration.pdf') {
+      
+          this.dFPDocURLName = res[i].url+"&docId="+token+"&username="+JSON.parse(sessionStorage.getItem("authTeacherDetails")).user_name;
+        }
+        if (res[i].docName == 'NJCM_RJCM_Declaration.pdf') {
+   
+          this.nJCMRJCMDocURLName = res[i].url+"&docId="+token+"&username="+JSON.parse(sessionStorage.getItem("authTeacherDetails")).user_name;
+        }
+      }
     })
   }
   getTcDcPointByTeacherIdAndInityearV2(){
@@ -203,7 +224,6 @@ export class PreviewUndertakingComponent implements OnInit {
         tcCountStatus:  String(this.responseTcDcData.tcTotalPoint),
     });
       this.empTransferradioButton = res.response.applyTransferYn;
-      debugger
       if (this.empTransferradioButton == null || this.empTransferradioButton == "" || this.empTransferradioButton == 0 || this.empTransferradioButton == '0') {
         this.disabled = true;
         this.showTcField =true;
@@ -221,7 +241,6 @@ export class PreviewUndertakingComponent implements OnInit {
       "teacherId": this.tempTeacherId
     }
     this.outSideService.fetchTcDcData(data).subscribe((res) => {
-      debugger
       console.log("tc dc res")
       console.log(res)
       this.responseTcDcData = res;
@@ -323,11 +342,19 @@ export class PreviewUndertakingComponent implements OnInit {
     }
   }
   onSubmitConfermation(){
+    if(this.teacherPreviewUndertakingForm.value.undertaking1==false || this.teacherPreviewUndertakingForm.value.undertaking2==false ){
+      Swal.fire({
+        'icon':'error',
+        'text':'Please check all fields!'
+      })
+      return false;
+     }
     if(this.schoolProfileFinalStatus=='SP'){
       Swal.fire({
         icon: 'info',
         'text':'Your basic profile is yet to be verified by your controling officer. Please get it verified before proceeding further'
       })
+      return false;
     }
    else{
       if( this.empTransferradioButton==1){

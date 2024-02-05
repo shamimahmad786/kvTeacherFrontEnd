@@ -36,11 +36,13 @@ export class TeacherPreviewConfirmComponent implements OnInit {
   verifyTchTeacherTraining: any;
   profileTeacherName: any;
   token:any;
+  exportProfileUrl: any;
   constructor(private pdfServive: TeacherAppPdfService,private router: Router, private date: DatePipe, private dataService: DataService,
     private modalService: NgbModal, private outSideService: OutsideServicesService,
     private route: ActivatedRoute, private fb: FormBuilder, private formData: FormDataService, private _adapter: DateAdapter<any>) { }
 
   ngOnInit(): void {
+    this.exportProfileUrl=environment.BASE_URL_DATA_REPORT
     this.teacherPreviewConfirmForm = this.fb.group({
       "teacherName": new FormControl('', Validators.required),
       "teacherGender": new FormControl('', Validators.required),

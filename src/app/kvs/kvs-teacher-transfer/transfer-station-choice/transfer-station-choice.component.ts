@@ -105,8 +105,9 @@ export class TransferStationChoiceComponent implements OnInit {
 
         )
       }
+      debugger
       this.empTransferradioButton = res.response.applyTransferYn
-      if (this.empTransferradioButton == null || this.empTransferradioButton == "") {
+      if (this.empTransferradioButton === null || this.empTransferradioButton === "") {
         this.stationChoiceForm.patchValue({
             applyTransferYn: '',
         })

@@ -211,6 +211,7 @@ export class PreviewUndertakingComponent implements OnInit {
        "inityear":"2024" 
       };
     this.outSideService.getTransferData(data).subscribe((res) => {
+      debugger
       console.log("------transfer data-----------------")
       console.log(res.response) 
       this.teacherrofileData=res.response

@@ -609,15 +609,15 @@
 <form [formGroup]="teacherPreviewUndertakingForm" (ngSubmit)="onSubmitConfermation()" >    
     <div class="chk-box-font border p-3 mt-4">  
 <div class="d-flex justify-content-start  ">
-    <div class="px-5 px-padding"><label>Station (I)</label>&nbsp;{{teacherrofileData?.choiceKv1StationName}} ({{teacherrofileData?.choiceKv1StationCode}}) <input class="form-check-input" type="checkbox" [attr.disabled]="profileFinalStatus ? true : null" value=""  formControlName="stationOne" id="stationOne" ></div>
-    <div class="px-5"><label>Station (II)</label>&nbsp;{{teacherrofileData?.choiceKv2StationName}} ({{teacherrofileData?.choiceKv2StationCode}})  <input class="form-check-input" type="checkbox" value="" [attr.disabled]="profileFinalStatus ? true : null"  formControlName="stationTwo" id="stationTwo" ></div>
-    <div class="px-5"><label>Station (III)</label> &nbsp;{{teacherrofileData?.choiceKv3StationName}} ({{teacherrofileData?.choiceKv3StationCode}}) <input class="form-check-input" type="checkbox" value="" [attr.disabled]="profileFinalStatus ? true : null"  formControlName="stationThree" id="stationThree" > </div>
-    <div class="px-5"><label>Station (IV)</label> &nbsp; {{teacherrofileData?.choiceKv4StationName}} ({{teacherrofileData?.choiceKv4StationCode}}) <input class="form-check-input" type="checkbox" value="" [attr.disabled]="profileFinalStatus ? true : null" formControlName="stationFour" id="stationFour" ></div>
+    <div class="px-5 px-padding"><label>Station (I)</label>&nbsp;{{teacherrofileData?.choiceKv1StationName}} ({{teacherrofileData?.choiceKv1StationCode}}) <input class="form-check-input" type="checkbox" [attr.disabled]="profileFinalStatus ? true : false" value=""  formControlName="stationOne" id="stationOne" ></div>
+    <div class="px-5"><label>Station (II)</label>&nbsp;{{teacherrofileData?.choiceKv2StationName}} ({{teacherrofileData?.choiceKv2StationCode}})  <input class="form-check-input" type="checkbox" value="" [attr.disabled]="profileFinalStatus ? true : false"  formControlName="stationTwo" id="stationTwo" ></div>
+    <div class="px-5"><label>Station (III)</label> &nbsp;{{teacherrofileData?.choiceKv3StationName}} ({{teacherrofileData?.choiceKv3StationCode}}) <input class="form-check-input" type="checkbox" value="" [attr.disabled]="profileFinalStatus ? true : false"  formControlName="stationThree" id="stationThree" > </div>
+    <div class="px-5"><label>Station (IV)</label> &nbsp; {{teacherrofileData?.choiceKv4StationName}} ({{teacherrofileData?.choiceKv4StationCode}}) <input class="form-check-input" type="checkbox" value="" [attr.disabled]="profileFinalStatus ? true : false" formControlName="stationFour" id="stationFour" ></div>
   </div>
   <div class="d-flex justify-content-start mt-4">
-    <div class="px-5 px-padding"><label>Station (V)</label> &nbsp;{{teacherrofileData?.choiceKv5StationName}} ({{teacherrofileData?.choiceKv5StationCode}}) <input class="form-check-input" type="checkbox" value="" [attr.disabled]="profileFinalStatus ? true : null"  formControlName="stationFive" id="stationFive" > </div>
-    <div class="px-5"><label>Total DC Count</label>  <input class="form-check-input" type="checkbox" value="" [attr.disabled]="profileFinalStatus ? true : null"  formControlName="dcCountStatus" id="dcCountStatus" >&nbsp;&nbsp;{{displacementCountForm.get('dcTotalPoint').value}} </div>
-    <div class="px-5" *ngIf="!showTcField"><label>Total TC Count</label>  <input class="form-check-input" type="checkbox" value="" [attr.disabled]="profileFinalStatus ? true : null" formControlName="tcCountStatus" id="tcCountStatus" >&nbsp;&nbsp;{{transferCountForm.get('tcTotalPoint').value}}</div>
+    <div class="px-5 px-padding"><label>Station (V)</label> &nbsp;{{teacherrofileData?.choiceKv5StationName}} ({{teacherrofileData?.choiceKv5StationCode}}) <input class="form-check-input" type="checkbox" value="" [attr.disabled]="profileFinalStatus ? true : false"  formControlName="stationFive" id="stationFive" > </div>
+    <div class="px-5"><label>Total DC Count</label>  <input class="form-check-input" type="checkbox" value="" [attr.disabled]="profileFinalStatus ? true : false"  formControlName="dcCountStatus" id="dcCountStatus" >&nbsp;&nbsp;{{displacementCountForm.get('dcTotalPoint').value}} </div>
+    <div class="px-5" *ngIf="!showTcField"><label>Total TC Count</label>  <input class="form-check-input" type="checkbox" value="" [attr.disabled]="profileFinalStatus ? true : false" formControlName="tcCountStatus" id="tcCountStatus" >&nbsp;&nbsp;{{transferCountForm.get('tcTotalPoint').value}}</div>
   </div>
 </div> 
   <div class="form-card mt-3" *ngIf="!profileFinalStatus">
@@ -629,7 +629,7 @@
     <div class="row" *ngIf="profileFinalStatus">
         <div class="col-md-12" style="text-align: left;">
             <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="" [attr.disabled]="profileFinalStatus ? true : null" [checked]="profileFinalStatus" (click)="showSaveBuuton($event)" formControlName="undertaking1" id="flexCheckDefault1">
+                <input class="form-check-input" type="checkbox" value="" [attr.disabled]="profileFinalStatus ? true : false" [checked]="profileFinalStatus" (click)="showSaveBuuton($event)" formControlName="undertaking1" id="flexCheckDefault1">
                 <label class="form-check-label" for="flexCheckDefault">
                     I, the undersigned, certify that to the best
                     of my knowledge and belief, this Profile
@@ -638,7 +638,7 @@
                 </label>
             </div>
             <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="" [attr.disabled]="profileFinalStatus ? true : null" [checked]="profileFinalStatus" (click)="showSaveBuuton($event)" formControlName="undertaking2" id="flexCheckChecked2">
+                <input class="form-check-input" type="checkbox" value="" [attr.disabled]="profileFinalStatus ? true : false" [checked]="profileFinalStatus" (click)="showSaveBuuton($event)" formControlName="undertaking2" id="flexCheckChecked2">
                 <label class="form-check-label" for="flexCheckChecked">
                     I also declare that I have saved all the previous
                     sections

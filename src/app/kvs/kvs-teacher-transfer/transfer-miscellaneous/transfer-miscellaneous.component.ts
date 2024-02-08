@@ -134,6 +134,7 @@ export class TransferMiscellaneousComponent implements OnInit {
       'spouseEmpCode': new FormControl(''),
       'spousePost': new FormControl(''),
       'spouseStationName': new FormControl(''),
+      'spouseStationCode': new FormControl(''),
       'careGiverFaimlyYnD': new FormControl(''),
       'positionOfNjcmRjcm': new FormControl('', Validators.required),
       'nameOfFamilyMember':new FormControl('', [Validators.required, Validators.maxLength(50), Validators.pattern("^[A-Za-z ]*$")]),
@@ -253,20 +254,24 @@ export class TransferMiscellaneousComponent implements OnInit {
         })
       }
 
-      
+      debugger
       // ---------------------------  declairation from radio button start  here ---------------------------------
       if (this.miscellaneousForm.value.spouseKvsYnD == 1 || this.miscellaneousForm.value.spouseKvsYnD == '1') {
-       this.getSpouseDeatails();
+        this.isDisabled = false;
+        this.gkFilebenefit = true;
+       this.getSpouseDeatailsYes();
       }
       if(this.miscellaneousForm.value.spouseKvsYnD == 0 ||  this.miscellaneousForm.value.spouseKvsYnD == '' )
       {
+        this.isDisabled = true;
         this.gkFilebenefit = false;
+        this.getSpouseDeatailsNo();
         this.miscellaneousForm.patchValue({
           spouseKvsYnD: '0'
           })
       }
       if(this.miscellaneousForm.value.spouseKvsYnD == 'null'){
-        this.getSpouseDeatails();
+        this.getSpouseDeatailsNull();
       }
 
       if (this.miscellaneousForm.value.personalStatusMdgD == 1) {
@@ -330,7 +335,8 @@ export class TransferMiscellaneousComponent implements OnInit {
     })
    
   }
-  getSpouseDeatails(){
+
+  getSpouseDeatailsYes(){
     var data ={
       "teacherId": this.tempTeacherId
     }
@@ -340,10 +346,73 @@ export class TransferMiscellaneousComponent implements OnInit {
       console.log(res);
 
       if (res.response['spouse_name'] == '' || res.response['spouse_name'] ==null ) {
-        this.gkFilebenefit = false;
         this.isDisabled = true;
+      }
+      else
+      {
+        this.spouseName=res.response['spouse_name'],
         this.miscellaneousForm.patchValue({
-          spouseKvsYnD: '0'
+          spouseStationName:res.response['spouse_station_name'],
+          spouseEmpCode:res.response['spouse_emp_code'],
+          spousePost:res.response['spouse_post'],
+          spouseStationCode:res.response['spouse_station_code'],
+          })
+      }
+  },
+  error => {
+    Swal.fire({
+      'icon':'error',
+      'text':error.error
+    }
+    )
+  })
+  }
+
+  getSpouseDeatailsNo(){
+    var data ={
+      "teacherId": this.tempTeacherId
+    }
+    debugger
+    this.outSideService.getSpouseDetailsV2(data).subscribe((res)=>{ 
+      console.log("-------spouse details----------------")
+      console.log(res);
+
+      if (res.response['spouse_name'] == '' || res.response['spouse_name'] ==null ) {
+        this.isDisabled = true;
+      }
+      else
+      {
+        this.spouseName=res.response['spouse_name'],
+        this.miscellaneousForm.patchValue({
+          spouseStationName:res.response['spouse_station_name'],
+          spouseEmpCode:res.response['spouse_emp_code'],
+          spousePost:res.response['spouse_post'],
+          spouseStationCode:res.response['spouse_station_code'],
+          })
+      }
+  },
+  error => {
+    Swal.fire({
+      'icon':'error',
+      'text':error.error
+    }
+    )
+  })
+  }
+  getSpouseDeatailsNull(){
+    var data ={
+      "teacherId": this.tempTeacherId
+    }
+    debugger
+    this.outSideService.getSpouseDetailsV2(data).subscribe((res)=>{ 
+      console.log("-------spouse details----------------")
+      console.log(res);
+
+      if (res.response['spouse_name'] == '' || res.response['spouse_name'] ==null ) {
+        this.isDisabled = true;
+        this.gkFilebenefit = false;
+        this.miscellaneousForm.patchValue({
+          spouseKvsYnD: '0',
           })
       }
       else
@@ -351,9 +420,11 @@ export class TransferMiscellaneousComponent implements OnInit {
         this.gkFilebenefit = true;
         this.spouseName=res.response['spouse_name'],
         this.miscellaneousForm.patchValue({
-          spouseName:res.response['spouse_name'],
           spouseStationName:res.response['spouse_station_name'],
-          spouseKvsYnD: '1'
+          spouseEmpCode:res.response['spouse_emp_code'],
+          spousePost:res.response['spouse_post'],
+          spouseStationCode:res.response['spouse_station_code'],
+          spouseKvsYnD: '1',
           })
       }
   },
@@ -765,7 +836,6 @@ export class TransferMiscellaneousComponent implements OnInit {
     this.miscellaneousForm.patchValue({
       inityear: '2024'
       })
-     // return
     Swal.fire({
       'icon':'warning',
       'text': "Do you want to proceed ?",

@@ -35,6 +35,7 @@ export class TeacherPreviewConfirmComponent implements OnInit {
   schoolDetails:any;
   verifyTchTeacherTraining: any;
   profileTeacherName: any;
+  ReadOnlyStyleGuideNotes: boolean;
   token:any;
   exportProfileUrl: any;
   constructor(private pdfServive: TeacherAppPdfService,private router: Router, private date: DatePipe, private dataService: DataService,
@@ -42,6 +43,7 @@ export class TeacherPreviewConfirmComponent implements OnInit {
     private route: ActivatedRoute, private fb: FormBuilder, private formData: FormDataService, private _adapter: DateAdapter<any>) { }
 
   ngOnInit(): void {
+    this.ReadOnlyStyleGuideNotes = true;
     this.exportProfileUrl=environment.BASE_URL_DATA_REPORT
     this.teacherPreviewConfirmForm = this.fb.group({
       "teacherName": new FormControl('', Validators.required),
@@ -115,6 +117,7 @@ export class TeacherPreviewConfirmComponent implements OnInit {
           workExperienceAppointedForSubject:  res.response['workExperienceAppointedForSubject'],
           lastPromotionPositionType:  res.response['lastPromotionPositionType'],
       });
+   
       }
   },
   error => {

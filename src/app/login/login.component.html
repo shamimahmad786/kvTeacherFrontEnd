@@ -76,7 +76,7 @@
                            
                           <div class="mb-4 position-relative">
                             <i class="fa fa-unlock-alt fa-color" aria-hidden="true"></i>
-                            <input type="number"  class="form-control" autocomplete="new-password" formControlName="OTP" [ngClass]="{ 'is-invalid': submittedOtp && !loginForm.get('otpForm.OTP').valid }" placeholder="Otp">
+                            <input type="text"  class="form-control" (keypress)="omit_special_char($event)" onKeyPress="if(this.value.length==6) return false;" autocomplete="new-password" formControlName="OTP" [ngClass]="{ 'is-invalid': submittedOtp && !loginForm.get('otpForm.OTP').valid }" placeholder="Otp">
                             <span class="help-block text-danger" *ngIf="!loginForm.get('otpForm.OTP').valid && submittedOtp">
                               Enter a valid  otp!</span>  
                           </div>

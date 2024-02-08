@@ -17,10 +17,10 @@
                 <thead>
                     <tr>
                         <th width="20%"> KV/RO/ZIET/HQ</th>
-                        <th>From</th>
+                        <th >From</th>
                         <th>To</th>
-                        <th style="position: relative; width:209px; padding-right: 22px !important"> Position Held</th>
-                        <th style="width: 209px;">Appointed for Subject</th>
+                        <th > Position Held</th>
+                        <th >Appointed for Subject</th>
                         <th>Transfer Ground</th>
                         <!-- <th style="width: 140px; ">
                             <input type="button"  class="btn btn-sm btn-green-logout me-2" value="Add" (click)="addQuantity(undefined)">
@@ -30,7 +30,7 @@
                 <tbody>
                     <tr *ngFor="let quantity of detailsOfPosting().controls; let i=index" formGroupName="{{i}}">
                         <td>
-                            <div class="input-group mb-3"  style="width: 231px;margin-top: 22px;">
+                            <div class="input-group mb-3"  style="width: 351px;margin-top: 22px;">
                                 <input type="text" class="input-group-text input" name="udiseSchCode" formControlName="udiseSchCode" disabled style="width:70px; height:33px;">
                                 <input type="text" class="form-control form-control-sm " name="udiseSchoolName" formControlName="udiseSchoolName" disabled>
 
@@ -47,7 +47,8 @@
                                 Enter KV/RO/ZIET/HQ !</span>
                         </td>
                         <td>
-                            <mat-form-field style="width: 60%;">
+                            
+                            <mat-form-field style="width:100px">
                                 <input matInput [matDatepicker]="si" disabled  id="wordStartDate-{{i}}" class="form-control"  class="form-control form-control-sm " [max]="maxDate" name="workStartDate" (dateChange)="experienceDataManagement($event,i,1)" formControlName="workStartDate" style="text-transform: none; color:black">
                                 <mat-datepicker-toggle matSuffix [for]="si"></mat-datepicker-toggle>
                                 <mat-datepicker #si></mat-datepicker>
@@ -56,7 +57,7 @@
                                 Select Work Start Date!</span>
                         </td>
                         <td >
-                            <mat-form-field style="width: 60%; position:relative; margin-left:-18%">
+                            <mat-form-field style="width:100px">
                                 <input matInput [matDatepicker]="ei" disabled id="wordEndDate-{{i}}" class="form-control" class="form-control form-control-sm " [max]="maxDate" name="workStartDate" (dateChange)="experienceDataManagement($event,i,2)" formControlName="workEndDate" style="text-transform: none; color:black">
                                 <mat-datepicker-toggle matSuffix [for]="ei"></mat-datepicker-toggle>
                                 <mat-datepicker #ei></mat-datepicker>
@@ -65,7 +66,7 @@
                                 Enter Work End Date!</span>
                         </td>
                         <td>
-                            <select class="form-select form-select-sm" style="position: relative; width:190%; margin-left:-100%" disabled aria-label="Default select example" name="positionType" formControlName="positionType" value="positionHeld" (blur)="teacherTypeSelectExp($event,i)">
+                            <select class="form-select form-select-sm" style="position: relative; " disabled aria-label="Default select example" name="positionType" formControlName="positionType" value="positionHeld" (blur)="teacherTypeSelectExp($event,i)">
                                 <option selected disabled>Select</option>
                                 <option
                                     *ngFor="let data of teacherTypeDataNameCode; let i=index;"

@@ -128,10 +128,14 @@ export class LoginComponent implements OnInit {
    if(formSubmitAction=="submitPasswordForm")
    {
     this.submitted=true
-    if (this.loginForm.controls.passwordForm.status == 'INVALID' ) {
+    if (this.loginForm.controls.passwordForm.status == 'INVALID' || this.loginForm.controls.passwordForm.value.username.toLowerCase().startsWith('kv') || this.loginForm.controls.passwordForm.value.username.toLowerCase().startsWith('ro')) {
+      Swal.fire({
+        'icon':'error',
+        'text':`Please provide correct credential.`
+      })
       this.generate()
       return;
-    }
+    } 
     if (this.loginForm.controls.passwordForm.value['passwordCaptcha'] != this.captcha ) {
       this.loginForm.patchValue({
         passwordForm: {

@@ -658,7 +658,7 @@ body {
       box-shadow: 0 3px 6px #272d3b1c;
     }
     
-    .dashboard-footer { background-color:#D0D0D0; padding:20px 30px 20px 30px;}
+    .dashboard-footer {  /*background-color:#D0D0D0;*/ padding:20px 30px 20px 30px;} 
     .font-size-16{font-size: 16px !important;}
     .dashboard-footer p { margin-bottom: 0 !important; font-size: 13px; color: #061045;}
     

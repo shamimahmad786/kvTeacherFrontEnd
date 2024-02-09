@@ -10,7 +10,7 @@
                     <div class="pe-3">
                         <h2 class="steps text-end pro-name">{{ profileTeacherName | uppercase}} </h2>
                     </div>
-                    <div><button class="btn btn-primary btn-sm">
+                    <div><button class="btn btn-primary btn-sm" [disabled]="profileFinalStatus">
                         <a href="{{exportProfileUrl}}getTeacherBasicDetailPdf?token={{token}}&username={{loginUserNameForChild}}&teacherId={{tempTeacherId}}"  style="text-decoration: none !important; color:white !important">Export To PDF</a>
                     </button></div>
                 </div>
@@ -23,11 +23,11 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <th>KV/RO/ZIET/HQ Name</th>
+                            <th style="width: 180px;">KV/RO/ZIET/HQ Name</th>
                             <td>{{schoolDetails?.kvName}} ({{schoolDetails?.kvCode}})</td>
-                            <th>Employee Code</th>
+                            <th style="width: 160px;">Employee Code</th>
                             <td>{{verifyTchTeacherProfileData?.teacherEmployeeCode}}</td>
-                            <th>Staff Type</th>
+                            <th style="width: 130px;">Staff Type</th>
                             <td>{{verifyTchTeacherProfileData?.teachingNonteaching | staffType}}
                             </td>
                         </tr>
@@ -89,47 +89,59 @@
                 </table>
 
                 <form [formGroup]="teacherPreviewConfirmForm" (ngSubmit)="submit()">
-                    <div class="chk-box-font border p-3 mt-4">
-                        <table class="table w-100">
+                    <h2  class="mb-0 tbl-heading">Profile Details</h2>
+                    <div class="mt-1">
+                        <table class="table priview-table table-bordered w-100" >
                             <tr>
-                                <td>
-                                    <label>Employee Name: </label>&nbsp;{{verifyTchTeacherProfileData?.teacherName | titlecase}} <input class="form-check-input" type="checkbox" value="" disabled formControlName="teacherName" id="teacherName" id="teacherName">
+                                <th>Employee Name: </th>
+                                <td >
+                                   &nbsp;{{verifyTchTeacherProfileData?.teacherName | titlecase}} <input class="form-check-input"  type="checkbox" value="" checked disabled   formControlName="teacherName" id="teacherName" id="teacherName">
                                 </td>
+                                <th>Employee Gender:</th>
                                 <td>
-                                    <label>Employee Gender:</label>&nbsp;{{ verifyTchTeacherProfileData?.teacherGender | genderPipe }} <input class="form-check-input" type="checkbox" value="" disabled formControlName="teacherGender" id="teacherGender">
+                                    &nbsp;{{ verifyTchTeacherProfileData?.teacherGender | genderPipe }} <input class="form-check-input" type="checkbox" value="" checked disabled formControlName="teacherGender" id="teacherGender">
                                 </td>
+                                <th>Employee DOB:</th>
                                 <td>
-                                    <label>Employee Dob: </label> &nbsp;{{verifyTchTeacherProfileData?.teacherDob }} <input class="form-check-input" type="checkbox" value="" disabled formControlName="teacherDob" id="teacherDob">
+                                 &nbsp;{{verifyTchTeacherProfileData?.teacherDob }} <input class="form-check-input" type="checkbox" value="" checked disabled formControlName="teacherDob" id="teacherDob">
                                 </td>
                             </tr>
                             <tr>
+                                <th>Employee Employee Code:</th>
                                 <td>
-                                    <label>Employee Employee Code:</label> &nbsp; {{verifyTchTeacherProfileData?.teacherEmployeeCode}} <input class="form-check-input" type="checkbox" disabled value="" formControlName="teacherEmplCode" id="teacherEmplCode">
+                                     &nbsp; {{verifyTchTeacherProfileData?.teacherEmployeeCode}} <input class="form-check-input" type="checkbox"  value="" checked disabled formControlName="teacherEmplCode" id="teacherEmplCode">
                                 </td>
+                                <th>Employee Disability:</th>
                                 <td>
-                                    <label>Employee Disability:</label> &nbsp;{{verifyTchTeacherProfileData?.teacherDisabilityYn == '1' ? 'Yes':'No'}} <input class="form-check-input" type="checkbox" disabled value="" formControlName="teacherDisability" id="teacherDisability">
+                                 &nbsp;{{verifyTchTeacherProfileData?.teacherDisabilityYn == '1' ? 'Yes':'No'}} <input class="form-check-input" type="checkbox"  value="" checked disabled formControlName="teacherDisability" id="teacherDisability">
                                 </td>
+                                <th>Experience Start Date Present KV:</th>
                                 <td>
-                                    <label>Experience Start Date Present KV:</label>&nbsp; {{verifyTchTeacherProfileData?.workExperienceWorkStartDatePresentKv}} <input class="form-check-input" disabled type="checkbox" value="" formControlName="ExperienceStartDatePresentKv"
+                                    &nbsp; {{verifyTchTeacherProfileData?.workExperienceWorkStartDatePresentKv}} <input class="form-check-input"  type="checkbox" value="" checked disabled formControlName="ExperienceStartDatePresentKv"
                                         id="ExperienceStartDatePresentKv">
                                 </td>
                             </tr>
                             <tr>
+                                <th>Appointed For Subject:</th>
                                 <td>
-                                    <label>Appointed For Subject:</label> &nbsp; {{verifyTchTeacherProfileData?.workExperienceAppointedForSubject}} <input class="form-check-input" type="checkbox" disabled value="" formControlName="workExperienceAppointedForSubject"
+                                     &nbsp; {{verifyTchTeacherProfileData?.workExperienceAppointedForSubject}} <input class="form-check-input" type="checkbox"  value="" checked disabled formControlName="workExperienceAppointedForSubject"
                                         id="workExperienceAppointedForSubject">
                                 </td>
+                                <th>Position Held:</th>
                                 <td>
-                                    <label>Position Held:</label> &nbsp;{{verifyTchTeacherProfileData?.lastPromotionPositionType}} <input class="form-check-input" type="checkbox" value="" disabled formControlName="lastPromotionPositionType" id="lastPromotionPositionType">
+                                     &nbsp;{{verifyTchTeacherProfileData?.lastPromotionPositionType}} <input class="form-check-input" type="checkbox" value="" checked disabled  formControlName="lastPromotionPositionType" id="lastPromotionPositionType">
                                 </td>
-                                <td></td>
+                                <th>DOJ in Present Station Irrespective of Cadre:</th>
+                                <td>
+                                     &nbsp;{{verifyTchTeacherProfileData?.workExperiencePositionTypePresentStationStartDate}} <input class="form-check-input" type="checkbox" value="" checked disabled  formControlName="workExperiencePositionTypePresentStationStartDate" id="workExperiencePositionTypePresentStationStartDate">
+                                </td>
                             </tr>
                         </table>
 
                     </div>
                   
                     <div class="mt-2 d-flex align-items-center justify-content-between ">
-                        <div class="button-back mt-2"><input type="button" name="previous" class="action-save me-2 back-button" (click)="previousPage()" value="Back" /><i class="fa fa-chevron-circle-left" aria-hidden="true"></i></div>
+                        <div class="button-back mt-2 position-relative"><input type="button" name="previous" class="action-save me-2 back-button" (click)="previousPage()" value="Back" /><i class="fa fa-chevron-circle-left" aria-hidden="true"></i></div>
                     
                     </div>
                 </form>

@@ -572,6 +572,7 @@
   
   .hover-text:hover .tooltip-text {
   visibility: visible;
+  z-index: 2 !important;
   }
   
   #top {

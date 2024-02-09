@@ -593,3 +593,5 @@
     top: 11px ; 
     color: white; 
   }
+
+  .dashboard-footer{background-color: initial !important;}

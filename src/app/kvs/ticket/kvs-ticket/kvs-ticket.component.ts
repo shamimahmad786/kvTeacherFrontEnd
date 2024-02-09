@@ -5,6 +5,7 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { OutsideServicesService } from 'src/app/service/outside-services.service';
+
 import Swal from 'sweetalert2';
 @Component({
   selector: 'app-kvs-ticket',
@@ -71,6 +72,7 @@ export class KvsTicketComponent implements OnInit {
     "teacherEmployeeCode":this.loginUserNameForChild
     }
     this.outSideService.getInitiatedTicket(data).subscribe((res)=>{
+      console.log(res)
       this.ticketList=[];
       if(res.length>0){
           for (let i = 0; i < res.length; i++) {
@@ -256,6 +258,7 @@ export class KvsTicketComponent implements OnInit {
     var data = {
       "ticketId":ticketid
     }
+    debugger
     this.outSideService.getInitiatedTicketByTicketId(data).subscribe((res)=>{
       if(res){
       this.docList=res['docList'];

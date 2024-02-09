@@ -587,10 +587,10 @@
                                 <option value="SPOUSE">SPOUSE</option>  
                             </select>
                         </div>
-                        <div class="col-md-6"  *ngIf="profileFinalStatus">
+                        <div class="col-md-6"  *ngIf="!profileFinalStatus">
                             <h4 class="titleSet">Name the type of disability as per the RPwD Act.<span class="required-asterisk">*</span>
                             </h4>
-                            <input type="text" class="form-control mb-3" disabled style="text-transform:uppercase" id="careGiverDisabilityName" formControlName="careGiverDisabilityName" name="careGiverDisabilityName" maxlength="50">
+                            <input type="text" class="form-control mb-3"  style="text-transform:uppercase" id="careGiverDisabilityName" formControlName="careGiverDisabilityName" name="careGiverDisabilityName" maxlength="50">
                         </div>
                         <div class="col-md-3"  *ngIf="!profileFinalStatus">
                             <h4 class="titleSet">Percentage of disability<span class="required-asterisk">*</span>
@@ -602,7 +602,7 @@
                             </h4>
                             <input type="text" class="form-control mb-3" disabled style="text-transform:uppercase" id="careGiverDisabilityName" formControlName="careGiverDisabilityName" name="careGiverDisabilityName" maxlength="50">
                         </div>
-                        <div class="col-md-3"  *ngIf="!profileFinalStatus">
+                        <div class="col-md-3"  *ngIf="profileFinalStatus">
                             <h4 class="titleSet">Percentage of disability<span class="required-asterisk">*</span>
                             </h4>
                             <input type="text" class="form-control mb-3" id="careGiverDisabilityPrcnt" formControlName="careGiverDisabilityPrcnt" name="careGiverDisabilityPrcnt" maxlength="3" max="100" min="0" (input)="checkPercentageOfDisablity($event)">

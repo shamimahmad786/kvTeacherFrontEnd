@@ -75,7 +75,11 @@
                     <div class="row">
                         <div class="col-md-4">
                             <h4 class="titleSet">Upload Spouse Declaration In PDF (Max 500 KB)<span class="required-asterisk">*</span></h4>
-                            <div class="input-group">
+                            <div class="input-group" *ngIf="profileFinalStatus">
+                                <input type="file" class="form-control form-control-sm" disabled id="inputGroupFile04" aria-describedby="inputGroupFileAddon04" aria-label="Upload" id="file" data-max-size="500" accept=".pdf" (change)="handledeclarationRelatedFormFileInput($event.target.files, '5')" #spouseFile>
+                                <button [disabled]="enableUploadButtonRelatedForm5" disabled class="btn btn-secondary btn-sm" type="button" id="inputGroupFileAddon04" (click)="documentUploadRelatedForm(5)">Upload</button>
+                            </div>
+                            <div class="input-group" *ngIf="!profileFinalStatus">
                                 <input type="file" class="form-control form-control-sm" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04" aria-label="Upload" id="file" data-max-size="500" accept=".pdf" (change)="handledeclarationRelatedFormFileInput($event.target.files, '5')" #spouseFile>
                                 <button [disabled]="enableUploadButtonRelatedForm5" class="btn btn-secondary btn-sm" type="button" id="inputGroupFileAddon04" (click)="documentUploadRelatedForm(5)">Upload</button>
                             </div>
@@ -83,17 +87,7 @@
                             <span class="help-block text-danger" *ngIf="fileUpgkFilebenefit">Please upload the file</span>
                        
                         </div>
-                        <!-- <div *ngIf="documentUploadArray[5]?.docName == 'Spouse_Declaration.pdf'" class="col-md-4">
-                            <h4 class="titleSet">Uploaded Document</h4>
-                            <div>                 
-                           
-                               <i   class="me-2" (click)="downloadDocument(documentUploadArray[5],'Spouse_Declaration.pdf')" class="fa fa-eye eye-icon" aria-hidden="true"></i>
-                               
-                                <i *ngIf="allowEdit" (click)="deleteDocumentUploaded('Spouse_Declaration.pdf')" class='bx bx-minus-circle'></i>
-                            </div>
-                        </div> -->
-
-
+                    
                         <div *ngIf="documentUploadArray[5]?.docName == 'Spouse_Declaration.pdf'" class="col-md-4">
                             <h4 class="titleSet">Uploaded Document</h4>
                             <div>                              
@@ -280,7 +274,11 @@
                     <div class="row">
                         <div class="col-md-4">
                             <h4 class="titleSet">Upload Medical Certificate In PDF (Max 500 KB)<span class="required-asterisk">*</span></h4>
-                            <div class="input-group">
+                            <div class="input-group" *ngIf="profileFinalStatus">
+                                <input type="file" class="form-control form-control-sm" disabled id="inputGroupFile04" aria-describedby="inputGroupFileAddon04" aria-label="Upload" id="file" data-max-size="500" accept=".pdf" (change)="handledeclarationRelatedFormFileInput($event.target.files, '0')" #Medical_Certificate>
+                                <button [disabled]="enableUploadButtonRelatedForm0" class="btn btn-secondary btn-sm" type="button" disabled id="inputGroupFileAddon04" (click)="documentUploadRelatedForm(0)">Upload</button>
+                            </div>
+                            <div class="input-group" *ngIf="!profileFinalStatus">
                                 <input type="file" class="form-control form-control-sm" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04" aria-label="Upload" id="file" data-max-size="500" accept=".pdf" (change)="handledeclarationRelatedFormFileInput($event.target.files, '0')" #Medical_Certificate>
                                 <button [disabled]="enableUploadButtonRelatedForm0" class="btn btn-secondary btn-sm" type="button" id="inputGroupFileAddon04" (click)="documentUploadRelatedForm(0)">Upload</button>
                             </div>

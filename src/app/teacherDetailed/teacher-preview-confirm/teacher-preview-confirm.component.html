@@ -89,51 +89,51 @@
                 </table>
 
                 <form [formGroup]="teacherPreviewConfirmForm" (ngSubmit)="submit()">
-                    <h2  class="mb-0 tbl-heading">Title Goes Here</h2>
+                    <h2  class="mb-0 tbl-heading">Profile Details</h2>
                     <div class="mt-1">
                         <table class="table priview-table table-bordered w-100" >
                             <tr>
                                 <th>Employee Name: </th>
-                                <td>
-                                   &nbsp;{{verifyTchTeacherProfileData?.teacherName | titlecase}} <input class="form-check-input" type="checkbox" value=""   formControlName="teacherName" id="teacherName" id="teacherName">
+                                <td >
+                                   &nbsp;{{verifyTchTeacherProfileData?.teacherName | titlecase}} <input class="form-check-input"  type="checkbox" value="" checked disabled   formControlName="teacherName" id="teacherName" id="teacherName">
                                 </td>
                                 <th>Employee Gender:</th>
                                 <td>
-                                    &nbsp;{{ verifyTchTeacherProfileData?.teacherGender | genderPipe }} <input class="form-check-input" type="checkbox" value=""  formControlName="teacherGender" id="teacherGender">
+                                    &nbsp;{{ verifyTchTeacherProfileData?.teacherGender | genderPipe }} <input class="form-check-input" type="checkbox" value="" checked disabled formControlName="teacherGender" id="teacherGender">
                                 </td>
                                 <th>Employee DOB:</th>
                                 <td>
-                                 &nbsp;{{verifyTchTeacherProfileData?.teacherDob }} <input class="form-check-input" type="checkbox" value=""  formControlName="teacherDob" id="teacherDob">
+                                 &nbsp;{{verifyTchTeacherProfileData?.teacherDob }} <input class="form-check-input" type="checkbox" value="" checked disabled formControlName="teacherDob" id="teacherDob">
                                 </td>
                             </tr>
                             <tr>
                                 <th>Employee Employee Code:</th>
                                 <td>
-                                     &nbsp; {{verifyTchTeacherProfileData?.teacherEmployeeCode}} <input class="form-check-input" type="checkbox"  value="" formControlName="teacherEmplCode" id="teacherEmplCode">
+                                     &nbsp; {{verifyTchTeacherProfileData?.teacherEmployeeCode}} <input class="form-check-input" type="checkbox"  value="" checked disabled formControlName="teacherEmplCode" id="teacherEmplCode">
                                 </td>
                                 <th>Employee Disability:</th>
                                 <td>
-                                 &nbsp;{{verifyTchTeacherProfileData?.teacherDisabilityYn == '1' ? 'Yes':'No'}} <input class="form-check-input" type="checkbox"  value="" formControlName="teacherDisability" id="teacherDisability">
+                                 &nbsp;{{verifyTchTeacherProfileData?.teacherDisabilityYn == '1' ? 'Yes':'No'}} <input class="form-check-input" type="checkbox"  value="" checked disabled formControlName="teacherDisability" id="teacherDisability">
                                 </td>
                                 <th>Experience Start Date Present KV:</th>
                                 <td>
-                                    &nbsp; {{verifyTchTeacherProfileData?.workExperienceWorkStartDatePresentKv}} <input class="form-check-input"  type="checkbox" value="" formControlName="ExperienceStartDatePresentKv"
+                                    &nbsp; {{verifyTchTeacherProfileData?.workExperienceWorkStartDatePresentKv}} <input class="form-check-input"  type="checkbox" value="" checked disabled formControlName="ExperienceStartDatePresentKv"
                                         id="ExperienceStartDatePresentKv">
                                 </td>
                             </tr>
                             <tr>
                                 <th>Appointed For Subject:</th>
                                 <td>
-                                     &nbsp; {{verifyTchTeacherProfileData?.workExperienceAppointedForSubject}} <input class="form-check-input" type="checkbox"  value="" formControlName="workExperienceAppointedForSubject"
+                                     &nbsp; {{verifyTchTeacherProfileData?.workExperienceAppointedForSubject}} <input class="form-check-input" type="checkbox"  value="" checked disabled formControlName="workExperienceAppointedForSubject"
                                         id="workExperienceAppointedForSubject">
                                 </td>
                                 <th>Position Held:</th>
                                 <td>
-                                     &nbsp;{{verifyTchTeacherProfileData?.lastPromotionPositionType}} <input class="form-check-input" type="checkbox" value=""  formControlName="lastPromotionPositionType" id="lastPromotionPositionType">
+                                     &nbsp;{{verifyTchTeacherProfileData?.lastPromotionPositionType}} <input class="form-check-input" type="checkbox" value="" checked disabled  formControlName="lastPromotionPositionType" id="lastPromotionPositionType">
                                 </td>
                                 <th>DOJ in Present Station Irrespective of Cadre:</th>
                                 <td>
-                                     &nbsp;{{verifyTchTeacherProfileData?.workExperiencePositionTypePresentStationStartDate}} <input class="form-check-input" type="checkbox" value=""  formControlName="workExperiencePositionTypePresentStationStartDate" id="workExperiencePositionTypePresentStationStartDate">
+                                     &nbsp;{{verifyTchTeacherProfileData?.workExperiencePositionTypePresentStationStartDate}} <input class="form-check-input" type="checkbox" value="" checked disabled  formControlName="workExperiencePositionTypePresentStationStartDate" id="workExperiencePositionTypePresentStationStartDate">
                                 </td>
                             </tr>
                         </table>

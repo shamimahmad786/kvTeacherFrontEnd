@@ -38,11 +38,13 @@ export class TeacherPreviewConfirmComponent implements OnInit {
   ReadOnlyStyleGuideNotes: boolean;
   token:any;
   exportProfileUrl: any;
+  profileFinalStatus: boolean = false;
   constructor(private pdfServive: TeacherAppPdfService,private router: Router, private date: DatePipe, private dataService: DataService,
     private modalService: NgbModal, private outSideService: OutsideServicesService,
     private route: ActivatedRoute, private fb: FormBuilder, private formData: FormDataService, private _adapter: DateAdapter<any>) { }
 
   ngOnInit(): void {
+    this.profileFinalStatus = true
     this.ReadOnlyStyleGuideNotes = true;
     this.exportProfileUrl=environment.BASE_URL_DATA_REPORT
     this.teacherPreviewConfirmForm = this.fb.group({

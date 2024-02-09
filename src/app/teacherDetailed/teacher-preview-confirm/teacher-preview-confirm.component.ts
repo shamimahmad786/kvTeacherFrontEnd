@@ -44,7 +44,7 @@ export class TeacherPreviewConfirmComponent implements OnInit {
     private route: ActivatedRoute, private fb: FormBuilder, private formData: FormDataService, private _adapter: DateAdapter<any>) { }
 
   ngOnInit(): void {
-    this.profileFinalStatus = true
+    
     this.ReadOnlyStyleGuideNotes = true;
     this.exportProfileUrl=environment.BASE_URL_DATA_REPORT
     this.teacherPreviewConfirmForm = this.fb.group({
@@ -71,6 +71,7 @@ export class TeacherPreviewConfirmComponent implements OnInit {
     this.profileTeacherName=sessionStorage.getItem('profileTeacherName');
     this.onVerifyClick();
     this.getTeacherConfirmationV2();
+    this.getFormStatusV2();
 
     this.token =JSON.parse(sessionStorage.getItem('authTeacherDetails'))?.token;
   }
@@ -123,6 +124,27 @@ export class TeacherPreviewConfirmComponent implements OnInit {
       });
    
       }
+  },
+  error => {
+    Swal.fire({
+      'icon':'error',
+      'text':error.error
+    }
+    )
+  })
+  }
+
+
+
+    getFormStatusV2(){
+    var data ={
+      "teacherId": this.tempTeacherId
+    }
+   
+    this.outSideService.getFormStatusV2(data).subscribe((res)=>{
+      if(res.response['profileFinalStatus']=='SP' || res.response['profileFinalStatus']=='' ||res.response['profileFinalStatus']==null){
+        this.profileFinalStatus=true;
+       }
   },
   error => {
     Swal.fire({

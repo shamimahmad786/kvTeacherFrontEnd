@@ -53,6 +53,7 @@ export class TeacherPreviewConfirmComponent implements OnInit {
       "teacherDisability": new FormControl('', Validators.required),
       "ExperienceStartDatePresentKv": new FormControl('', Validators.required),
       "workExperienceAppointedForSubject": new FormControl('', Validators.required),
+      "workExperiencePositionTypePresentStationStartDate": new FormControl('', Validators.required),
       "lastPromotionPositionType": new FormControl('', Validators.required),
       "undertaking1": new FormControl('', Validators.required),
       "undertaking2": new FormControl('', Validators.required),
@@ -116,6 +117,7 @@ export class TeacherPreviewConfirmComponent implements OnInit {
           ExperienceStartDatePresentKv:  res.response['workExperienceWorkStartDatePresentKv'],
           workExperienceAppointedForSubject:  res.response['workExperienceAppointedForSubject'],
           lastPromotionPositionType:  res.response['lastPromotionPositionType'],
+          workExperiencePositionTypePresentStationStartDate:  res.response['workExperiencePositionTypePresentStationStartDate']
       });
    
       }
@@ -142,9 +144,9 @@ export class TeacherPreviewConfirmComponent implements OnInit {
       return false;
        }
   if(this.teacherPreviewConfirmForm.value.teacherName==false || this.teacherPreviewConfirmForm.value.teacherGender==false || this.teacherPreviewConfirmForm.value.teacherDob==false || this.teacherPreviewConfirmForm.value.teacherEmplCode==false
-       || (this.teacherPreviewConfirmForm.value.teacherDisability==false  && this.teacherPreviewConfirmForm.value.teacherDisability!='0')|| this.teacherPreviewConfirmForm.value.ExperienceStartDatePresentKv==false
-       || this.teacherPreviewConfirmForm.value.workExperienceAppointedForSubject==false || this.teacherPreviewConfirmForm.value.lastPromotionPositionType==false
-       || this.teacherPreviewConfirmForm.value.undertaking1==false || this.teacherPreviewConfirmForm.value.undertaking2==false ){
+       || (this.teacherPreviewConfirmForm.value.teacherDisability==false  && this.teacherPreviewConfirmForm.value.teacherDisability!='0')|| this.teacherPreviewConfirmForm.value.ExperienceStartDatePresentKv==false 
+       || this.teacherPreviewConfirmForm.value.workExperienceAppointedForSubject==false || this.teacherPreviewConfirmForm.value.lastPromotionPositionType==false ||
+       this.teacherPreviewConfirmForm.value.workExperiencePositionTypePresentStationStartDate==false || this.teacherPreviewConfirmForm.value.undertaking1==false || this.teacherPreviewConfirmForm.value.undertaking2==false ){
         Swal.fire({
           'icon':'error',
           'text':'Please check all fields'
@@ -163,6 +165,7 @@ export class TeacherPreviewConfirmComponent implements OnInit {
             "workExperienceAppointedForSubject": this.verifyTchTeacherProfileData['workExperienceAppointedForSubject'],
             "lastPromotionPositionType": this.verifyTchTeacherProfileData['lastPromotionPositionType'],
             "teacherId": this.verifyTchTeacherProfileData['teacherId'],
+            "workExperiencePositionTypePresentStationStartDate": this.verifyTchTeacherProfileData['workExperiencePositionTypePresentStationStartDate'],
         }
        console.log(data)
        Swal.fire({

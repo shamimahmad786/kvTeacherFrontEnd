@@ -95,45 +95,43 @@
                             <tr>
                                 <th>Employee Name: </th>
                                 <td >
-                                   &nbsp;{{verifyTchTeacherProfileData?.teacherName | titlecase}} <input class="form-check-input"  type="checkbox" value="" checked disabled   formControlName="teacherName" id="teacherName" id="teacherName">
+                                   &nbsp;{{verifyTchTeacherProfileData?.teacherName | titlecase}} &nbsp;<input  type="checkbox" value="" checked disabled  id="teacherName">
                                 </td>
                                 <th>Employee Gender:</th>
                                 <td>
-                                    &nbsp;{{ verifyTchTeacherProfileData?.teacherGender | genderPipe }} <input class="form-check-input" type="checkbox" value="" checked disabled formControlName="teacherGender" id="teacherGender">
+                                    &nbsp;{{ verifyTchTeacherProfileData?.teacherGender | genderPipe }} &nbsp;<input  type="checkbox" value="" checked disabled  id="teacherGender">
                                 </td>
                                 <th>Employee DOB:</th>
                                 <td>
-                                 &nbsp;{{verifyTchTeacherProfileData?.teacherDob }} <input class="form-check-input" type="checkbox" value="" checked disabled formControlName="teacherDob" id="teacherDob">
+                                 &nbsp;{{verifyTchTeacherProfileData?.teacherDob }} &nbsp;<input  type="checkbox" value="" checked disabled  id="teacherDob">
                                 </td>
                             </tr>
                             <tr>
                                 <th>Employee Employee Code:</th>
                                 <td>
-                                     &nbsp; {{verifyTchTeacherProfileData?.teacherEmployeeCode}} <input class="form-check-input" type="checkbox"  value="" checked disabled formControlName="teacherEmplCode" id="teacherEmplCode">
+                                     &nbsp; {{verifyTchTeacherProfileData?.teacherEmployeeCode}}&nbsp;<input  type="checkbox" value="" checked disabled  id="teacherEmployeeCode">
                                 </td>
                                 <th>Employee Disability:</th>
                                 <td>
-                                 &nbsp;{{verifyTchTeacherProfileData?.teacherDisabilityYn == '1' ? 'Yes':'No'}} <input class="form-check-input" type="checkbox"  value="" checked disabled formControlName="teacherDisability" id="teacherDisability">
+                                 &nbsp;{{verifyTchTeacherProfileData?.teacherDisabilityYn == '1' ? 'Yes':'No'}} &nbsp; <input  type="checkbox" value="" checked disabled  id="teacherDisabilityYn">
                                 </td>
                                 <th>Experience Start Date Present KV:</th>
                                 <td>
-                                    &nbsp; {{verifyTchTeacherProfileData?.workExperienceWorkStartDatePresentKv}} <input class="form-check-input"  type="checkbox" value="" checked disabled formControlName="ExperienceStartDatePresentKv"
-                                        id="ExperienceStartDatePresentKv">
+                                    &nbsp; {{verifyTchTeacherProfileData?.workExperienceWorkStartDatePresentKv}} &nbsp; <input  type="checkbox" value="" checked disabled  id="workExperienceWorkStartDatePresentKv">
                                 </td>
                             </tr>
                             <tr>
                                 <th>Appointed For Subject:</th>
                                 <td>
-                                     &nbsp; {{verifyTchTeacherProfileData?.workExperienceAppointedForSubject}} <input class="form-check-input" type="checkbox"  value="" checked disabled formControlName="workExperienceAppointedForSubject"
-                                        id="workExperienceAppointedForSubject">
+                                     &nbsp; {{verifyTchTeacherProfileData?.workExperienceAppointedForSubject}} &nbsp; <input  type="checkbox" value="" checked disabled  id="workExperienceAppointedForSubject">
                                 </td>
                                 <th>Position Held:</th>
                                 <td>
-                                     &nbsp;{{verifyTchTeacherProfileData?.lastPromotionPositionType}} <input class="form-check-input" type="checkbox" value="" checked disabled  formControlName="lastPromotionPositionType" id="lastPromotionPositionType">
+                                     &nbsp;{{verifyTchTeacherProfileData?.lastPromotionPositionType}} &nbsp; <input  type="checkbox" value="" checked disabled  id="lastPromotionPositionType">
                                 </td>
                                 <th>DOJ in Present Station Irrespective of Cadre:</th>
                                 <td>
-                                     &nbsp;{{verifyTchTeacherProfileData?.workExperiencePositionTypePresentStationStartDate}} <input class="form-check-input" type="checkbox" value="" checked disabled  formControlName="workExperiencePositionTypePresentStationStartDate" id="workExperiencePositionTypePresentStationStartDate">
+                                     &nbsp;{{verifyTchTeacherProfileData?.workExperiencePositionTypePresentStationStartDate}} &nbsp; <input  type="checkbox" value="" checked disabled  id="workExperiencePositionTypePresentStationStartDate">
                                 </td>
                             </tr>
                         </table>

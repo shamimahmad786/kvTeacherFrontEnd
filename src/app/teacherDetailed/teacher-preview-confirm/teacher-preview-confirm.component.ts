@@ -39,6 +39,7 @@ export class TeacherPreviewConfirmComponent implements OnInit {
   token:any;
   exportProfileUrl: any;
   profileFinalStatus: boolean = false;
+  isChecked: boolean = true;
   constructor(private pdfServive: TeacherAppPdfService,private router: Router, private date: DatePipe, private dataService: DataService,
     private modalService: NgbModal, private outSideService: OutsideServicesService,
     private route: ActivatedRoute, private fb: FormBuilder, private formData: FormDataService, private _adapter: DateAdapter<any>) { }
@@ -230,3 +231,5 @@ export class TeacherPreviewConfirmComponent implements OnInit {
        }
   }
 }
+
+let checkbox1 = document.getElementById("teacherName");

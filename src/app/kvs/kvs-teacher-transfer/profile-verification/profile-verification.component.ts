@@ -125,7 +125,7 @@ export class ProfileVerificationComponent implements OnInit {
     if(this.schoolProfileFinalStatus=='SP' || this.schoolProfileFinalStatus=='' || this.schoolProfileFinalStatus==null){
       Swal.fire({
         icon: 'info',
-        'text':'Your basic profile is yet to be verified by your controling officer. Please get it verified before proceeding further'
+        'text':'Your basic profile is yet to be verified by your controlling officer. Please get it verified before proceeding further'
       })
       return false;
     }
@@ -133,7 +133,7 @@ export class ProfileVerificationComponent implements OnInit {
     if (this.teacherPreviewConfirmForm.invalid) {
       Swal.fire({
         'icon':'error',
-        'text':'something went worng!'
+        'text':'something went wrong!'
       })
       return false;
        }
@@ -159,7 +159,7 @@ export class ProfileVerificationComponent implements OnInit {
                   if (res?.status) {
                     if (res?.response?.status == 1) {
                       Swal.fire(
-                        'Transfer undertaking submitted sucessfuly!',
+                        'Transfer undertaking submitted successfully!',
                         '',
                        'success'
                       ) 

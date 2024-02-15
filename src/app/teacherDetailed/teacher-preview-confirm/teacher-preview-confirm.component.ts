@@ -110,8 +110,8 @@ export class TeacherPreviewConfirmComponent implements OnInit {
       "teacherId":this.tempTeacherId}
     this.outSideService.getTeacherConfirmationV2(data).subscribe((res)=>{
       if(res){
-        console.log("---------------teacher check  detilll------");
-        console.log(res);
+        // console.log("---------------teacher check  detilll------");
+         console.log('techererre detailllll',res);
         this.teacherPreviewConfirmForm.patchValue({
           teacherName:  res.response['teacherName'],
           teacherGender:  res.response['teacherGender'],

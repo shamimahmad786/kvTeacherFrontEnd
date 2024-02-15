@@ -159,13 +159,14 @@
                             <table class="table table-bordered w-100">
                                 <thead>
                                     <tr style="background-color:#7492cb;">
-                                        <th colspan="7" class="text-center text-white">Ticket ( {{ticketDetails?.ticketId}} )</th>
+                                        <th colspan="8" class="text-center text-white">Ticket ( {{ticketDetails?.ticketId}} )</th>
                                     </tr>
                                     <tr style="background-color:#E5EEFF;">
                                         <th >Ticket Subject</th>
                                         <th >Ticket Description </th>
                                         <th >School Remarks</th>
                                         <th >Teacher Remarks</th>
+                                        <th >HQ Remarks</th>
                                         <th>Ticket Status</th>
                                         <th >Ticket Genration Date</th>
                                         <th >Ticket Resolve Date</th>
@@ -177,6 +178,7 @@
                                         <td>{{ticketDetails?.ticketDescription}}</td>
                                         <td>{{ticketDetails?.schoolRemarks}}</td>
                                         <td>{{ticketDetails?.teacherRemarks}}</td>
+                                        <td>{{ticketDetails?.nationalRemarks}}</td>
                                         <td>{{ticketStatusForPreview}}</td>
                                         <td>{{ticketDetails?.ticketdateTime}}</td>
                                         <td>{{ticketDetails?.ticketResolveDateTime}}</td>

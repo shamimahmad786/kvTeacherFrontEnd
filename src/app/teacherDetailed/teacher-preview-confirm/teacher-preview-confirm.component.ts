@@ -53,8 +53,8 @@ export class TeacherPreviewConfirmComponent implements OnInit {
       "teacherGender": new FormControl('', Validators.required),
       "teacherDob": new FormControl('', Validators.required),
       "teacherEmplCode": new FormControl('', Validators.required),
-      "teacherDisability": new FormControl('', Validators.required),
-      "ExperienceStartDatePresentKv": new FormControl('', Validators.required),
+      "teacherDisabilityYn": new FormControl('', Validators.required),
+      "workExperienceWorkStartDatePresentKv": new FormControl('', Validators.required),
       "workExperienceAppointedForSubject": new FormControl('', Validators.required),
       "workExperiencePositionTypePresentStationStartDate": new FormControl('', Validators.required),
       "lastPromotionPositionType": new FormControl('', Validators.required),
@@ -117,14 +117,15 @@ export class TeacherPreviewConfirmComponent implements OnInit {
           teacherGender:  res.response['teacherGender'],
           teacherDob:  res.response['teacherDob'],
           teacherEmplCode:  res.response['teacherEmployeeCode'],
-          teacherDisability:  res.response['teacherDisabilityYn'],
-          ExperienceStartDatePresentKv:  res.response['workExperienceWorkStartDatePresentKv'],
+          teacherDisabilityYn:  res.response['teacherDisabilityYn'],
+          workExperienceWorkStartDatePresentKv:  res.response['workExperienceWorkStartDatePresentKv'],
           workExperienceAppointedForSubject:  res.response['workExperienceAppointedForSubject'],
           lastPromotionPositionType:  res.response['lastPromotionPositionType'],
           workExperiencePositionTypePresentStationStartDate:  res.response['workExperiencePositionTypePresentStationStartDate']
       });
    
       }
+      
   },
   error => {
     Swal.fire({

@@ -100,8 +100,8 @@
                                     </span>
                                 </div>
     
-                                <div class="my-3" *ngIf="profileFinalStatus" >
-                                    <input class="form-check-input" type="checkbox" id="consentCheck"  [checked]="profileFinalStatus" disabled
+                                <div class="my-3 d-flex" *ngIf="profileFinalStatus" >
+                                    <input class="form-check-input" style="font-size: large !important" type="checkbox" id="consentCheck"  [checked]="profileFinalStatus" disabled
                                     (change)="consentCheckBoxChange($event)" formControlName="consentCheckBox"  >&nbsp;&nbsp;
                                 <label class="form-check-label fw-bold chekboxPosition" for="consentCheck">
                                     I hereby undertake that my profile details are complete and true to the best of my knowledge and available information. Now, I would like to proceed to provide additional information required for the transfer application and submit my STATION CHOICE(s) for transfer and displacement.
@@ -109,8 +109,8 @@
                                 </div>
 
 
-                                <div class="my-3" *ngIf="!profileFinalStatus" >
-                                    <input class="form-check-input" type="checkbox" id="consentCheck" 
+                                <div class="my-3 d-flex" *ngIf="!profileFinalStatus" >
+                                    <input class="form-check-input" type="checkbox" style="font-size: large !important"  id="consentCheck" 
                                         (change)="consentCheckBoxChange($event)" formControlName="consentCheckBox"  >&nbsp;&nbsp;
                                     <label class="form-check-label fw-bold chekboxPosition" for="consentCheck">
                                         I hereby undertake that my profile details are complete and true to the best of my knowledge and available information. Now, I would like to proceed to provide additional information required for the transfer application and submit my STATION CHOICE(s) for transfer and displacement.

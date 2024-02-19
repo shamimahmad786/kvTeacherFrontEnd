@@ -48,7 +48,7 @@ const routes: Routes = [
       {path:'teacherWorkExperience', component:TeacherWorkExperienceComponent}, 
       {path:'teacherPreviewConfirm', component:TeacherPreviewConfirmComponent}, 
       {path:'kvsteacherprofile', component:KvsTeacherProfileComponent},
-      {path:'kvsteachertransfer', component:KvsTeacherTransferComponent},
+      // {path:'kvsteachertransfer', component:KvsTeacherTransferComponent},
       {path:'disclaimer', component:DisclaimerComponent},
       {path:'changePassword', component:ChangePasswordComponent},
       {path: 'kvsTicket', loadChildren: () => import('./kvs/ticket/ticket.module').then(m => m.TicketModule) },

@@ -180,8 +180,17 @@ export class LoginComponent implements OnInit {
         }else{
           this.router.navigate(['/teacher/teacherBasicProfile']);
         }
-  
+
+       
       }
+
+      if(res.success === false || res.success == 'false' ){
+        debugger;
+        Swal.fire({
+          'icon':'error',
+           'text':'User is not active.'
+        })
+       }
       this.generate();
     },
       error => { 
@@ -237,12 +246,14 @@ export class LoginComponent implements OnInit {
         }
   
       }
-       if(res.errorMessage=='User is not active'){
+      if(res.success === false || res.success == 'false' ){
+        debugger;
         Swal.fire({
           'icon':'error',
            'text':'User is not active.'
         })
        }
+      
        this.generate();
       },
       error => { 

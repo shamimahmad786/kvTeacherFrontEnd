@@ -93,18 +93,22 @@ export class TeacherComponent implements OnInit {
   }
 
   authlogout(){
-    if(sessionStorage.getItem("loginType")=="jwt"){
-     // alert("in if");
-      sessionStorage.clear();
-      // this.logoutLink=environment.LANDING_PAGE_URL
-     // window.location.href= "https://demopgi.udiseplus.gov.in/school";
-   //   window.location.href= "https://kvsonlinetransfer.kvs.gov.in/school";
-       this.router.navigate(['/login']);
-}else if(sessionStorage.getItem("loginType")=="auth"){
- // alert("in else");
-  sessionStorage.clear();
-  window.location.href=this.logoutLink;
-}
+
+    sessionStorage.clear();
+    this.router.navigate(['/login']);
+//     if(sessionStorage.getItem("loginType")=="jwt"){
+//      // alert("in if");
+//       sessionStorage.clear();
+//       // this.logoutLink=environment.LANDING_PAGE_URL
+//      // window.location.href= "https://demopgi.udiseplus.gov.in/school";
+//    //   window.location.href= "https://kvsonlinetransfer.kvs.gov.in/school";
+//        this.router.navigate(['/login']);
+// }else if(sessionStorage.getItem("loginType")=="auth"){
+//  // alert("in else");
+//   sessionStorage.clear();
+//   this.router.navigate(['/login']);
+//   ///window.location.href=this.logoutLink;
+// }
 
   }
 }

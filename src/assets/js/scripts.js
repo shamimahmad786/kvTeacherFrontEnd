@@ -140,6 +140,14 @@ function encriptedText(userId, password) {
 
 }
 
+function customEncript(data){
+    var pk = getKey();
+    var encrypt = new JSEncrypt();
+    encrypt.setPublicKey(pk);
+    return encrypt.encrypt(data)
+
+}
+
 function getUdiseCode() {
     $.ajax({
         url: "http://10.25.26.10:8090/meuser/api/userCradential/get-usercradential",

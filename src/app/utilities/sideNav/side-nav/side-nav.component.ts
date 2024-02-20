@@ -50,7 +50,9 @@ export class SideNavComponent implements OnInit {
       readURL(this);
     });
     this.tempTeacherId = sessionStorage.getItem('kvTeacherId');
-   this.getFormStatusLinkV2();
+   setTimeout(() => {
+    this.getFormStatusLinkV2();
+   },1000)
   }
 
   getFormStatusLinkV2(){

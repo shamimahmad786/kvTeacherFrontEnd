@@ -28,7 +28,7 @@ export const environment = {
    BASE_URL_DATA_MASTER1:'http://10.25.26.251:8014/unee-api/v1/master/',
    BASE_URL_DATA_API_TICKET:'http://10.25.26.251:8015/api/ticket/',
    BASE_URL_DATA_REPORT: 'http://10.25.26.251:8080/api/',
-
+   LINK_URL_MAINPAGE: 'https://kvsonlinetransfer.kvs.gov.in/#/',
   //  LOGIN_URL_JWT:'https://demopgi.udiseplus.gov.in/MOE-RAD-TEACHER-V1/api/login/',
   //  BASE_URL_DATA: 'https://demopgi.udiseplus.gov.in/MOE-RAD-TEACHER-V1/api/teacher/',
   //  udiseApi:'https://demo.udiseplus.gov.in/api-v1/public/getSchoolMaster/',

@@ -5,6 +5,7 @@ import { ControlContainer, FormArray, FormBuilder, FormControl, FormGroup, NgFor
 import Swal from 'sweetalert2';
  import * as $ from 'jquery';
 import { OutsideServicesService } from '../service/outside-services.service';
+import { environment } from 'src/environments/environment';
 declare const encriptedText: any;
 @Component({
   selector: 'app-login',
@@ -23,8 +24,10 @@ export class LoginComponent implements OnInit {
   isDisabled: boolean = false;
   showTimer: boolean = false;
   captchaotp: any;
+  employeeLoginUrl: any;
   constructor(private formBuilder: FormBuilder,private route: ActivatedRoute,private router: Router, private auth :AuthService,private outSideService: OutsideServicesService) { }
   ngOnInit(): void {
+    this.employeeLoginUrl = environment.LINK_URL_MAINPAGE;
     sessionStorage.clear();
       this.loginForm = new FormGroup({
       passwordForm: new FormGroup({

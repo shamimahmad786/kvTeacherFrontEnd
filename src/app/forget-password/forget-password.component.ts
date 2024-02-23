@@ -4,6 +4,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { ControlContainer, FormArray, FormBuilder, FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
 import Swal from 'sweetalert2';
 import * as $ from 'jquery';
+import { environment } from 'src/environments/environment';
 @Component({
   selector: 'app-forget-password',
   templateUrl: './forget-password.component.html',
@@ -13,8 +14,10 @@ export class ForgetPasswordComponent implements OnInit {
   forgetPasswordForm: FormGroup;
   passwordFormsubmitted= false;
   captchaforget:any;
+  employeeLoginUrl: any;
   constructor(private formBuilder: FormBuilder,private route: ActivatedRoute,private router: Router, private auth :AuthService) { }
   ngOnInit(): void {
+    this.employeeLoginUrl = environment.LINK_URL_MAINPAGE;
     this.forgetPasswordForm = new FormGroup({
       'email': new FormControl('', [Validators.required, Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")]),
       'ForgetPasswordCaptcha': new FormControl('', Validators.required),

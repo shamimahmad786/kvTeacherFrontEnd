@@ -78,7 +78,7 @@ export const environment = {
   BASE_URL_DATA_MASTER1:'https://demopgi.udiseplus.gov.in/MOE-RAD-TEACHER-V1/unee-api/v1/master/',
   BASE_URL_DATA_API_TICKET:'https://demopgi.udiseplus.gov.in/MOE-RAD-TICKET/api/ticket/',
   BASE_URL_DATA_REPORT: 'https://demopgi.udiseplus.gov.in/kv-report-V1/api/',
-
+  LINK_URL_MAINPAGE: 'https://demopgi.udiseplus.gov.in/#/',
 
 
   // LOGIN_URL_JWT:'https://demopgi.udiseplus.gov.in/MOE-RAD-TEACHER/api/login/',

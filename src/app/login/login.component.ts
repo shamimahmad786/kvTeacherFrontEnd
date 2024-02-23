@@ -5,6 +5,7 @@ import { ControlContainer, FormArray, FormBuilder, FormControl, FormGroup, NgFor
 import Swal from 'sweetalert2';
  import * as $ from 'jquery';
 import { OutsideServicesService } from '../service/outside-services.service';
+import { environment } from 'src/environments/environment';
 declare const encriptedText: any;
 @Component({
   selector: 'app-login',
@@ -23,8 +24,10 @@ export class LoginComponent implements OnInit {
   isDisabled: boolean = false;
   showTimer: boolean = false;
   captchaotp: any;
+  employeeLoginUrl: any;
   constructor(private formBuilder: FormBuilder,private route: ActivatedRoute,private router: Router, private auth :AuthService,private outSideService: OutsideServicesService) { }
   ngOnInit(): void {
+    this.employeeLoginUrl = environment.LINK_URL_MAINPAGE;
     sessionStorage.clear();
       this.loginForm = new FormGroup({
       passwordForm: new FormGroup({
@@ -233,17 +236,25 @@ export class LoginComponent implements OnInit {
       if (res.token) {
         sessionStorage.setItem("authTeacherDetails", JSON.stringify(res));
        this.businessUnitTypeId= JSON.parse(sessionStorage.getItem("authTeacherDetails"))?.applicationDetails[0].business_unit_type_id;
-        if(this.businessUnitTypeId=="2"){
-          this.router.navigate(['/teacher/nationalDashboard']);
-        }else if(this.businessUnitTypeId=="3"){
-          this.router.navigate(['/teacher/regionDashboard']);
-        }else if(this.businessUnitTypeId=="4"){
-          this.router.navigate(['/teacher/stationDashboard']);
-        }else if(this.businessUnitTypeId=="5"){
-          this.router.navigate(['/teacher/teacherBasicProfile']);
-        }else{
-          this.router.navigate(['/teacher/teacherBasicProfile']);
+       if(this.businessUnitTypeId=="2"){
+        this.router.navigate(['/teacher/nationalDashboard']);
+      }else if(this.businessUnitTypeId=="3"){
+        {
+          Swal.fire({
+            'icon':'error',
+            'text':`Please provide correct credential.`
+          })
+          this.router.navigate(['/login']);
         }
+      return false;
+      //  this.router.navigate(['/teacher/regionDashboard']);
+      }else if(this.businessUnitTypeId=="4"){
+        this.router.navigate(['/teacher/stationDashboard']);
+      }else if(this.businessUnitTypeId=="5"){
+        this.router.navigate(['/teacher/teacherBasicProfile']);
+      }else{
+        this.router.navigate(['/teacher/teacherBasicProfile']);
+      }
   
       }
       if(res.success === false || res.success == 'false' ){

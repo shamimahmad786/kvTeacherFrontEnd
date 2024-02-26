@@ -38,6 +38,7 @@ export class KvsTicketComponent implements OnInit {
   teacherName: any;
   ticketStatusForPreview: any;
   ticketStatusForRevoke: any;
+  ticketHistory: any;
   constructor(private fb: FormBuilder,private outSideService: OutsideServicesService,private modalService: NgbModal) { }
   dataSource:any;
   // displayedColumns:any = ['sno','regionname','stationname','fromdate','todate','status'];
@@ -263,6 +264,7 @@ export class KvsTicketComponent implements OnInit {
       if(res){
       this.docList=res['docList'];
       this.ticketDetails=res['ticketDetails'];
+      this.ticketHistory=res['ticketHistory'];
       if(res['ticketDetails'].ticketStatus==0 || res['ticketDetails'].ticketStatus=='0'){
         this.ticketStatusForPreview='In Process';
       }else if(res['ticketDetails'].ticketStatus=='1' || res['ticketDetails'].ticketStatus==1){
@@ -292,6 +294,7 @@ export class KvsTicketComponent implements OnInit {
       if(res){
       this.docList=res['docList'];
       this.ticketDetails=res['ticketDetails'];
+      this.ticketHistory=res['ticketHistory'];
       if(res['ticketDetails'].ticketStatus==0 || res['ticketDetails'].ticketStatus=='0'){
         this.ticketStatusForRevoke='In Process';
       }else if(res['ticketDetails'].ticketStatus=='1' || res['ticketDetails'].ticketStatus==1){

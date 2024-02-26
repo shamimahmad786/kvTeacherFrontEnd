@@ -8,7 +8,7 @@ export const environment = {
    LOGIN_URL_JWT:'http://10.25.26.251:8014/api/login/',
    BASE_URL_DATA: 'http://10.25.26.10:8014/api/teacher/',
    udiseApi:'https://demo.udiseplus.gov.in/api-v1/public/getSchoolMaster/',
-   auth_service:'http://' + "10.25.26.251:8090/meuser"+'/api/userCradential',
+   auth_service:'http://' + "10.25.26.251:8014/meuser"+'/api/userCradential',
    BASE_URL_DATA_TEACHER_TRANSFER:'http://10.25.26.251:8014/api/transprofile/',
    BASE_URL_DATA_TEACHER: 'http://10.25.26.251:8014/api/teacher/',
    BASE_URL_DATA_MASTER: 'http://10.25.26.251:8014/api/master/',

@@ -74,9 +74,11 @@ function getKey() {
     $.ajax({
 
         //   url: "https://kvsonlinetransfer.kvs.gov.in/MOE-RAD-TEACHER/api/login/getKey",
-         url: "http://10.25.26.251:8014/api/login/getKey",
+        url: "http://10.25.26.251:8014/api/login/getKey",
         // url: "http://10.25.26.35:8014/api/login/getKey",
-       // url: "https://demopgi.udiseplus.gov.in/MOE-RAD-TEACHER-V1/api/login/getKey",
+        // url: "https://demopgi.udiseplus.gov.in/MOE-RAD-TEACHER/api/login/getKey",
+        // url: "https://demopgi.udiseplus.gov.in/MOE-RAD-TEACHER-V1/api/login/getKey",
+        // url: "https://kvsonlinetransfer.kvs.gov.in/MOE-RAD-TEACHER-PROD/api/login/getKey",
         type: "POST",
         cache: false,
         async: false,
@@ -138,7 +140,7 @@ function encriptedText(userId, password) {
 
 }
 
-function customEncript(data){
+function customEncript(data) {
     var pk = getKey();
     var encrypt = new JSEncrypt();
     encrypt.setPublicKey(pk);
@@ -148,8 +150,8 @@ function customEncript(data){
 
 function getUdiseCode() {
     $.ajax({
-          url: "http://10.25.26.10:8090/meuser/api/userCradential/get-usercradential",          
-      //  url: "https://kvsonlinetransfer.kvs.gov.in/meuser/api/userCradential/get-usercradential",
+        url: "http://10.25.26.10:8090/meuser/api/userCradential/get-usercradential",
+        //  url: "https://kvsonlinetransfer.kvs.gov.in/meuser/api/userCradential/get-usercradential",
         // url: "https://demopgi.udiseplus.gov.in/meuser/api/userCradential/get-usercradential",
         type: 'post',
         async: false,

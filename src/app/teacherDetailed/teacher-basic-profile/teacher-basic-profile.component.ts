@@ -89,6 +89,7 @@ export class TeacherBasicProfileComponent implements OnInit {
   teacherDisabilityType: any;
   businessUnitTypeCode: any;
   userName: any;
+  visiblitySubSocialCategory:boolean;
   @ViewChild('Physically_Handicap_Certificate')Physically_Handicap_Certificate: ElementRef;
   @ViewChild('selectSpouseStationModal', { static: true }) selectSpouseStationModal: TemplateRef<any>;
   constructor(private pdfServive: TeacherAppPdfService,private router: Router, private date: DatePipe, private dataService: DataService,
@@ -124,6 +125,8 @@ export class TeacherBasicProfileComponent implements OnInit {
       'dob': new FormControl('', [Validators.required, this.dateDifferenceFnc.bind(this)]),
       'mobile': new FormControl('', [Validators.required, Validators.minLength(10), Validators.maxLength(10), Validators.pattern("[8976][0-9]{9}")]),
       'email': new FormControl('', [Validators.required, Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")]),
+      'socialCategories': new FormControl('', Validators.required),
+      'socialSubCategories': new FormControl('', Validators.required),
       'presentStationName': new FormControl('', Validators.required),
       'presentKvName': new FormControl('', Validators.required),
       'presentPostName': new FormControl('', Validators.required),
@@ -168,6 +171,13 @@ export class TeacherBasicProfileComponent implements OnInit {
       console.log("-employee data---------")
       console.log(res)
       this.emplyeeData=res.response;
+
+      if(this.emplyeeData['socialSubCategories']=="1" || this.emplyeeData['socialSubCategories']=="2"){
+        this.visiblitySubSocialCategory =true;
+        }else{
+          this.visiblitySubSocialCategory =false;
+        }
+
       if(res){
         this.basicProfileForm.patchValue({
           fullName:  this.emplyeeData['teacherName'],
@@ -176,6 +186,8 @@ export class TeacherBasicProfileComponent implements OnInit {
           empCode:this.emplyeeData['teacherEmployeeCode'],
           mobile: this.emplyeeData['teacherMobile'],
           email: this.emplyeeData['teacherEmail'],
+          socialCategories: this.emplyeeData['socialCategories'],
+          socialSubCategories: this.emplyeeData['socialSubCategories'],
           prmntAddress: this.emplyeeData['teacherPermanentAddress'],
           prmntState: this.emplyeeData['teacherParmanentState'],
           prmntDistrict: this.emplyeeData['teacherPermanentDistrict'] ,
@@ -246,6 +258,19 @@ export class TeacherBasicProfileComponent implements OnInit {
     )
   })
   }
+
+
+
+  socialChange(event){
+    if(event.target.value=="1"){
+    this.visiblitySubSocialCategory=true;
+    }else{
+    this.visiblitySubSocialCategory=false;
+    this.basicProfileForm.patchValue({
+      socialSubCategories: 0,
+    });
+    }
+    }
 
   getStateMaster() {
     this.outSideService.fetchStateMaster("a").subscribe((res) => {

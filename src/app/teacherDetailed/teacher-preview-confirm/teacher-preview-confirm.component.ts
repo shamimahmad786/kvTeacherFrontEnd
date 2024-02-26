@@ -40,6 +40,8 @@ export class TeacherPreviewConfirmComponent implements OnInit {
   exportProfileUrl: any;
   profileFinalStatus: boolean = false;
   isChecked: boolean = true;
+  socialCat: string;
+  socialSubCat: string;
   constructor(private pdfServive: TeacherAppPdfService,private router: Router, private date: DatePipe, private dataService: DataService,
     private modalService: NgbModal, private outSideService: OutsideServicesService,
     private route: ActivatedRoute, private fb: FormBuilder, private formData: FormDataService, private _adapter: DateAdapter<any>) { }
@@ -95,6 +97,29 @@ export class TeacherPreviewConfirmComponent implements OnInit {
     console.log(this.verifyTchTeacherProfileData)
     this.schoolDetails = res.response.schoolDetails;
     this.verifyTchTeacherTraining = res.response.training;
+
+
+    if(this.verifyTchTeacherProfileData['socialCategories']=='1'){
+      this.socialCat='GENERAL';
+    }
+    if(this.verifyTchTeacherProfileData['socialCategories']=='2'){
+      this.socialCat='OBC';
+    }
+    if(this.verifyTchTeacherProfileData['socialCategories']=='3'){
+      this.socialCat='SC';
+    }
+    if(this.verifyTchTeacherProfileData['socialCategories']=='4'){
+      this.socialCat='ST';
+    }
+    if(this.verifyTchTeacherProfileData['socialSubCategories']=='1'){
+      this.socialSubCat='GENERAL NON EWS';
+    }
+    if(this.verifyTchTeacherProfileData['socialSubCategories']=='2'){
+      this.socialSubCat='GENERAL EWS';
+    }
+    if(this.verifyTchTeacherProfileData['socialSubCategories']=='0' || this.verifyTchTeacherProfileData['socialSubCategories']==null){
+      this.socialSubCat='NA';
+    }
   
       for (let i = 0; i < res.response.experience.length; i++) {
         if (res.response.experience[i].workEndDate != null || res.response.experience[i].workEndDate != null) {

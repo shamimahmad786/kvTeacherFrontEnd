@@ -50,3 +50,13 @@ table {
     margin: 1px 0px 0px 9px;
   
 }
+.card{
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  justify-content: space-between;
+}
+.card-style{
+border: 1px solid #c2bdbd;
+border-radius: 4px; padding: 11px; margin: 10px 12px 10px 12px;
+}

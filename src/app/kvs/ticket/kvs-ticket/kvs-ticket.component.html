@@ -151,6 +151,8 @@
                     </div>
                 </div>
             </div>
+            <div class="card "  style="border-block: revert; " >
+                <div class="card-body card-style">
             <div class="" style="min-width: 100%; max-height: 1000px;">
                 <div class="container-fluid">
                     <div class="row">
@@ -161,8 +163,8 @@
                                         <th colspan="8" class="text-center text-white">Query Management System ( {{ticketDetails?.ticketId}} )</th>
                                     </tr>
                                     <tr style="background-color:#E5EEFF;">
-                                        <th> Subject</th>
-                                        <th> Description </th>
+                                        <th style="width: 30% !important;"> Subject</th>
+                                        <!-- <th> Description </th> -->
                                         <!-- <th >School Remarks</th>
                                         <th >Teacher Remarks</th>
                                         <th >HQ Remarks</th> -->
@@ -174,13 +176,13 @@
                                 <tbody>
                                     <tr>
                                         <td>{{ticketDetails?.ticketSubject}}</td>
-                                        <td>{{ticketDetails?.ticketDescription}}</td>
+                                        <!-- <td>{{ticketDetails?.ticketDescription}}</td> -->
                                         <!-- <td>{{ticketDetails?.schoolRemarks}}</td>
                                         <td>{{ticketDetails?.teacherRemarks}}</td>
                                         <td>{{ticketDetails?.nationalRemarks}}</td> -->
                                         <td>{{ticketStatusForPreview}}</td>
                                         <td>{{ticketDetails?.ticketdateTime}}</td>
-                                        <td>{{ticketDetails?.ticketResolveDateTime}}</td>
+                                        <td>{{ticketDetails?.ticketResolveDateTime | date: 'dd-MM-yyyy hh:mm:ss'}}</td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -188,6 +190,26 @@
                     </div>
                 </div>
             </div>
+       
+
+            <div style="min-width: 100%; max-height: 1000px; ">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="alert alert-secondary" style="background-color: #f2f5fb !important;">
+                                <div class="dashboard-main-content__header">
+                                    <h1>Query Description</h1>
+                                </div>
+                                {{ticketDetails?.ticketDescription}}
+                            </div>
+            
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
             <div class="" style="min-width: 100%; max-height: 1000px;">
                 <div class="container-fluid">
                     <div class="row">
@@ -242,7 +264,7 @@
                                         <td>{{data?.activityDoneBy}}</td>
                                         <td>{{data?.assignTo}}</td>
                                         <td>{{data?.remarks}}</td>
-                                        <td>{{data?.createdDateTime}}</td>
+                                        <td>{{data?.createdDateTime | date: 'dd-MM-yyyy hh:mm:ss'}}</td>
 
                                 </tbody>
                             </table>
@@ -270,6 +292,10 @@
                     </div>
                 </div>
             </div>
+
+            <div class="card "  style="border-block: revert; " >
+                <div class="card-body card-style">
+
             <div class="">
                 <div class="container-fluid">
                     <div class="row">
@@ -280,8 +306,8 @@
                                         <th colspan="7" class="text-center text-white">Query Management System ( {{ticketDetails?.ticketId}} )</th>
                                     </tr>
                                     <tr style="background-color:#E5EEFF;">
-                                        <th> Subject</th>
-                                        <th> Description </th>
+                                        <th style="width: 30% !important;"> Subject</th>
+                                        <!-- <th> Description </th> -->
                                         <!-- <th >School Remarks</th>
                                         <th >Teacher Remarks</th> -->
                                         <th> Status</th>
@@ -292,12 +318,12 @@
                                 <tbody>
                                     <tr>
                                         <td>{{ticketDetails?.ticketSubject}}</td>
-                                        <td>{{ticketDetails?.ticketDescription}}</td>
+                                        <!-- <td>{{ticketDetails?.ticketDescription}}</td> -->
                                         <!-- <td>{{ticketDetails?.schoolRemarks}}</td>
                                         <td>{{ticketDetails?.teacherRemarks}}</td> -->
                                         <td>{{ticketStatusForRevoke}}</td>
                                         <td>{{ticketDetails?.ticketdateTime}}</td>
-                                        <td>{{ticketDetails?.ticketResolveDateTime}}</td>
+                                        <td>{{ticketDetails?.ticketResolveDateTime | date: 'dd-MM-yyyy hh:mm:ss'}}</td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -305,6 +331,25 @@
                     </div>
                 </div>
             </div>
+
+            <div style="min-width: 100%; max-height: 1000px; ">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="alert alert-secondary" style="background-color: #f2f5fb !important;">
+                                <div class="dashboard-main-content__header">
+                                    <h1>Query Description</h1>
+                                </div>
+                                {{ticketDetails?.ticketDescription}}
+                            </div>
+            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
             <div class="" style="min-width: 100%; max-height: 1000px;">
                 <div class="container-fluid">
                     <form id="msform" class="msform" [formGroup]="revokeForm" (ngSubmit)="revokeFormSubmit()">
@@ -355,7 +400,7 @@
                                         <td>{{data?.activityDoneBy}}</td>
                                         <td>{{data?.assignTo}}</td>
                                         <td>{{data?.remarks}}</td>
-                                        <td>{{data?.createdDateTime}}</td>
+                                        <td>{{data?.createdDateTime | date: 'dd-MM-yyyy hh:mm:ss'}}</td>
 
                                 </tbody>
                             </table>

@@ -61,6 +61,8 @@ import { TransferDcCountComponent } from './kvs/kvs-teacher-transfer/transfer-dc
 import { TransferTcCountComponent } from './kvs/kvs-teacher-transfer/transfer-tc-count/transfer-tc-count.component';
 import { PreviewUndertakingComponent } from './kvs/kvs-teacher-transfer/preview-undertaking/preview-undertaking.component';
 import { ForgetPasswordComponent } from './forget-password/forget-password.component';
+import { LeaveManagementComponent } from './teacherDetailed/leave-management/leave-management.component';
+
 // import { MatModuleModule } from './mat/mat-module/mat-module.module';
 // export function HttpLoaderFactory(http: HttpClient) {
 //   return new MultiTranslateHttpLoader(http, [
@@ -119,6 +121,7 @@ import { ForgetPasswordComponent } from './forget-password/forget-password.compo
     TransferTcCountComponent,
     PreviewUndertakingComponent,
     ForgetPasswordComponent,
+    LeaveManagementComponent,
 
   ],
   imports: [

@@ -24,6 +24,8 @@ import { TransferTcCountComponent } from './kvs/kvs-teacher-transfer/transfer-tc
 
 import { PreviewUndertakingComponent } from './kvs/kvs-teacher-transfer/preview-undertaking/preview-undertaking.component';
 import { ForgetPasswordComponent } from './forget-password/forget-password.component';
+import { LeaveManagementComponent } from './teacherDetailed/leave-management/leave-management.component';
+
 
 const routes: Routes = [
   // {path:'', component: TDashboardComponent},
@@ -46,6 +48,7 @@ const routes: Routes = [
    
 
       {path:'teacherWorkExperience', component:TeacherWorkExperienceComponent}, 
+      {path:'teacherLeaveManagement', component:LeaveManagementComponent}, 
       {path:'teacherPreviewConfirm', component:TeacherPreviewConfirmComponent}, 
       {path:'kvsteacherprofile', component:KvsTeacherProfileComponent},
       // {path:'kvsteachertransfer', component:KvsTeacherTransferComponent},

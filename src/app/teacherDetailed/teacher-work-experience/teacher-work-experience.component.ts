@@ -517,13 +517,13 @@ dateCheck(dateFrom, dateTo, dateCheck,type) {
   onNextClick(){
     if(this.teacherForm.value.workExperienceForm.length<1){
       Swal.fire(
-        'Plese fill Experience!',
+        'Please fill your leave!',
         '',
         'error'
       )
     }
     else{
-      this.router.navigate(['/teacher/teacherPreviewConfirm']);
+      this.router.navigate(['/teacher/teacherLeaveManagement']);
     }
   }
   onSaveExperience(event:any){

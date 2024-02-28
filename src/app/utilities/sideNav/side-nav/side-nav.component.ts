@@ -16,6 +16,7 @@ export class SideNavComponent implements OnInit {
   teacherId:any;
   basicProfile: any = false;
   workExperience: any = false;
+  leaveManagement:any = false;
   PreviewConfirm: any = false;
 
   formRoutingObj:any;
@@ -28,6 +29,7 @@ export class SideNavComponent implements OnInit {
   public ngOnInit(): void {
    this.basicProfile=true;
    this.workExperience=true;
+   this.leaveManagement = true;
    this.PreviewConfirm=true;
     for (let i = 0; i < JSON.parse(sessionStorage.getItem("authTeacherDetails"))?.applicationDetails.length; i++) {
       this.firstName = JSON.parse(sessionStorage.getItem("authTeacherDetails"))?.firstname;

@@ -42,6 +42,7 @@ export class TeacherPreviewConfirmComponent implements OnInit {
   isChecked: boolean = true;
   socialCat: string;
   socialSubCat: string;
+  teschrLeaveDetails:any;
   constructor(private pdfServive: TeacherAppPdfService,private router: Router, private date: DatePipe, private dataService: DataService,
     private modalService: NgbModal, private outSideService: OutsideServicesService,
     private route: ActivatedRoute, private fb: FormBuilder, private formData: FormDataService, private _adapter: DateAdapter<any>) { }
@@ -128,6 +129,7 @@ export class TeacherPreviewConfirmComponent implements OnInit {
         res.response.experience[i].workStartDate = res.response.experience[i].workStartDate;
       }
       this.verifyTchTeacherWorkExp = res.response.experience
+      this.teschrLeaveDetails=res.response.teacherLeave;
     })
   }
   getTeacherConfirmationV2(){
@@ -183,7 +185,7 @@ export class TeacherPreviewConfirmComponent implements OnInit {
   }
 
   previousPage(){
-    this.router.navigate(['/teacher/teacherWorkExperience']);
+    this.router.navigate(['/teacher/teacherLeaveManagement']);
   }
   submit(){
     debugger

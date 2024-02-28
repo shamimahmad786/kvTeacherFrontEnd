@@ -39,6 +39,7 @@ export class KvsTicketComponent implements OnInit {
   ticketStatusForPreview: any;
   ticketStatusForRevoke: any;
   ticketHistory: any;
+  ticketInProgressCount: any;
   constructor(private fb: FormBuilder,private outSideService: OutsideServicesService,private modalService: NgbModal) { }
   dataSource:any;
   // displayedColumns:any = ['sno','regionname','stationname','fromdate','todate','status'];
@@ -93,9 +94,15 @@ export class KvsTicketComponent implements OnInit {
             if(res[i].ticketResolvedBy=="kv_9999"){
               this.testData.ticketResolvedBy ='NIC';    
             }
-            else{
-              this.testData.ticketResolvedBy = res[i].ticketResolvedBy;    
+            else if(res[i].ticketResolvedBy == "national_kv") {
+              this.testData.ticketResolvedBy = 'HEADQUARTER'
+            }
+      
+            else if(res[i].ticketResolvedBy != "kv_9999" && res[i].ticketResolvedBy != "national_kv" && res[i].ticketStatus != 0) {
+              this.testData.ticketResolvedBy = 'SCHOOL'
             } 
+
+            
             this.ticketList.push(this.testData);
             this.testData = { "sno": "", "ticketId": "","ticketSubject":"", "ticketdateTime": "", "ticketToId": "","ticketStatus":"","ticketResolvedBy":"" };
           }
@@ -418,6 +425,30 @@ export class KvsTicketComponent implements OnInit {
       "ticketStatus":"0",
       "folderId":this.randonNumber
   }
+
+
+
+  var data1 = {
+    "teacherId":this.tempTeacherId
+  }
+
+  this.outSideService.getTicketCount(data1).subscribe((res) => {
+  debugger
+
+  this.ticketInProgressCount = res.inProgress;
+  if(this.ticketInProgressCount >= 3) {
+    Swal.fire({
+      'icon':'error',
+      'text':'You have already multiple queries in pending status.'
+    }
+    )
+  }
+     
+  })
+
+
+
+
     Swal.fire({
       'icon':'warning',
       'text': "Do you want to proceed "+' '+this.uploadMessage,
@@ -432,6 +463,9 @@ export class KvsTicketComponent implements OnInit {
     ).then((isConfirm) => {
     if (isConfirm.value === true) {
         this.outSideService.initiateTicket(data).subscribe((res)=>{
+
+
+          
           if(res){
             this.fileUpload = true;
             this.randonNumber='';

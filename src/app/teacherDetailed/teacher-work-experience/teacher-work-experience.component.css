@@ -621,3 +621,9 @@ tr {
   flex: 0 0 5% !important;
   width: 5% !important;
 }
+.work-exp td{
+  padding: 0 15px!important;
+}
+.work-exp th {
+  padding: 15px!important;
+}

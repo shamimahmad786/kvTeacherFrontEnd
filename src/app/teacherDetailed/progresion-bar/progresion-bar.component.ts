@@ -31,7 +31,7 @@ export class ProgresionBarComponent implements OnInit {
     this.leaveManagmentPage=false;
     this.uploadPage=false;
     }
-    if(url[0].path=='leaveMangement')
+    if(url[0].path=='teacherLeaveManagement')
     {
     this.profilePage=true;
     this.experiencePage=true;

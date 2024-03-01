@@ -75,6 +75,8 @@ export class TeacherWorkExperienceComponent implements OnInit {
   @ViewChild('selectSchoolModal', { static: true }) selectSchoolModal: TemplateRef<any>;
   transferGroundList: any;
   profileTeacherName: any;
+  profileFinalStatus: boolean = false;
+	profileFinalStatusName:any;
   constructor(private pdfServive: TeacherAppPdfService,private router: Router, private date: DatePipe, private dataService: DataService,
     private modalService: NgbModal, private outSideService: OutsideServicesService,
     private route: ActivatedRoute, private fb: FormBuilder, private formData: FormDataService, private _adapter: DateAdapter<any>) {
@@ -95,9 +97,33 @@ export class TeacherWorkExperienceComponent implements OnInit {
     this.transferGroundList = this.formDataList.transferGround
     this.getTchExpByTchId();
     this.getAllMaster();
+    this.getFormStatusV2();
   }
   detailsOfPosting(): FormArray {
     return this.teacherForm.get("workExperienceForm") as FormArray
+  }
+  getFormStatusV2(){
+    var data ={
+      "teacherId": this.tempTeacherId
+    }
+    debugger
+    this.outSideService.getFormStatusV2(data).subscribe((res)=>{
+      if(res.response['profileFinalStatus']=='SP' || res.response['profileFinalStatus']=='' ||res.response['profileFinalStatus']==null){
+        this.profileFinalStatus=true;
+        this.profileFinalStatusName='Not Verified';
+       }
+       else{
+        this.profileFinalStatus=false;
+        this.profileFinalStatusName='Verified';
+       }
+  },
+  error => {
+    Swal.fire({
+      'icon':'error',
+      'text':error.error
+     }
+    )
+  })
   }
   getTchExpByTchId() {
     (this.teacherForm.controls['workExperienceForm'] as FormArray).clear();

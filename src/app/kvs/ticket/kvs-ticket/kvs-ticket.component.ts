@@ -144,7 +144,7 @@ export class KvsTicketComponent implements OnInit {
       } else {
         this.fileToUpload = null;
         Swal.fire(
-          'File size allowed upto 5MB only !',
+          'File size allowed upto 500kb only !',
           '',
           'error'
         )

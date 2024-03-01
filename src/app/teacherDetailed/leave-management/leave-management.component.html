@@ -1,4 +1,4 @@
-dfdfdfdfddfdfd<div class="dashboard-main-content" style="min-height: 600px;">
+<div class="dashboard-main-content" style="min-height: 600px;">
     <app-progresion-bar></app-progresion-bar>
     <div class="dashboard-main-content-info  p-4 mt-3">
         <div class="row">
@@ -8,7 +8,7 @@ dfdfdfdfddfdfd<div class="dashboard-main-content" style="min-height: 600px;">
                                <h2 class="mb-0">Leave Management: </h2>
                     </div>
                     <div class="col-8">
-                        <h2 class="steps text-end pro-name">{{profileTeacherName | uppercase}}
+                        <h2 class="steps text-end pro-name">{{profileTeacherName | uppercase}}<span [ngClass]="{'make-orange': profileFinalStatus==true,'make-green': profileFinalStatus==false}"> ({{profileFinalStatusName}})</span>
                         </h2>
                     </div>
                 </div>
@@ -39,7 +39,6 @@ dfdfdfdfddfdfd<div class="dashboard-main-content" style="min-height: 600px;">
                                         </mat-form-field>
                                     
                                     </td>
-                                
                                     <td>
                                         <mat-form-field style="width: 100%;" >
                                             <input matInput [matDatepicker]="ei"  disabled id="endDate-{{i}}" class="form-control" class="form-control form-control-sm " name="endDate" formControlName="endDate" style="text-transform: none">
@@ -48,23 +47,23 @@ dfdfdfdfddfdfd<div class="dashboard-main-content" style="min-height: 600px;">
                                         </mat-form-field>
                                  
                                     </td>
-                                  
-                                 
                                     <td >
-                                        <select class="form-select form-select-sm" disabled  aria-label="Default select example" name="isContiniousLeave" formControlName="isContiniousLeave"  >
-                                       <option selected disabled>Select</option>
-                                       <option value="1">MORE THAN 30</option>
-                                       <option value="0">NOT MORE THAN 30</option>
-                                    </select>
-                                       
+                                        <div *ngIf="i==0">
+                                            <select class="form-select form-select-sm" disabled  aria-label="Default select example" name="isContiniousLeave" formControlName="isContiniousLeave"  >
+                                            <option selected disabled>Select</option>
+                                            <option value="9">Not Applicable</option>
+                                         </select>
+                                        </div>
+                                        <div *ngIf="i!=0">
+                                            <select class="form-select form-select-sm"  aria-label="Default select example" name="isContiniousLeave" formControlName="isContiniousLeave"  >
+                                                <option selected disabled>Select</option>
+                                                <option value="1">MORE THAN & EQUAL TO 30 DAYS</option>
+                                                <option value="0">LESS THAN 30 DAYS</option>
+                                             </select>
+                                        </div>
                                     </td>
-                                 
-                                 
-                               
                                     <td>
                                         <input type="text"  class="form-control" disabled name="noOfLeave" disabled formControlName="noOfLeave" (keypress)="omit_special_char($event)" onKeyPress="if(this.value.length==3) return false;">
-                                  
-                                          
                                         </td> 
                                 </tr>
                             </tbody>

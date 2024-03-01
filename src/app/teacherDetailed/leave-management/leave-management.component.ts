@@ -52,7 +52,7 @@ export class LeaveManagementComponent implements OnInit {
   profileFinalStatus: boolean = false;
   transferGroundList: any;
   profileTeacherName: any;
- 
+  profileFinalStatusName:any;
  
   constructor(private router: Router,  private datePipe:DatePipe,
     private modalService: NgbModal, private outSideService: OutsideServicesService,
@@ -85,10 +85,11 @@ export class LeaveManagementComponent implements OnInit {
     this.outSideService.getFormStatusV2(data).subscribe((res)=>{
       if(res.response['profileFinalStatus']=='SP' || res.response['profileFinalStatus']=='' ||res.response['profileFinalStatus']==null){
         this.profileFinalStatus=true;
+        this.profileFinalStatusName='Not Verified';
       //  showHide(false)
       }else{
-        
         this.profileFinalStatus=false;
+        this.profileFinalStatusName='Verified';
        // showHide(true);
        }
   },
@@ -109,7 +110,11 @@ export class LeaveManagementComponent implements OnInit {
         console.log("leave manaagement")
        console.log( this.leaveDataList)
         for (let i = 0; i < this.leaveDataList.length; i++) {
-          this.addQuantity(this.leaveDataList[i])
+          if(i==0){
+            this.addFirstLeaveQuantity(this.leaveDataList[i])
+          }else{
+            this.addQuantity(this.leaveDataList[i])
+          }
         }
       })
 
@@ -121,12 +126,28 @@ export class LeaveManagementComponent implements OnInit {
      k = event.charCode;
      return((k >= 48 && k <= 57)); 
   }
+  addFirstLeaveQuantity(data){
+    this.detailsOfPosting().push(this.newLeaveQuantity(data));
+  }
   addQuantity(data) {
     this.detailsOfPosting().push(this.newQuantity(data));
-    console.log( this.detailsOfPosting())
+  }
+  newLeaveQuantity(data): FormGroup {
+    console.log(data)
+    if (data != undefined) {
+      return this.fb.group({
+        teacherId: this.tempTeacherId,
+        id :data.id,
+        startDate: [data.startDate, [Validators.required]],
+        endDate:data.endDate,
+        isContiniousLeave:'9',
+        noOfLeave:  [data.noOfLeave,[Validators.required]],
+      
+      })
+    } 
   }
   newQuantity(data): FormGroup {
-    debugger
+    console.log(data)
     if (data != undefined) {
       return this.fb.group({
         teacherId: this.tempTeacherId,

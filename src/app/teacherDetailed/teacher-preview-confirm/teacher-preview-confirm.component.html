@@ -8,12 +8,15 @@
                         <h2 class="mb-0 tbl-heading">Preview & Confirm</h2>
                     </div>
                     <div class="pe-3">
-                        <h2 class="steps text-end pro-name">{{ profileTeacherName | uppercase}} </h2>
+                        <h2 class="steps text-end pro-name mb-0">{{ profileTeacherName | uppercase}} <span [ngClass]="{'make-orange': profileFinalStatus==true,'make-green': profileFinalStatus==false}"> ({{profileFinalStatusName}})</span> </h2>
                     </div>
-                    <div><button class="btn btn-primary btn-sm" [disabled]="profileFinalStatus">
+                    <div>
+                        <button class="btn btn-primary btn-sm" [disabled]="profileFinalStatus">
                         <a href="{{exportProfileUrl}}getTeacherBasicDetailPdf?token={{token}}&username={{loginUserNameForChild}}&teacherId={{tempTeacherId}}"  style="text-decoration: none !important; color:white !important">Export To PDF</a>
-                    </button></div>
+                    </button>
+                </div>          
                 </div>
+                <p class="text-end fw-bold mt-2" style="color: #0046ad;">Employee can download profile (Export to pdf)  after school has completed and verified the profile. </p>
 
                 
 
@@ -126,7 +129,7 @@
                                         <td>{{i+1}}</td>
                                         <td>{{data?.startDate}}</td>
                                         <td>{{data?.endDate}}</td>
-                                        <td>{{data?.isContiniousLeave == '1' ? 'Yes':'No'}}</td>
+                                        <td>{{data?.isContiniousLeave == '1' ? 'Yes':data?.isContiniousLeave =='9'? 'NA' :'No'}}</td>
                                         <td>{{data?.noOfLeave}}</td>
                                        
                                     </tr>

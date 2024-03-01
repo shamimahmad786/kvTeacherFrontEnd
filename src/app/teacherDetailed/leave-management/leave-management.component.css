@@ -667,7 +667,14 @@ tr {
 .mat-form-field-appearance-fill .mat-form-field-infix {
     padding: 0px ! important;
 }
-
+.make-orange{
+    color: #e17212;
+    text-transform:initial !important;
+}
+.make-green{
+    color: #24695c;
+    text-transform:initial !important;
+}
 .mat-column-Sno {
     word-wrap: break-word !important;
     white-space: unset !important;

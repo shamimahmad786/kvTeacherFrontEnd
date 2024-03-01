@@ -595,3 +595,11 @@
   }
 
   .dashboard-footer{background-color: initial !important;}
+  .make-orange{
+    color: #e17212;
+    text-transform:initial !important;
+}
+.make-green{
+    color: #24695c;
+    text-transform:initial !important;
+}

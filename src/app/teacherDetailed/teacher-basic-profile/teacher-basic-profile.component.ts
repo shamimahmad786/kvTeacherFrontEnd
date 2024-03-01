@@ -90,6 +90,8 @@ export class TeacherBasicProfileComponent implements OnInit {
   businessUnitTypeCode: any;
   userName: any;
   visiblitySubSocialCategory:boolean;
+  profileFinalStatus: boolean = false;
+	profileFinalStatusName:any;
   @ViewChild('Physically_Handicap_Certificate')Physically_Handicap_Certificate: ElementRef;
   @ViewChild('selectSpouseStationModal', { static: true }) selectSpouseStationModal: TemplateRef<any>;
   constructor(private pdfServive: TeacherAppPdfService,private router: Router, private date: DatePipe, private dataService: DataService,
@@ -162,7 +164,28 @@ export class TeacherBasicProfileComponent implements OnInit {
     this.getStateMaster();
    
   }
-
+  getFormStatusV2(){
+    var data ={
+      "teacherId": this.emplyeeData['teacherId']
+    }
+    this.outSideService.getFormStatusV2(data).subscribe((res)=>{
+      if(res.response['profileFinalStatus']=='SP' || res.response['profileFinalStatus']=='' ||res.response['profileFinalStatus']==null){
+        this.profileFinalStatus=true;
+        this.profileFinalStatusName='Not Verified';
+      }
+      else{
+        this.profileFinalStatus=false;
+        this.profileFinalStatusName='Verified';
+      }
+  },
+  error => {
+    Swal.fire({
+      'icon':'error',
+      'text':error.error
+    }
+    )
+  })
+  }
   getEmployeeData(){
     var data={
      "teacherEmployeeCode":this.userName
@@ -248,7 +271,8 @@ export class TeacherBasicProfileComponent implements OnInit {
       }
       this.clickOnDisability(this.teacherDisabilityType);
       }   
-      this.getDocumentByTeacherId();  
+      this.getDocumentByTeacherId();
+      this.getFormStatusV2();  
   },
   error => {
     Swal.fire({

@@ -443,12 +443,7 @@ export class KvsTicketComponent implements OnInit {
     }
     )
   }
-     
   })
-
-
-
-
     Swal.fire({
       'icon':'warning',
       'text': "Do you want to proceed "+' '+this.uploadMessage,

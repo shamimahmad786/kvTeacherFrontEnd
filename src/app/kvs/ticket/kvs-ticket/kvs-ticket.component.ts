@@ -436,7 +436,7 @@ export class KvsTicketComponent implements OnInit {
   debugger
 
   this.ticketInProgressCount = res.inProgress;
-  if(this.ticketInProgressCount >= 3) {
+  if(this.ticketInProgressCount >= 1) {
     Swal.fire({
       'icon':'error',
       'text':'You have already multiple queries in pending status.'

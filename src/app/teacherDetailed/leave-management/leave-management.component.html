@@ -55,7 +55,7 @@
                                          </select>
                                         </div>
                                         <div *ngIf="i!=0">
-                                            <select class="form-select form-select-sm"  aria-label="Default select example" name="isContiniousLeave" formControlName="isContiniousLeave"  >
+                                            <select class="form-select form-select-sm" disabled aria-label="Default select example" name="isContiniousLeave" formControlName="isContiniousLeave"  >
                                                 <option selected disabled>Select</option>
                                                 <option value="1">MORE THAN & EQUAL TO 30 DAYS</option>
                                                 <option value="0">LESS THAN 30 DAYS</option>
@@ -73,7 +73,7 @@
                 </form>
                 <div class="mt-2 d-flex align-items-center justify-content-between ">
                     <div class="button-back mt-2">
-                        <input type="button" name="previous" class=" me-2 back-button" (click)="previousPage()" value="Back" /><i class="fa fa-chevron-circle-left" aria-hidden="true"></i></div>
+                        <input type="button" name="previous" class=" me-2 back-button" disabled (click)="previousPage()" value="Back" /><i class="fa fa-chevron-circle-left" aria-hidden="true"></i></div>
                    
                    
                         <div class="button-save mt-2">

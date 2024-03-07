@@ -221,13 +221,16 @@
                                                         value="{{data.subjectCode}}">{{data.subNameCode}}
                                                     </option>
                                                 </select>
-                                                <span class="help-block text-danger" *ngIf="!basicProfileForm.get('presentSubjectName').valid && 
-                                                basicProfileForm.get('presentSubjectName').touched">
-                                                    Enter Subject Name(Code)!</span>
-                                            </div>   
-    
-    
+                                              
+                                            </div>  
+                                            
                                             <div class="col-md-6 mb-3">
+                                                <h4 class="titleSet">Home Town</h4>
+                                                <input type="text" class="form-control " name="homeTown" formControlName="homeTown" disabled>
+                                            </div>
+    
+    
+                                            <!-- <div class="col-md-6 mb-3">
                                                 <h4 class="titleSet">Last promotion position date<span class="required-asterisk">*</span></h4>
                                                         <div class="input-group-addon">
                                                             <mat-datepicker #pickers12></mat-datepicker>
@@ -239,7 +242,7 @@
                                                         Enter last promotion position date!
                                                     </span>
                                                 </span>
-                                            </div>
+                                            </div> -->
     
                                             <div class="col-md-6 mb-3">                                        
                                                 <h4 class="titleSet">Have you been recruited under special recruitment for NER ?</h4>

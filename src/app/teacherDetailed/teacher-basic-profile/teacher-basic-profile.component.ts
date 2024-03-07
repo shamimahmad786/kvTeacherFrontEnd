@@ -135,7 +135,7 @@ export class TeacherBasicProfileComponent implements OnInit {
       'presentSubjectName': new FormControl('', Validators.required),
       'staffType': new FormControl('', Validators.required),
       'specialRecruitmentYn': new FormControl('', Validators.required),
-      'lastPromotionPositionDate': new FormControl('', Validators.required),
+      'homeTown': new FormControl('', Validators.required),
       'kvCode': new FormControl(''),
       'spouseStationCode': new FormControl(''),
       'disabilityYN': new FormControl('', Validators.required),
@@ -222,7 +222,7 @@ export class TeacherBasicProfileComponent implements OnInit {
           disabilityYN: this.emplyeeData['teacherDisabilityYn'],
           disabilityType: this.emplyeeData['teacherDisabilityType'],
           presentPostName:this.emplyeeData['lastPromotionPositionType'],
-          lastPromotionPositionDate: this.emplyeeData['lastPromotionPositionDate'],
+          homeTown: this.emplyeeData['homeTown'],
           presentSubjectName: this.emplyeeData['workExperienceAppointedForSubject'],
           staffType: this.emplyeeData['teachingNonteaching'],
           spouseStatusF:this.emplyeeData['spouseStatus'],
@@ -400,6 +400,7 @@ export class TeacherBasicProfileComponent implements OnInit {
         this.udiseSchCode = this.kvSchoolDetails.rowValue[i].udise_sch_code;
         this.schName = this.kvSchoolDetails.rowValue[i].kv_name;
         this.stationName = this.kvSchoolDetails.rowValue[i].station_name;
+        
       }
     })
     

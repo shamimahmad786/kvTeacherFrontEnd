@@ -222,7 +222,7 @@ export class TeacherBasicProfileComponent implements OnInit {
           disabilityYN: this.emplyeeData['teacherDisabilityYn'],
           disabilityType: this.emplyeeData['teacherDisabilityType'],
           presentPostName:this.emplyeeData['lastPromotionPositionType'],
-          homeTown: this.emplyeeData['homeTown'],
+          homeTown: this.emplyeeData['homeTownAddress'],
           presentSubjectName: this.emplyeeData['workExperienceAppointedForSubject'],
           staffType: this.emplyeeData['teachingNonteaching'],
           spouseStatusF:this.emplyeeData['spouseStatus'],
@@ -400,7 +400,7 @@ export class TeacherBasicProfileComponent implements OnInit {
         this.udiseSchCode = this.kvSchoolDetails.rowValue[i].udise_sch_code;
         this.schName = this.kvSchoolDetails.rowValue[i].kv_name;
         this.stationName = this.kvSchoolDetails.rowValue[i].station_name;
-        
+
       }
     })
     

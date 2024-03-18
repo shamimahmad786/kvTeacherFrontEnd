@@ -20,6 +20,7 @@
                                     <th>S.No.</th>
                                     <th>Start Date</th>
                                     <th>End Date</th>
+                                    <th>Station Type</th>
                                     <th> Continuous Leave</th>
                                     <th>Total  Leave</th>
                                 </tr>
@@ -47,6 +48,19 @@
                                         </mat-form-field>
                                  
                                     </td>
+                                    <td>
+                                       
+                                        <div> 
+                                            <select class="form-select form-select-sm" disabled pleaceholder="SELECT STATION TYPE"  aria-label="Default select example" id="ctl{{i}}"  name="stationType" formControlName="stationType"  >
+                                                <option selected disabled>SELECT STATION TYPE</option>
+                                                <option value="0">NORMAL</option>
+                                                <option value="1">HARD/VERY-HARD/NER</option>
+                                             </select>
+                                        </div>
+                                      
+                                        <span class="help-block text-danger" *ngIf="quantity.controls.stationType.errors?.required">
+                                   Select Station Type!</span>
+                                    </td>
                                     <td >
                                         <div *ngIf="i==0">
                                             <select class="form-select form-select-sm" disabled  aria-label="Default select example" name="isContiniousLeave" formControlName="isContiniousLeave"  >
@@ -55,10 +69,18 @@
                                          </select>
                                         </div>
                                         <div *ngIf="i!=0">
-                                            <select class="form-select form-select-sm" disabled aria-label="Default select example" name="isContiniousLeave" formControlName="isContiniousLeave"  >
+                                            <select class="form-select form-select-sm" disabled aria-label="Default select example"  id="ctl{{i}}"  name="isContiniousLeave" formControlName="isContiniousLeave"  >
                                                 <option selected disabled>Select</option>
-                                                <option value="1">MORE THAN & EQUAL TO 30 DAYS</option>
-                                                <option value="0">LESS THAN 30 DAYS</option>
+                                                <ng-container  >
+                                                 <option class="ctln{{i}}" value="0">LESS THAN 30 DAYS</option>
+                                                 <option class="ctln{{i}}"  value="1">MORE THAN & EQUAL TO 30 DAYS</option>
+                                                 
+                                                </ng-container>
+                                                 <ng-container>
+                                                     <option class="ctlh{{i}}" value="2">LESS THAN 45 DAYS</option>
+                                                     <option class="ctlh{{i}}" value="3">MORE THAN & EQUAL TO 45 DAYS</option>
+                                                     
+                                                 </ng-container>
                                              </select>
                                         </div>
                                     </td>

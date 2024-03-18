@@ -140,6 +140,7 @@ export class LeaveManagementComponent implements OnInit {
         id :data.id,
         startDate: [data.startDate, [Validators.required]],
         endDate:data.endDate,
+        stationType: [data.stationType],
         isContiniousLeave:'9',
         noOfLeave:  [data.noOfLeave,[Validators.required]],
       
@@ -154,6 +155,7 @@ export class LeaveManagementComponent implements OnInit {
         id :data.id,
         startDate: [data.startDate, [Validators.required]],
         endDate:data.endDate,
+        stationType: [data.stationType],
         isContiniousLeave:[data.isContiniousLeave,[Validators.required]],
         noOfLeave:  [data.noOfLeave,[Validators.required]],
       
